@@ -42,11 +42,11 @@ function Header() {
                     </Link>
                   </li>
                   <Navlinks className='block' />
-                 <Button className='py-7'>
+                 <Button onClick={()=>navigate('/login')} className='py-7'>
                   Login
                  </Button>
                  <div className='p-2 rounded-sm text-center bg-slate-200 mt-7'>
-                  <Button className='  bg-blue-500 w-full py-2 text-white'>
+                  <Button onClick={()=>navigate('/signup')} className='  bg-blue-500 w-full py-2 text-white'>
                     SignUp
                   </Button>
                  </div>

@@ -8,7 +8,7 @@ function Navlinks({className = 'flex'}) {
     <div className={`${className} gap-12`}>
         {links.map((link,index)=>(
             <div>
-            <div key={index} className='py-7 md:py-0 text-left md:cursor-pointer  transition delay-75 ease-in-out group'>
+            <div className='py-7 md:py-0 text-left md:cursor-pointer  transition delay-75 ease-in-out group'>
                 <h2 onClick={()=>heading !== link.name ? setHeading(link.name) : setHeading('')} className='hover:opacity-70 flex items-center justify-between md:pr-0'>
                     {link.name}
                     <span className='text-xl md:mt-1 md:ml-2'>

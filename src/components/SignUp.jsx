@@ -22,13 +22,13 @@ function SignUp() {
         <div className='flex text-base items-center justify-center'>
           <div className='flex justify-center flex-col w-full sm:w-96'>
             <h2 className='md:text-2xl opacity-90 font-medium text-center'>Create new account</h2>
-            <div className='flex cursor-pointer gap-2 my-4 w-full justify-center py-3 rounded-full bg-slate-100'>
+            <div className='flex cursor-pointer gap-2 mt-4 mb-2 w-full justify-center py-3 rounded-full bg-slate-100'>
               <img src={googleImg} alt="googleimage" />
               <span className='opacity-70 font-medium'>Sign in with google</span>
             </div>
             <div className='text-center opacity-70'>or</div>
             <form className='w-full' onSubmit={handleSubmit(signUp)}>
-              <div className='space-y-3 mt-4 '>
+              <div className='space-y-3 mt-2 '>
                 <Input
                 label="Full Name: "
                 placeholder="Enter your full name"
