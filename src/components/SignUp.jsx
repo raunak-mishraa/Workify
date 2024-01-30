@@ -56,7 +56,7 @@ function SignUp() {
                 {...register('password')}
                 />        
               </div>
-              <div className='flex items-center mt-4 gap-2'>
+              <div className='flex  items-center mt-4 gap-2'>
                
               <label className='text-base inline-block opacity-70 font-medium font-poppins'>Become a {check}</label>
               <label class="relative inline-flex items-center cursor-pointer">

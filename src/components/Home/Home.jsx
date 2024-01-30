@@ -7,6 +7,8 @@ import { useId } from 'react'
 import Button from '../Button'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import Categories from './Categories'
+import { motion } from "framer-motion"
 function Home() {
   const id = useId()
   const navigate = useNavigate()
@@ -49,7 +51,7 @@ function Home() {
         </div>
       </Container>
     </section>
-    <section className='py-10 sm:py-20 font-[assistant]'>
+    {/* <section className='py-10 sm:py-20 font-[assistant]'>
       <Container>
         <div>
           <h2 className='block text-2xl opacity-90 md:text-3xl font-bold'>Browse Categories</h2>
@@ -100,7 +102,8 @@ function Home() {
           </div>
         </div>
       </Container>  
-    </section>
+    </section> */}
+    <Categories/>
     <section className='py-10 sm:py-20'>
       <Container>
         <div className='block sm:flex flex-wrap justify-around w-full'>
@@ -110,27 +113,27 @@ function Home() {
             <div className='mt-10 sm:mt-0 sm:w-1/2 flex flex-col justify-center'>
               <div>
                 <h2 className='font-bold text-2xl opacity-90 md:text-3xl'>Why We are Better</h2>
-                <p className='my-4 opacity-80'>Lorem ipsum dolor sit amet consectetur. Viverra lacinia sed praesent pharetra quisque consectetur tellus elit. Suspendisse ultrices vitae at platea. Euismod pretium sit est etiam.</p>
+                <p className='my-4 opacity-80'>Tired of the freelance rat race? We offer a refreshing alternative! Unlike traditional platforms, we empower new freelancers with curated projects, personalized mentorship, and a supportive community—all commission-free. Join us and launch your freelance journey with confidence!</p>
                 <div className='mt-10 opacity-85'>
                   <div className='flex gap-4 mb-4'>
-                  <div className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
+                  <motion.div drag className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
                   <i className="ri-award-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-200"></i>
                   <h3 className='font-bold'>Quality Job</h3>
-                  </div>
-                  <div className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
+                  </motion.div>
+                  <motion.div drag className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
                   <i className="ri-box-3-fill rounded-md flex items-center justify-center w-8 h-8 bg-gray-200"></i>
                   <h3 className='font-bold'>No Bid</h3>
-                  </div>
+                  </motion.div>
                   </div>
                   <div className='flex gap-4'>
-                  <div className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
+                  <motion.div drag  className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
                   <i className="ri-currency-fill w-8 h-8 rounded-md flex items-center justify-center bg-gray-200"></i>
                   <h3 className='font-bold'>No Extra Charge</h3>
-                  </div>
-                  <div className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
+                  </motion.div>
+                  <motion.div drag  className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
                   <i className="ri-briefcase-4-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-200"></i>
                   <h3 className='font-bold'>International</h3>
-                  </div>
+                  </motion.div>
                   </div>
                 </div>
               </div>
