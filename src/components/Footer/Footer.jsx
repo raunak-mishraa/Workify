@@ -1,12 +1,13 @@
 import React from 'react'
 import  Container  from '../container/Container'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import {Logo} from '../index'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinkedinIn, faSquareInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 function Footer() {
+  const navigate = useNavigate();
   return (
-    <footer className='bg-slate-50 pt-16 font-poppins bottom-0 -z-10'>
+    <footer className='bg-slate-50 pt-16 font-poppins '>{/* removed class -z-10 bottom-0  */}
         <Container>
           <div>
             <div className='w-full flex flex-wrap justify-between mb-12'>

@@ -14,7 +14,7 @@ function Home() {
   const navigate = useNavigate()
   return (
     <>
-    <section className='font-assistant bg-gradient-to-r from-slate-50 via-sky-5   00 to-indigo-50 bg-blue-100'>
+    <section className='font-assistant bg-gradient-to-r from-slate-50 via-sky-50 to-indigo-50 bg-blue-100'>
       <Container>
         <div className='flex flex-wrap justify-center items-center py-10 xl:py-0'>
             <div className='px-4 text-center md:text-left md:pl-10 w-full md:w-1/2'>
@@ -28,18 +28,18 @@ function Home() {
                   <p className='leading-7'>Freelance Without Limits: Find Work, Connect with </p>
                   <p className='leading-7'>Clients, and Build Your Business</p>
                 </div>
-                <div className='hover:shadow-md duration-300 ease-linear flex items-center justify-between bg-white md:mt-8 mt-14 py-2 md:px-4 rounded-3xl'>
+                <div className='hover:shadow-md duration-300 ease-linear flex items-center justify-between bg-white md:mt-8 mt-14 py-2 md:px-4 px-2 rounded-md md:rounded-3xl'>
                   <div className='flex'>
                     <label className='rounded-full w-10 h-10 flex items-center justify-center py-2 bg-slate-100 cursor-pointer' htmlFor={id}>
                     <i className="text-cyan-500 ri-search-line"></i>
                     </label>
                     <input type="text" 
                     id={id}
-                    className='ml-4 text-xs outline-none bg-transparent'
+                    className='ml-4 text-xs outline-none bg-transparent '
                     placeholder='Job title or keyword'/>
                   </div>
                   <div>
-                    <Button className='text-xs md:text-sm text-white  bg-gradient-to-r from-cyan-500 to-blue-400 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-500 py-3 px-4 rounded-xl'>
+                    <Button className='text-xs md:text-sm text-white bg-gradient-to-r from-cyan-300 to-blue-300 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-500 py-3 md:px-4 px-2 md:rounded-xl rounded-md '>
                       Find Work
                     </Button>
                   </div>
@@ -116,24 +116,24 @@ function Home() {
                 <p className='my-4 opacity-80'>Tired of the freelance rat race? We offer a refreshing alternative! Unlike traditional platforms, we empower new freelancers with curated projects, personalized mentorship, and a supportive community—all commission-free. Join us and launch your freelance journey with confidence!</p>
                 <div className='mt-10 opacity-85'>
                   <div className='flex gap-4 mb-4'>
-                  <motion.div drag className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
-                  <i className="ri-award-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-200"></i>
+                  <div className='w-56 p-4 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                  <i className="ri-award-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-100"></i>
                   <h3 className='font-bold'>Quality Job</h3>
-                  </motion.div>
-                  <motion.div drag className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
-                  <i className="ri-box-3-fill rounded-md flex items-center justify-center w-8 h-8 bg-gray-200"></i>
+                  </div>
+                  <div className='w-56 p-4 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                  <i className="ri-box-3-fill rounded-md flex items-center justify-center w-8 h-8 bg-gray-100"></i>
                   <h3 className='font-bold'>No Bid</h3>
-                  </motion.div>
+                  </div>
                   </div>
                   <div className='flex gap-4'>
-                  <motion.div drag  className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
-                  <i className="ri-currency-fill w-8 h-8 rounded-md flex items-center justify-center bg-gray-200"></i>
+                  <div  className='w-56 p-4 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                  <i className="ri-currency-fill w-8 h-8 rounded-md flex items-center justify-center bg-gray-100"></i>
                   <h3 className='font-bold'>No Extra Charge</h3>
-                  </motion.div>
-                  <motion.div drag  className='w-56 p-4 border border-solid border-gray-300 flex gap-3 text-base font-bold rounded-md '>
-                  <i className="ri-briefcase-4-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-200"></i>
+                  </div>
+                  <div  className='w-56 p-4 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                  <i className="ri-briefcase-4-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-100"></i>
                   <h3 className='font-bold'>International</h3>
-                  </motion.div>
+                  </div>
                   </div>
                 </div>
               </div>

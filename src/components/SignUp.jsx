@@ -7,7 +7,7 @@ function SignUp() {
   const navigate = useNavigate()
   const {register, handleSubmit} = useForm()
   const [error, setError] = React.useState('')
-  const [check, setCheck] = React.useState('freelancer')
+  // const [check, setCheck] = React.useState('freelancer')
   const signUp = async (data) => {
     setError('')
     try {
@@ -31,6 +31,7 @@ function SignUp() {
               <div className='space-y-3 mt-2 '>
                 <Input
                 label="Full Name: "
+                className='pl-4' 
                 placeholder="Enter your full name"
                 {...register("name", {
                     required: true,
@@ -58,10 +59,10 @@ function SignUp() {
               </div>
               <div className='flex  items-center mt-4 gap-2'>
                
-              <label className='text-base inline-block opacity-70 font-medium font-poppins'>Become a {check}</label>
-              <label class="relative inline-flex items-center cursor-pointer">
-              <input onChange={()=>setCheck(check === 'freelancer' ? 'client' : 'freelancer')} type="checkbox" value="" class="sr-only peer" />
-              <div class="w-9 h-5 bg-gray-300  rounded-full  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-blue-600"></div>
+              <label className='text-base inline-block opacity-70 font-medium font-poppins'>Become a Freelancer</label>
+              <label className="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" value="" className="sr-only peer" />
+              <div className="w-9 h-5 bg-gray-300  rounded-full  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all  peer-checked:bg-blue-600"></div>
             </label>
               </div>
 

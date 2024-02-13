@@ -10,6 +10,8 @@ import noCash from "../assets/images/noCash.svg";
 import googleImg from "../assets/images/google.svg";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import Dashboard from "./Dashboard";
+import ContactImg from "../assets/images/contactImg.png"
 export { 
     Logo,
     Navlinks,
@@ -22,6 +24,8 @@ export {
     noCash,
     Login,
     SignUp,
-    googleImg
+    googleImg,
+    Dashboard,
+    ContactImg
 
 };

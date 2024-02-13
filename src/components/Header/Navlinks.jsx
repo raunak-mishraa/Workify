@@ -9,7 +9,7 @@ function Navlinks({className = 'flex'}) {
         {links.map((link,index)=>(
             <div>
             <div className='py-7 md:py-0 text-left md:cursor-pointer  transition delay-75 ease-in-out group'>
-                <h2 onClick={()=>heading !== link.name ? setHeading(link.name) : setHeading('')} className='hover:opacity-70 flex items-center justify-between md:pr-0'>
+                <h2 onMouseOver={()=>heading !== link.name ? setHeading(link.name) : setHeading('')} className='hover:opacity-70 flex items-center justify-between md:pr-0'>
                     {link.name}
                     <span className='text-xl md:mt-1 md:ml-2'>
                     <i className={`${heading === link.name ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'}`}></i>
@@ -19,15 +19,15 @@ function Navlinks({className = 'flex'}) {
                     <div>
                         <div className='absolute top-14 z-10 hidden group-hover:md:block hover:block'>
                             <div className='py-3'>
-                                <div className='w-4 h-4 left-3 absolute mt-1 bg-white rotate-45'></div>
+                                <div className='w-4 h-4 left-3 -z-10 absolute mt-1 bg-white border-2 border-gray-100  rotate-45'></div>
                             </div>
-                            <div className='bg-white p-3.5'>
+                            <div className='bg-white border-2 border-gray-100 border-t-0 p-3.5'>
                                 {
                                     link.sublinks.map(mysublink=>(
                                         <div>
                                             <h2 className='text-lg font-semibold'>{mysublink.head}</h2>
                                             {mysublink.sublink.map(slink=>(
-                                                <li className='text-gray-600 text-sm my-2.5'>
+                                                <li key={slink.name} className='text-gray-600 text-sm my-2.5'>
                                                     <Link className='hover:underline' to={slink.link}>{slink.name}</Link>    
                                                 </li>
                                             ))}
@@ -50,7 +50,6 @@ function Navlinks({className = 'flex'}) {
                             <li className='text-gray-600 text-sm py-3 pl-14'>
                                 <Link className='hover:underline' to={sublink.link}>{sublink.name}</Link>    
                             </li>
-                        
                         ))}
                     </div>
                 </div>

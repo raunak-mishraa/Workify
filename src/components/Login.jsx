@@ -58,7 +58,7 @@ function Login() {
               </div>
               <Link to='/forgot-password' className='relative text-base mt-4 inline-block opacity-80  hover:underline font-medium font-poppins'>Forgot password?</Link>
             <h4 className='mt-6 text-center opacity-60 font-semibold '>Don’t have account?<Link to='/signup' className='underline'>Sign Up</Link></h4>
-            <Button type='submit' className='w-full py-3 mt-6 text-white bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full'>
+            <Button type='submit' className='w-full py-3 mt-6 text-white bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full '>
               Login
             </Button>
             </form>
