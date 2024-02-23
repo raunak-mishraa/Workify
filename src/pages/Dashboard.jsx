@@ -1,11 +1,10 @@
-import { Dashboard as UserDashboard } from "../components/index";
-
+import { useSelector } from "react-redux";
+import {  FreelancerDashboard, ClientDashboard } from "../components/index";
 import React from 'react'
 
 function Dashboard() {
-  return (
-    <UserDashboard/>
-  )
+  const userData = useSelector((state) => state.auth.userData)
+  return userData?.user.isClient ? <ClientDashboard/> : <FreelancerDashboard/>
 }
 
 export default Dashboard

@@ -4,14 +4,14 @@ import {Button, Container, Input} from '../../../index.js'
 import { useSelector } from 'react-redux'
 function UpdateFreelancerProfile() {
     const userData = useSelector((state) => state.auth.userData)
-    const data = {
-        username: 'John Doe',
-        email: 'xyz@gmail.com',
-        profession: 'Web Developer'
-    }
-    const [username, setUserName] = React.useState(userData.user.username);
-    const [email, setEmail] = React.useState(userData.user.email);
-    const [profession, setProfession] = React.useState("web developer");
+    // const data = {
+    //     username: 'John Doe',
+    //     email: 'xyz@gmail.com',
+    //     profession: 'Web Developer'
+    // }
+    const [username, setUserName] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [profession, setProfession] = React.useState("");
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -36,9 +36,9 @@ function UpdateFreelancerProfile() {
                             </div>
                             
                             <div className='space-y-3'>
-                            <Input onChange={(e) => setUserName(e.target.value)} value={username}/>
-                            <Input onChange={(e) => setEmail(e.target.value)} type='email' value={email}/>
-                            <Input onChange={(e) => setProfession(e.target.value)} value={profession} />
+                            <Input onChange={(e) => setUserName(e.target.value)} value={username} placeholder="Enter your name"/>
+                            <Input onChange={(e) => setEmail(e.target.value)} type='email' value={email} placeholder="Enter your email"/>
+                            <Input onChange={(e) => setProfession(e.target.value)} value={profession} placeholder="Your profession" />
                             </div>
                             <Button className='mt-6 w-full rounded-md font-semibold py-2 text-white bg-gradient-to-r from-cyan-500 to-blue-500'>Update Profile</Button>
                         </form>

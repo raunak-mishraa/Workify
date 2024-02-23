@@ -18,13 +18,13 @@ function SignUp() {
     email:"",
     password:"",
     avatar:"",
-    isClient: false
+    isClient: true
   })
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
     const formData = new FormData();
     formData.append('fullName', user.fullName);
     formData.append('username', user.username);
@@ -32,7 +32,7 @@ function SignUp() {
     formData.append('password', user.password);
     formData.append('isClient', user.isClient);
     formData.append('avatar', file); // Append the avatar file
-    
+    console.log(formData)
     try {
       const response = await axios.post("http://localhost:8000/api/v1/users/register", formData, {
         headers: {
@@ -66,7 +66,8 @@ function SignUp() {
   }
   const handleClient = (e) =>{
     setUser((prev) => {
-      return { ...prev, isClient:e.target.checked }
+      // console.log({isClient:!e.target.checked})
+      return { ...prev, isClient:!e.target.checked }
     })
   }
 

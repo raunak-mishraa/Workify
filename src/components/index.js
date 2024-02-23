@@ -10,12 +10,14 @@ import noCash from "../assets/images/noCash.svg";
 import googleImg from "../assets/images/google.svg";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import Dashboard from "./Dashboard";
+import FreelancerDashboard from "./FreelancerDashboard";
 import ContactImg from "../assets/images/contactImg.png";
 import FreelancerProfile from "./Header/User/Freelancer/FreelancerProfile";
 import UpdateFreelancerProfile from "./Header/User/Freelancer/UpdateFreelancerProfile";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import ClientDashboard from "./ClientDashboard";
+import CreatePost from "./CreatePost";
 export { 
     Logo,
     Navlinks,
@@ -29,11 +31,12 @@ export {
     Login,
     SignUp,
     googleImg,
-    Dashboard,
+    FreelancerDashboard,
     ContactImg,
     FreelancerProfile,
     UpdateFreelancerProfile,
     ForgotPassword,
-    ResetPassword
+    ResetPassword,
+    ClientDashboard
 
 };

@@ -62,7 +62,7 @@ function FreelancerProfile() {
                         </div>
                    </div>
                    <div className='absolute right-4 border-2 w-8 h-8 rounded-full flex justify-center items-center  top-3'>
-                    <Link to='updatefreelancerprofile'><i className='ri-pencil-fill text-blue-400'></i></Link>
+                    <Link to='/updatefreelancerprofile'><i className='ri-pencil-fill text-blue-400'></i></Link>
                     
                    </div>
                 </div>
