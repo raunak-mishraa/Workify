@@ -18,15 +18,15 @@ function Home() {
       <Container>
         <div className='flex flex-wrap justify-center items-center py-10 xl:py-0'>
             <div className='px-4 text-center md:text-left md:pl-10 w-full md:w-1/2'>
-              <h1 className='text-3xl xl:text-5xl font-thin'><span className='font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-transparent bg-clip-text'>Freelance</span> your way</h1>
+              <h1 className='font-poppins text-3xl xl:text-5xl font-thin'><span className='font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-transparent bg-clip-text'>Freelance</span> your way</h1>
 
-              <h1 className='opacity-85  text-3xl xl:text-5xl justify-center md:justify-normal my-2 flex items-center gap-2'>
-                <span><img className='w-10' src={goalImg} alt="" /></span>to success,</h1>
+              <h1 className='opacity-85 font-poppins text-3xl xl:text-5xl justify-center md:justify-normal my-2 flex items-center gap-2'>
+                <span className='font-poppins'><img className='w-10' src={goalImg} alt="" /></span>to success,</h1>
 
-                <h1 className='text-3xl opacity-85 xl:text-5xl font-thin'>without the <span className='font-bold'>Fees</span></h1>
+                <h1 className='text-3xl opacity-85 xl:text-5xl font-poppins font-thin'>without the <span className='font-bold'>Fees</span></h1>
                 <div className='mt-4 font-light '>
-                  <p className='leading-7'>Freelance Without Limits: Find Work, Connect with </p>
-                  <p className='leading-7'>Clients, and Build Your Business</p>
+                  <p className='leading-7 font-poppins tracking-wide'>Freelance Without Limits: Find Work, Connect with </p>
+                  <p className='leading-7 font-poppins  tracking-wide'>Clients, and Build Your Business</p>
                 </div>
                 <div className='hover:shadow-md duration-300 ease-linear flex items-center justify-between bg-white md:mt-8 mt-14 py-2 md:px-4 px-2 rounded-md md:rounded-3xl'>
                   <div className='flex'>
@@ -39,7 +39,7 @@ function Home() {
                     placeholder='Job title or keyword'/>
                   </div>
                   <div>
-                    <Button className='text-xs md:text-sm text-white bg-gradient-to-r from-cyan-300 to-blue-300 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-500 py-3 md:px-4 px-2 md:rounded-xl rounded-md '>
+                    <Button className='text-xs md:text-sm text-white bg-gradient-to-r from-blue-500  to-cyan-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-500 py-3 md:px-4 px-2 md:rounded-xl rounded-md '>
                       Find Work
                     </Button>
                   </div>

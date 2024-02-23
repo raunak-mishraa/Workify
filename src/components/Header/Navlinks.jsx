@@ -7,7 +7,7 @@ function Navlinks({className = 'flex'}) {
   return (
     <div className={`${className} gap-12`}>
         {links.map((link,index)=>(
-            <div>
+            <div key={index}>
             <div className='py-7 md:py-0 text-left md:cursor-pointer  transition delay-75 ease-in-out group'>
                 <h2 onMouseOver={()=>heading !== link.name ? setHeading(link.name) : setHeading('')} className='hover:opacity-70 flex items-center justify-between md:pr-0'>
                     {link.name}
@@ -24,7 +24,7 @@ function Navlinks({className = 'flex'}) {
                             <div className='bg-white border-2 border-gray-100 border-t-0 p-3.5'>
                                 {
                                     link.sublinks.map(mysublink=>(
-                                        <div>
+                                        <div key={mysublink.head}>
                                             <h2 className='text-lg font-semibold'>{mysublink.head}</h2>
                                             {mysublink.sublink.map(slink=>(
                                                 <li key={slink.name} className='text-gray-600 text-sm my-2.5'>
@@ -41,13 +41,13 @@ function Navlinks({className = 'flex'}) {
             </div>
             {/* mobile links  */}
             <div className={`${heading === link.name ? 'md:hidden' : 'hidden'}`}>
-           {link.sublinks.map(slink=>(
-            <div>
+           {link.sublinks.map((slink, index)=>(
+            <div key={index}>
                 <div>
                     <h2 className='py-4 pl-7 font-semibold md:pr-0 pr-5'>{slink.head}</h2>
                     <div>
-                        {slink.sublink.map(sublink=>(
-                            <li className='text-gray-600 text-sm py-3 pl-14'>
+                        {slink.sublink.map((sublink, index)=>(
+                            <li key={index} className='text-gray-600 text-sm py-3 pl-14'>
                                 <Link className='hover:underline' to={sublink.link}>{sublink.name}</Link>    
                             </li>
                         ))}

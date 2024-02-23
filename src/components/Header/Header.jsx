@@ -2,11 +2,14 @@ import React from 'react'
 import Container from '../container/Container'
 import { Link, useNavigate } from 'react-router-dom'
 import { Logo, Navlinks, Button, Input }from '../index'
-
+import { useSelector } from 'react-redux'
 import User from './User/User'
 function Header() {
+  const authStatus = useSelector((state) => state.auth.status)
+  // const authData = useSelector((state) => state.auth.userData)
+  console.log(authStatus)
+  // console.log(authData)
 
-  const [loggedIn, setLoggedIn] = React.useState(true);
   const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
   return (
@@ -33,11 +36,10 @@ function Header() {
               </ul>
               </div>
               {
-                loggedIn 
+                authStatus 
                 ? 
                 (  
                     <User/>
-
                 ) 
                 : 
                 (  

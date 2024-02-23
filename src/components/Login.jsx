@@ -1,25 +1,67 @@
+//validations tostify loADINg
 import React from 'react'
 import Container from './container/Container'
 import { Button, Input, googleImg } from './index'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { useCookies } from 'react-cookie';
+import { login as loginUser } from '../../store/authSlice'
+import axios from 'axios'
+import 'react-toastify/dist/ReactToastify.css';
+import {toast} from "react-toastify"
 function Login() {
   const navigate = useNavigate()
   const {register, handleSubmit, formState: { errors }} = useForm();
+  const dispatch = useDispatch()
   const [error, setError] = React.useState('')
 
-  // const login = async (data) => {
-  //   console.log(data)
-  //   setError('')
-  //   try {
+
+  const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
+  const login = async(userData) => {  
+    // console.log(data);
+    try {
+      const response = await axios.post("http://localhost:8000/api/v1/users/login", userData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       
-  //   } catch (error) {
+      const responseData = response.data.message;
+      console.log(response.data)
       
-  //   }
-  // }
-  const login = (data) => {  
-    console.log(data);
-   };
+      if(responseData){
+        localStorage.setItem('userData', JSON.stringify(responseData));
+      }
+      if (responseData.accessToken) {
+        // When user logs in
+       
+
+        // Set cookies for access token and refresh token
+        setCookie('accessToken', responseData.accessToken, { path: '/' });
+        setCookie('refreshToken', responseData.refreshToken, { path: '/' });
+  
+        toast.success("User Logged In!", {
+          autoClose: 2000,
+        });
+        dispatch(loginUser(responseData));
+        navigate('/dashboard'); // Redirect to dashboard or any other page
+      } 
+
+       // Dispatch action to update authentication state
+      navigate('/dashboard'); // Redirect to dashboard or any other page
+    } catch (error) {
+      
+        toast.error("Invalid user credentials",{
+          autoClose: 2000,
+        })
+      
+      // console.log("login", error.message);
+    }
+  }
+  
+
+   
   return (
     <section className='font-poppins'>
       <Container>
@@ -56,7 +98,7 @@ function Login() {
                 />        
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
               </div>
-              <Link to='/forgot-password' className='relative text-base mt-4 inline-block opacity-80  hover:underline font-medium font-poppins'>Forgot password?</Link>
+              <Link to='forgot-password' className='relative text-base mt-4 inline-block opacity-80  hover:underline font-medium font-poppins'>Forgot password?</Link>
             <h4 className='mt-6 text-center opacity-60 font-semibold '>Don’t have account?<Link to='/signup' className='underline'>Sign Up</Link></h4>
             <Button type='submit' className='w-full py-3 mt-6 text-white bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full '>
               Login
