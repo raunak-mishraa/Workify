@@ -16,28 +16,28 @@ function FreelancerDashboard() {
     budget:"100$"
   }
 
-  console.log("this is the data",userData)
+  // console.log("this is the data",userData)
   return (
     <section className='text-left'>
       <Container>
-        <div className='flex gap-6 w-full'>
-          <div className='flex justify-between text-left w-4/5 bg-gradient-to-tr rounded-md from-cyan-500 to-blue-600'>
+        <div className='flex flex-wrap md:flex-nowrap gap-6 w-full'>
+          <div className='flex justify-between text-left md:w-4/5 bg-gradient-to-tr rounded-md from-cyan-500 to-blue-600'>
             <div className='p-9'>
               <div className='space-y-2'>
                 <h2 className='text-2xl text-white font-poppins font-semibold capitalize'>"Welcome {userData?.user.fullName}"</h2>
                 <p className='leading-7 text-xl text-white font-semibold'>Dive into endless opportunities and creative ventures.<br></br> Let your skills shine bright on our platform.</p>
               </div>
-                <div className='mt-8 flex bg-white py-2 px-3 border border-gray-200 rounded outline-none w-80'>
+                <div className='mt-8 flex bg-white py-2 px-3 border border-gray-200 rounded outline-none md:w-80 w-full'>
                   <input type="search" name="searchValue" id=""  placeholder='Search Jobs' className='outline-none w-full bg-transparent' />
                   <i className="ri-search-line"></i>
                 </div>
                 </div>
-                <div className='w-1/3 relative'>
+                <div className='w-1/3 relative hidden md:block'>
                   <div className='absolute  left-10 w-2/3 h-4/5 bg-white rounded-full bottom-0'></div>
                     <img src={dashboardImg} className='drop-shadow-md h-full w-full object-cover' alt="" />
                 </div>
           </div>
-          <div className='text-left p-3 pt-5 w-1/5 rounded-sm bg-gray-50 border-2'>
+          <div className='text-left p-3 pt-5 md:w-1/5 w-full rounded-sm bg-gray-50 border-2'>
             <h2 className='font-bold text-black text-opacity-80 font-poppins text-xl'>Why Workify?</h2>
             <div className='space-y-2 mt-2'>
               <p className='font-medium text-black text-opacity-70'><i className="ri-user-3-line w-6 h-6 p-1 rounded-full border-2"></i> Quality Freelancer</p>

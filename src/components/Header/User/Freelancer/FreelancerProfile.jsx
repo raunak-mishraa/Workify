@@ -29,7 +29,7 @@ function FreelancerProfile() {
                             <h2 className='text-xl font-semibold'>{userData?.user.fullName}
                             <i class="ri-verified-badge-fill ml-1 text-base text-cyan-600"></i>
                             </h2>
-                            <h2 className='font-medium text-sm'>Web Developer</h2>
+                            <h2 className='font-medium text-sm'>{userData?.user.profession}</h2>
                         </div>
                     </div>
                     <div className='space-y-1'>

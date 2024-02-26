@@ -8,7 +8,7 @@ function ClientDashboard() {
   return (
     <section>
         <Container>
-            <div className='flex flex-col text-center gap-4 items-center'>
+            <div className='flex py-6 flex-col text-center gap-4 items-center'>
                 <div className='w-32 border-2 rounded-full overflow-hidden p-5'>
                     <img src={userData?.user.avatar} className='w-full h-full object-cover' alt="" />
                 </div>

@@ -5,9 +5,9 @@ import { Logo, Navlinks, Button, Input }from '../index'
 import { useSelector } from 'react-redux'
 import User from './User/User'
 function Header() {
+  const isUser = useSelector((state) => state.auth.userData?.user.isClient)
   const authStatus = useSelector((state) => state.auth.status)
-  // const authData = useSelector((state) => state.auth.userData)
-  console.log(authStatus)
+  // console.log(authStatus)
   // console.log(authData)
 
   const navigate = useNavigate()
@@ -26,12 +26,20 @@ function Header() {
               <i className={`${open ? 'ri-close-fill' : 'ri-menu-line'} duration-500`}></i>
                 </div>
               </div>
-              <ul className='items-center md:flex hidden gap-12 text-black  md:ml-12 text-base'>
-                <li className='hover:opacity-70 transition delay-75 ease-in-out'>
-                  <Link to='/'>
-                    Home
+              <ul className='cursor-pointer items-center md:flex hidden gap-12 text-black text-opacity-85 md:ml-12 text-base'>
+
+                {isUser ?
+                 (<li className='hover:opacity-70 transition delay-75 ease-in-out'>
+                  <Link to='/mypost'>
+                    My Post
                   </Link>
-                </li>
+                  </li>) 
+                 : (<li className='hover:opacity-70 transition delay-75 ease-in-out'>
+                    <Link to='/'>
+                      Home
+                    </Link>
+                </li>)}
+
                 <Navlinks/>
               </ul>
               </div>

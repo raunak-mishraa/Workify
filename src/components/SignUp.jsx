@@ -4,9 +4,9 @@ import { Button, Input, googleImg } from './index'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
-// import {login} from '../../store/authSlice'
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from "react-toastify"
+import { professionData } from '../assets/Data/profession'
 
 function SignUp() {
   const navigate = useNavigate()
@@ -18,9 +18,9 @@ function SignUp() {
     email:"",
     password:"",
     avatar:"",
-    isClient: true
+    isClient: true,
+    profession: ""
   })
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +31,9 @@ function SignUp() {
     formData.append('email', user.email);
     formData.append('password', user.password);
     formData.append('isClient', user.isClient);
+    formData.append('profession', user.profession);
     formData.append('avatar', file); // Append the avatar file
-    console.log(formData)
+    console.log(user)
     try {
       const response = await axios.post("http://localhost:8000/api/v1/users/register", formData, {
         headers: {
@@ -43,7 +44,9 @@ function SignUp() {
       // console.log(response.data);
       const responseData = response.data;
       if(responseData){
-        toast.success("Successefully Registered!");        
+        toast.success("Successefully Registered!",{
+          autoClose: 2000,
+        });        
       }
       // Handle successful signup response
       // if(responseData) dispatch(login(responseData)); // Dispatch action to update authentication state
@@ -87,61 +90,48 @@ function SignUp() {
               <div className='space-y-3 mt-2 '>
                 <Input
                 label="FullName: "
-                className='pl-4'
+                className='pl-4 w-full'
                 name="fullName" 
                 placeholder="Enter your FullName"
                 value={user.fullName}
-                // {...register("fullName", {
-                //     required: true,
-                // })}
                 onChange={handleChange}
                 />
                 <Input
                 label="Username: "
-                className='pl-4' 
+                className='pl-4 w-full' 
                 name="username"
                 placeholder="Enter your username"
                 value={user.username}
-                // {...register("username", {
-                //     required: true,
-                // })}
                 onChange={handleChange}
                 />
                 <Input 
                 label='Email'
                 type='email'
                 name="email"
-                className='pl-4'
+                className='pl-4 w-full'
                 value={user.email}
                 placeholder='Enter your email'
                 onChange={handleChange}
-                // {...register('email',{
-                //   required: true,
-                //   validate: {
-                //     matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || "Email address must be a valid address",
-                //   }
-                // })}
                 />
                 <Input 
                 label='password'
                 type='password'
-                className='pl-4'
+                className='pl-4 w-full'
                 name="password"  
                 value={user.password}
                 placeholder='Enter your password'
-                // {...register('password',
-                // {
-                //   required: true,
-                //   minLength: 6
-                // }
-                // )}
                 onChange={handleChange}
                 />   
+                <select name="profession" value={user.profession} onChange={handleChange} className='text-black font-medium text-opacity-70 w-full p-2 border-2'>
+                    {
+                      professionData.map(data=>(
+                        <option key={data.profession} value={data.profession}>{data.profession}</option>
+                      
+                      ))
+                    }
+                </select>
                 <div className='text-xs '>
                 <input type="file" className='opacity-85 pl-4 font-medium font-poppins px-3 py-3  rounded-lg bg-white text-gray-700 outline-none focus:bg-gray-50 duration-200 border border-gray-200 w-full' 
-                // {...register("picture", {
-                //   required: "Recipe picture is required",
-                // })}
                 onChange={(e) => setFile(e.target.files[0])} 
                 />
               </div>     

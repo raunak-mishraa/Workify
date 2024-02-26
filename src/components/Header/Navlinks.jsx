@@ -1,15 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { links } from './NavItems'
+import { useSelector } from 'react-redux';
 
 function Navlinks({className = 'flex'}) {
+    const isAuth = useSelector(state => state.auth.status);
+
    const [heading, setHeading] = React.useState('')
-  return (
-    <div className={`${className} gap-12`}>
+  return (!isAuth ?
+    (<div className={`${className} gap-12`}>
         {links.map((link,index)=>(
             <div key={index}>
             <div className='py-7 md:py-0 text-left md:cursor-pointer  transition delay-75 ease-in-out group'>
-                <h2 onMouseOver={()=>heading !== link.name ? setHeading(link.name) : setHeading('')} className='hover:opacity-70 flex items-center justify-between md:pr-0'>
+                <h2 onClick={()=>heading !== link.name ? setHeading(link.name) : setHeading('')} className='hover:opacity-70 flex items-center justify-between md:pr-0'>
                     {link.name}
                     <span className='text-xl md:mt-1 md:ml-2'>
                     <i className={`${heading === link.name ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'}`}></i>
@@ -58,7 +61,7 @@ function Navlinks({className = 'flex'}) {
            </div>
         </div>
         ))}
-    </div>
+    </div>) : (null)
   )
 }
 

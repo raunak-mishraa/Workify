@@ -28,7 +28,7 @@ function UpdateFreelancerProfile() {
                         <form className='font-poppins' onSubmit={handleUpdate}>
                             {/* profileImg */}
                            
-                            <div className='relative mb-8 w-16 h-16 mx-auto rounded-full  bg-red-400'>
+                            <div className='relative mb-8 w-16 h-16 mx-auto rounded-full  bg-blue-400'>
                                 <img src={userData?.user.avatar} className='w-full object-cover h-full rounded-full' alt="" />
                                 <div className='absolute w-6 h-6  flex items-center justify-center rounded-full bg-white border-2 border-gray-300  bottom-0 right-0'>
                                     <i className='ri-pencil-line text-blue-500'></i>
