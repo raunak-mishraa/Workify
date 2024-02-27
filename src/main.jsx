@@ -22,7 +22,8 @@ import { ToastContainer } from 'react-toastify';
 import CreatePost from './components/CreatePost.jsx'
 // import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
 import MyPost from './pages/Posts/MyPost.jsx'
-
+import {Post} from './pages/Posts/Post.jsx'
+import About from './pages/About.jsx'
 
 const router = createBrowserRouter(
   
@@ -32,7 +33,9 @@ const router = createBrowserRouter(
         <Route path='' element={<Home/>}/>
         <Route path='signup' element={<SignUp/>}/>
         <Route path='login' element={<Login/>}/>
+        <Route path='about' element={<About/>}/>
         <Route path='mypost' element={<MyPost/>}/>
+        <Route path='post' element={<Post/>}/>
         <Route path='contact' element={<Contact/>}/>
         <Route path='dashboard' element={
 

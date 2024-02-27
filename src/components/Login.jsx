@@ -19,7 +19,7 @@ function Login() {
   Axios.defaults.withCredentials = true;
   const login = async(userData) => {  
     try {
-      const response = await Axios.post("http://localhost:8000/api/v1/users/login", userData, {
+      const response = await Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/login`, userData, {
         headers: {
           'Content-Type': 'application/json'
         }

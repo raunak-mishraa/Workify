@@ -9,7 +9,7 @@ function ForgotPassword() {
     const forgotPassword = async(email) => {
         try {
             console.log(email)
-            const response = await Axios.post('http://localhost:8000/api/v1/users/forgot-password', email);
+            const response = await Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/forgot-password`, email);
             // console.log(response);
             if(response.status === 200){
                 toast.info("Check your email for reset link")

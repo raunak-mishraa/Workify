@@ -16,7 +16,7 @@ function ResetPassword() {
         console.log(password)
         try {
             console.log(password)
-            const response = await Axios.post("http://localhost:8000/api/v1/users/reset-password/"+accessToken.token, password);
+            const response = await Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/reset-password/`+accessToken.token, password);
             console.log(response);
             if(response.status === 200){
                 navigate("/login")

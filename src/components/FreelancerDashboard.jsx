@@ -1,27 +1,89 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from './index.js'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import dashboardImg from '../assets/images/dashboardimg.png'
 import { toast } from 'react-toastify'
+import  Axios  from 'axios'
+import { selectPost } from '../../store/postSlice.js';
+import { useNavigate } from 'react-router-dom'
 
 function FreelancerDashboard() {
   const userData = useSelector((state) => state.auth.userData)
-  const [save, setSave] = useState(true)
-  const user = {
-    avatar:"https://img.freepik.com/free-photo/3d-illustration-teenager-with-funny-face-glasses_1142-50955.jpg?t=st=1708687066~exp=1708690666~hmac=1d5e8bac5c16eb53521d1d6bbdeb0e62a9185192cdb4510db89b0b14e664017a&w=740",
-    username:"Ketan Yadav",
-    title:"We need Environmental photo editors.",
-    postTime:"40 Minutes",
-    desc:"Please review the attached sample below and only apply if you can make images like these. We want a good graphic designer who can design environmental photos (Like in the sample below. The product image is added in a environment of church) Send your samples while applying to job. Otherwise you proposal will not be rejected.",
-    budget:"100$"
+  const [posts, setPosts] = useState([])
+  const [savedPosts, setSavedPosts] = useState({});
+  const [tabs, setTabs] = useState('recent')
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // TO DO: // Fetch all posts from the server
+  useEffect(() => {
+    Axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/posts/allposts`)
+    .then((res) => {
+      setPosts(res.data.data)
+      setLoading(false);
+      console.log(res.data.data)
+    })
+    .catch((err) => {
+      console.error("Error fetching posts:", err);
+      setLoading(false); 
+      toast.error("Error fetching posts. Please try again later.");
+    })
+  }, [])
+
+
+  //FETCH BOOKMARKED POSTS
+
+
+
+  const toggleSave = (postId) => {
+    const newSavedPosts = {...savedPosts};
+    newSavedPosts[postId] = !newSavedPosts[postId];
+    setSavedPosts(newSavedPosts);
+    if (newSavedPosts[postId]) {
+      toast.info("Post bookmarked!", { autoClose: 2000 });
+    } else {
+      toast.info("Bookmark removed!", { autoClose: 2000 });
+    }
+  };
+
+  const toggleTabs = (tab) => {
+    setTabs(tab)
   }
 
-  // console.log("this is the data",userData)
+  //to select a post
+  const handleClick = (post) => {
+    dispatch(selectPost(post));
+  };
+  const postedTime = (timestamp) => {
+    const currentDate = new Date();
+    const postDate = new Date(timestamp);
+  
+    const differenceInSeconds = Math.floor((currentDate - postDate) / 1000);
+  
+    // Calculate time difference
+    if (differenceInSeconds < 60) {
+      return 'just now';
+    } else if (differenceInSeconds < 3600) {
+      const minutes = Math.floor(differenceInSeconds / 60);
+      return `Posted ${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    } else if (differenceInSeconds < 86400) {
+      const hours = Math.floor(differenceInSeconds / 3600);
+      return `Posted ${hours} hour${hours > 1 ? 's' : ''} ago`;
+    } else {
+      // Handle longer time periods if needed
+      return 'Posted more than a day ago';
+    }
+  }
+
+
+
+
   return (
     <section className='text-left'>
       <Container>
         <div className='flex flex-wrap md:flex-nowrap gap-6 w-full'>
-          <div className='flex justify-between text-left md:w-4/5 bg-gradient-to-tr rounded-md from-cyan-500 to-blue-600'>
+          <div className='flex justify-between text-left md:w-4/5 bg-gradient-to-tr rounded-md from-cyan-500 to-blue-600 w-full'>
             <div className='p-9'>
               <div className='space-y-2'>
                 <h2 className='text-2xl text-white font-poppins font-semibold capitalize'>"Welcome {userData?.user.fullName}"</h2>
@@ -51,52 +113,73 @@ function FreelancerDashboard() {
           <div>
             <h2>Works you might like</h2>
             <div className='mt-4'>
-              <ul className='flex gap-6 text-xs'>
-                <li className='text-blue-500 border-b-2 border-blue-500'>
-                  <button>Recent</button>
+              <ul className='mb-8 flex gap-6 text-xs'>
+                <li className={`${
+                  tabs === 'recent' ? 'text-blue-500 border-blue-500 border-b-2' : ''
+                } cursor-pointer pb-2`}>
+                  <button onClick={()=>{
+                  toggleTabs('recent')
+                  }}
+                  >Recent</button>
                 </li>
-                <li>
-                  <button>Bookmarked</button>
+                <li className={`${
+                  tabs === 'bookmarked' ? 'text-blue-500 border-blue-500 border-b-2' : ''
+                } cursor-pointer pb-2`}>
+                  <button onClick={()=>{
+                    toggleTabs('bookmarked')
+                  }}
+                  >Bookmarked</button>
                 </li>
               </ul>
-              <div className='mt-8'>
-                <div className='p-4 flex gap-3 rounded-md border-2'>
-                  <div className=''>
-                    <div className='border-2 border-gray-400 p-1 rounded-full w-14 h-14'>
-                      <img src={user.avatar} className='w-full object-cover h-full rounded-full' alt="" />
-                    </div>
-                  </div>
-
-                  <div className='font-poppins pt-2'>
-                    <div className='flex justify-between'>
-                      <div>
-                        <h2 className='font-semibold'>{user.username}</h2>
-                        <p className='text-xs'>Posted {user.postTime} ago</p>
+              {/* this below is for recent */}
+              <div className={`${tabs === 'recent' ? 'block' : 'hidden'}`}>
+              {loading && <div className="text-center">Loading...</div>}
+              { !loading && (
+                posts.map((post, index) => (
+                  <div key={index} onClick={() => {
+                    handleClick(post)
+                    navigate('/post')
+                    }} className='inline-block cursor-pointer mb-2 w-full'>
+                  <div className='p-4 w-full flex gap-3 rounded-md border-2'>
+                    <div className=''>
+                      <div className='border-2 border-gray-400 p-1 rounded-full w-14 h-14'>
+                        <img src={post.client.avatar} className='w-full object-cover h-full rounded-full' alt="" />
                       </div>
-                      <div className='flex items-center gap-7'>
-                        <h3 className='text-sm'>Budget: {user.budget}</h3>
+                    </div>
+  
+                    <div className='font-poppins pt-2 w-full'>
+                      <div className='flex justify-between'>
                         <div>
-                        <i onClick={() => {
-                          if(save){
-                            toast.info("Bookmarked!",{
-                              autoClose: 2000,
-                              theme:'dark'
-                            })
-                          }
-                          setSave((prev)=>!prev)
-                        }
-                        } className={`${save ? "ri-bookmark-line" :"ri-bookmark-fill"} text-lg`}></i>
+                          <h2 className='font-semibold capitalize '>{post.client.fullName}</h2>
+                          <p className='text-xs'> {postedTime(post.createdAt)}</p>
+                        </div>
+                        <div className='flex items-center gap-7'>
+                          <h3 className='text-sm'>Budget: {post?.budget}$</h3>
+                          <div>
+                          <i onClick={(event) => {
+                            event.stopPropagation();
+                            toggleSave(post?._id) 
+                            }} className={`${savedPosts[post._id] ? "ri-bookmark-fill" : "ri-bookmark-line"} text-lg`}></i>
+                          </div>
                         </div>
                       </div>
-                      
+                      <div className='mt-2 font-poppins'>
+                        <h2 className='font-semibold text-sm capitalize'>{post?.title}</h2>
+                        <h2 className='font-normal text-black text-opacity-65 text-sm tracking-wide'>{post.description}</h2>
+                      </div>
                     </div>
-                    <div className='mt-2 font-poppins'>
-                      <h2 className='font-semibold text-sm'>{user.title}</h2>
-                      <h2 className='font-normal text-black text-opacity-65 text-sm tracking-wide'>{user.desc}</h2>
-                    </div>
+  
                   </div>
                 </div>
+                ))
+                )
+              }
               </div>
+              {/* this below id for bookmarked */}
+              <div className={`${tabs === 'bookmarked' ? 'block' : 'hidden'}`}>
+                <h1>er</h1>
+              </div>
+              
             </div>
           </div>
         </div>

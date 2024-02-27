@@ -16,7 +16,7 @@ function CreatePost() {
   const Post = async (data) => {
     console.log(data)
     try {
-      const response = await Axios.post(`${import.meta.env.VITE_SERVER_URL}/posts/createpost`, data,{
+      const response = await Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/posts/createpost`, data,{
         headers: {
           'Content-Type': 'application/json',
           // 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`

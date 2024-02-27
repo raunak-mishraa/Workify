@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 // import authorImg from '../../../assets/images/author.jpg'
 import { useSelector,useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,18 +9,33 @@ import { toast } from 'react-toastify';
 
 function User() {
     const navigate = useNavigate()
+    const ref = useRef(null);
     const [cookies] = useCookies(['accessToken']);
     const accessToken = cookies['accessToken'];
-    console.log(accessToken)
+    // console.log(accessToken)
     const dispatch = useDispatch()
     const [isFreelancer, setIsFreelancer] = useState(true)
     const [open, setOpen] = useState(false)
     const userData = useSelector((state) => state.auth.userData)
     console.log("this is user", userData)
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (ref.current && !ref.current.contains(event.target)) {
+            setOpen(false);
+          }
+        };
+    
+        document.addEventListener('click', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('click', handleClickOutside);
+        };
+      }, [ref]);
+
     const logOut = async () => {
         try {
             const logoutRes = await axios.post(
-                "http://localhost:8000/api/v1/users/logout",
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/users/logout`,
                 { _id: userData.user._id },
                 {
                     headers: {
@@ -51,7 +66,7 @@ function User() {
   return (
     <div className='md:flex gap-6 hidden'> 
         <div className='flex py-2 px-3 border border-gray-200 rounded outline-none max-w-xl'>
-            <input type="search" name="searchValue" id=""  placeholder='Search Jobs' className='outline-none' />
+            <input type="search" name="searchValue" id=""  placeholder={userData.user.isClient ? 'Search Freelancer' : 'Search Jobs'} className='outline-none' />
             <i className="ri-search-line"></i>
         </div>
         <div className='md:flex items-center gap-2 hidden'>
@@ -61,9 +76,9 @@ function User() {
             </div>
         </div>
         <div className='relative'>
-        <div onClick={() =>setOpen((prev)=>!prev)} className='rounded-full flex items-center justify-center w-8 h-8  overflow-hidden'>
+        <div ref={ref} onClick={() =>setOpen((prev)=>!prev)} className='rounded-full flex items-center justify-center w-8 h-8  overflow-hidden'>
             {/* <i className=" ri-user-line"></i> */}
-            <img className='w-full' src={userData.user.avatar} alt="profile" />
+            <img className='w-full h-full object-cover' src={userData.user.avatar} alt="profile" />
         </div>
         <div className={`absolute right-0 top-13 z-10  py-2 ${open ? 'block' : 'hidden'} `}>
         <div className='w-4 h-4 left-3 absolute mt-1 bg-white rotate-45'></div>

@@ -9,8 +9,8 @@ function ClientDashboard() {
     <section>
         <Container>
             <div className='flex py-6 flex-col text-center gap-4 items-center'>
-                <div className='w-32 border-2 rounded-full overflow-hidden p-5'>
-                    <img src={userData?.user.avatar} className='w-full h-full object-cover' alt="" />
+                <div className='w-32 h-32 border-4 border-dashed rounded-full overflow-hidden p-3'>
+                    <img src={userData?.user.avatar} className='w-full h-full object-cover rounded-full' alt="" />
                 </div>
                 <div className='space-y-2'>
                     <h2 className='text-xl font-bold text-black text-opacity-80 font-poppins leading-3'>"Welcome {userData?.user.username}"</h2>

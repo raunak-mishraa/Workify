@@ -30,13 +30,16 @@ function Footer() {
                 <h2 className="uppercase text-black opacity-85 font-semibold mb-4">About</h2>
                 <ul className='text-black text-opacity-70 text-base font-normal'>
                   <li className='mb-4 hover:underline'>
-                    <Link to='/' >About us</Link>
+                    <Link to='/about' >About us</Link>
                   </li>
                   <li className='mb-4 hover:underline'>
                     <Link to='/'>How it Works</Link>
                   </li>
                   <li className='mb-4 hover:underline'>
                     <Link to='/'>Team</Link>
+                  </li>
+                  <li className='mb-4 hover:underline'>
+                    <Link to='/contact'>Contact</Link>
                   </li>
                 </ul>
                 </div>
@@ -85,9 +88,14 @@ function Footer() {
               <div className='flex flex-wrap justify-center sm:justify-between pt-8 pb-2 text-black opacity-80'>
                 <p className='mb-6 text-center sm:text-left'>&copy; 2024 Workify Pty Limited. All rights reserved.</p>
                 <div className='flex gap-5 justify-center sm:justify-end'>
-                <FontAwesomeIcon className='hover:opacity-80' icon={faTwitter} size='lg'/>
+                <Link target="_blank" to='https://twitter.com/Raunak_devs'><FontAwesomeIcon className='hover:opacity-80' icon={faTwitter} size='lg'/>
+                </Link>
+                <Link target="_blank" to='https://www.linkedin.com/in/raunak-mishraa/'>
                 <FontAwesomeIcon className='hover:opacity-80' icon={faLinkedinIn} size='lg'/>
+                </Link>
+                <Link target="_blank" to='https://www.instagram.com/devwithraunak'>
                 <FontAwesomeIcon className='hover:opacity-80' icon={faSquareInstagram} size='lg'/>
+                </Link>
                 </div>
               </div>
           </div>

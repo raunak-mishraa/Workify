@@ -19,7 +19,7 @@ function Header() {
             <div className='flex items-center justify-between h-20'>
               <div className='flex items-center w-full'>
               <div className='z-50 flex justify-between md:w-auto w-full'>
-                <Link to='/'>
+                <Link to={authStatus ? '/dashboard' : '/'}>
                   <Logo/>
                 </Link>
                 <div className="text-3xl md:hidden" onClick={()=>setOpen(!open)}>
@@ -34,7 +34,7 @@ function Header() {
                     My Post
                   </Link>
                   </li>) 
-                 : (<li className='hover:opacity-70 transition delay-75 ease-in-out'>
+                 : (!authStatus && <li className='hover:opacity-70 transition delay-75 ease-in-out'>
                     <Link to='/'>
                       Home
                     </Link>
