@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from './index.js'
 import { useDispatch, useSelector } from 'react-redux'
-// import dashboardImg from '../assets/images/dashboardImg.png'
+import dashboardImg from '../assets/images/dashboardimg.png'
 import { toast } from 'react-toastify'
 import  Axios  from 'axios'
 import { selectPost } from '../../store/postSlice.js';
@@ -96,7 +96,7 @@ function FreelancerDashboard() {
                 </div>
                 <div className='w-1/3 relative hidden md:block'>
                   <div className='absolute  left-10 w-2/3 h-4/5 bg-white rounded-full bottom-0'></div>
-                    {/* <img src={dashboardImg} className='drop-shadow-md h-full w-full object-cover' alt="" /> */}
+                    <img src={dashboardImg} className='drop-shadow-md h-full w-full object-cover' alt="" />
                 </div>
           </div>
           <div className='text-left p-3 pt-5 md:w-1/5 w-full rounded-sm bg-gray-50 border-2'>
