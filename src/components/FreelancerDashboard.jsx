@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from './index.js'
 import { useDispatch, useSelector } from 'react-redux'
-
+import dashboardImg from '../assets/images/dashboardImg.png'
 import { toast } from 'react-toastify'
 import  Axios  from 'axios'
 import { selectPost } from '../../store/postSlice.js';
