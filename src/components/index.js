@@ -10,13 +10,13 @@ import noCash from "../assets/images/noCash.svg";
 import googleImg from "../assets/images/google.svg";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import FreelancerDashboard from "./FreelancerDashboard";
+import FreelancerDashboard from "../components/Dashboard/FreelancerDashboard";
 import ContactImg from "../assets/images/contactImg.png";
 import FreelancerProfile from "./Header/User/Freelancer/FreelancerProfile";
 import UpdateFreelancerProfile from "./Header/User/Freelancer/UpdateFreelancerProfile";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
-import ClientDashboard from "./ClientDashboard";
+import ClientDashboard from "../components/Dashboard/ClientDashboard";
 import CreatePost from "./CreatePost";
 export { 
     Logo,

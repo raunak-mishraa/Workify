@@ -31,7 +31,10 @@ function SignUp() {
     formData.append('email', user.email);
     formData.append('password', user.password);
     formData.append('isClient', user.isClient);
-    formData.append('profession', user.profession);
+    if (!user.isClient) {
+      formData.append('profession', user.profession);
+    }
+  
     formData.append('avatar', file); // Append the avatar file
     console.log(user)
     try {
@@ -41,7 +44,7 @@ function SignUp() {
         }
       });
       
-      // console.log(response.data);
+      console.log(response.data);
       const responseData = response.data;
       if(responseData){
         toast.success("Successefully Registered!",{
@@ -122,7 +125,7 @@ function SignUp() {
                 placeholder='Enter your password'
                 onChange={handleChange}
                 />   
-                <select name="profession" value={user.profession} onChange={handleChange} className='text-black font-medium text-opacity-70 w-full p-2 border-2'>
+                <select disabled={user.isClient && true} name="profession" value={user.profession} onChange={handleChange} className='text-black font-medium text-opacity-70 w-full p-2 border-2'>
                     {
                       professionData.map(data=>(
                         <option key={data.profession} value={data.profession}>{data.profession}</option>

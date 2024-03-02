@@ -36,7 +36,7 @@ function Footer() {
                     <Link to='/'>How it Works</Link>
                   </li>
                   <li className='mb-4 hover:underline'>
-                    <Link to='/'>Team</Link>
+                    <Link to='/team'>Team</Link>
                   </li>
                   <li className='mb-4 hover:underline'>
                     <Link to='/contact'>Contact</Link>

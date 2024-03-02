@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button, Container } from '../../components'
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Post() {
+  const navigate = useNavigate();
   const selectedPost = useSelector((state) => state.post.selectedPost);
   console.log(selectedPost)
   const timestamp = selectedPost?.createdAt;
@@ -62,8 +64,8 @@ function Post() {
                     <div className='font-poppins w-2/6 py-10'>
                       <div className='w-[60%] ml-auto'>
                         <div className='space-y-3'>
-                          <Button className='py-2 w-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white '>Apply now</Button>
-                          <Button className='py-2 w-full bg-gradient-to-r border-2 border-blue-600 rounded-xl text-black text-opacity-80 font-semibold'>Save Job</Button>
+                          <Button onClick={() => navigate(`/apply/${selectedPost._id}`)} className='py-2 w-full bg-gradient-to-r from-cyan-600 to-blue-500 rounded-xl text-white '>Apply now</Button>
+                          <Button className='py-1.5 w-full bg-gradient-to-r border-2 border-blue-500 rounded-xl text-black text-opacity-80 font-semibold'>Save Job</Button>
                         </div>
                         <div className='mt-20 space-y-6'>
                             <div>
@@ -72,7 +74,7 @@ function Post() {
                             </div>
                             <div className='text-black text-opacity-75 space-y-1'>
                              <div className=' flex items-center gap-2'>
-                              <img src={selectedPost?.client?.avatar} className='w-7 h-7 object-cover rounded-full' alt="" />
+                              <img src={selectedPost?.client.avatar} className='w-7 h-7 object-cover rounded-full' alt="" />
                               <div>
                                 <h3 className='text-sm font-semibold capitalize'>{selectedPost?.client.fullName}</h3>
                                 <h3 className='text-sm font-medium'><i class="ri-verified-badge-fill text-blue-700"></i> Payment Verified</h3>

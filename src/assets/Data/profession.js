@@ -1,5 +1,8 @@
 export const professionData = [
     {
+        profession: 'Select profession',
+    },
+    {
         profession: 'Web Developer',
     },
     {

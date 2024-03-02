@@ -1,8 +1,8 @@
 import React from 'react'
-import { Container} from "../../../index"
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-function FreelancerProfile() {
+import Container from '../../container/Container'
+function Profile() {
     const userData = useSelector((state) => state.auth.userData)
     // console.log("this is profile page", userData)
     
@@ -61,10 +61,6 @@ function FreelancerProfile() {
                             <h3 className=' mt-1  font-semibold'>{userData?.user.email}</h3>
                         </div>
                    </div>
-                   <div className='absolute right-4 border-2 w-8 h-8 rounded-full flex justify-center items-center  top-3'>
-                    <Link to='/updatefreelancerprofile'><i className='ri-pencil-fill text-blue-400'></i></Link>
-                    
-                   </div>
                 </div>
             </div>
           </div>
@@ -73,4 +69,4 @@ function FreelancerProfile() {
   )
 }
 
-export default FreelancerProfile
+export default Profile

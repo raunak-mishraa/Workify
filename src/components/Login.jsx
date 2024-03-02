@@ -19,14 +19,17 @@ function Login() {
   Axios.defaults.withCredentials = true;
   const login = async(userData) => {  
     try {
-      const response = await Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/login`, userData, {
+      const response = await Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/login`, {
+          email: userData.email.toLowerCase(),
+          password: userData.password
+        }, 
+      {
         headers: {
           'Content-Type': 'application/json'
         }
       });
       
       const responseData = response.data.message;
-      
       if(responseData){
         navigate('/dashboard');
         localStorage.setItem('userData', JSON.stringify(responseData));

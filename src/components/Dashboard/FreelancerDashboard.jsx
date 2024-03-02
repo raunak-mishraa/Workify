@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Container } from './index.js'
+import { Container } from '../index.js'
 import { useDispatch, useSelector } from 'react-redux'
-import  dashboardImg  from '../assets/images/dashboard.png'
+import  dashboardImg  from '../../assets/images/dashboard.png'
 import { toast } from 'react-toastify'
 import  Axios  from 'axios'
-import { selectPost } from '../../store/postSlice.js';
+import { selectPost, bookmarkPost } from '../../../store/postSlice.js';
 import { useNavigate } from 'react-router-dom'
 
 function FreelancerDashboard() {
+  // const bookmarkPostData = useSelector((state) => state.post.bookmarkedPost)
   const userData = useSelector((state) => state.auth.userData)
   const [posts, setPosts] = useState([])
-  const [savedPosts, setSavedPosts] = useState({});
+  const [postId, setPostId] = useState('')
+  // const [savedPosts, setSavedPosts] = useState({});
+  // const [bookmarkedPost, setBookmarkedPost] = useState([]);
   const [tabs, setTabs] = useState('recent')
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -22,7 +25,7 @@ function FreelancerDashboard() {
     .then((res) => {
       setPosts(res.data.data)
       setLoading(false);
-      console.log(res.data.data)
+      console.log("all",res.data.data)
     })
     .catch((err) => {
       console.error("Error fetching posts:", err);
@@ -34,18 +37,19 @@ function FreelancerDashboard() {
 
   //FETCH BOOKMARKED POSTS
 
+// console.log(savedPosts)
 
-
-  const toggleSave = (postId) => {
-    const newSavedPosts = {...savedPosts};
-    newSavedPosts[postId] = !newSavedPosts[postId];
-    setSavedPosts(newSavedPosts);
-    if (newSavedPosts[postId]) {
-      toast.info("Post bookmarked!", { autoClose: 2000 });
-    } else {
-      toast.info("Bookmark removed!", { autoClose: 2000 });
-    }
-  };
+  // const toggleSave = (postId) => {
+  //   const newSavedPosts = {...savedPosts};
+  //   newSavedPosts[postId] = !newSavedPosts[postId];
+  //   setSavedPosts(newSavedPosts);
+  //   console.log(savedPosts)
+  //   if (newSavedPosts[postId]) {
+  //     toast.info("Post bookmarked!", { autoClose: 2000 });
+  //   } else {
+  //     toast.info("Bookmark removed!", { autoClose: 2000 });
+  //   }
+  // };
 
   const toggleTabs = (tab) => {
     setTabs(tab)
@@ -53,6 +57,7 @@ function FreelancerDashboard() {
 
   //to select a post
   const handleClick = (post) => {
+    localStorage.setItem('selectedPostData', JSON.stringify(post));
     dispatch(selectPost(post));
   };
   const postedTime = (timestamp) => {
@@ -71,13 +76,11 @@ function FreelancerDashboard() {
       const hours = Math.floor(differenceInSeconds / 3600);
       return `Posted ${hours} hour${hours > 1 ? 's' : ''} ago`;
     } else {
-      // Handle longer time periods if needed
       return 'Posted more than a day ago';
     }
   }
 
-
-
+  const toggleSave = (postId) => {}
 
   return (
     <section className='text-left'>
@@ -132,53 +135,59 @@ function FreelancerDashboard() {
                 </li>
               </ul>
               {/* this below is for recent */}
+              {tabs === 'recent' && !loading && posts.length === 0 ? (
+                <p className='text-center'>No post found</p>
+              ):
+              (null)
+              }
               <div className={`${tabs === 'recent' ? 'block' : 'hidden'}`}>
-              {loading && <div className="text-center">Loading...</div>}
-              { !loading && (
-                posts.map((post, index) => (
-                  <div key={index} onClick={() => {
-                    handleClick(post)
-                    navigate('/post')
-                    }} className='inline-block cursor-pointer mb-2 w-full'>
-                  <div className='p-4 w-full flex gap-3 rounded-md border-2'>
-                    <div className=''>
-                      <div className='border-2 border-gray-400 p-1 rounded-full w-14 h-14'>
-                        <img src={post.client.avatar} className='w-full object-cover h-full rounded-full' alt="" />
-                      </div>
-                    </div>
-  
-                    <div className='font-poppins pt-2 w-full'>
-                      <div className='flex justify-between'>
-                        <div>
-                          <h2 className='font-semibold capitalize '>{post.client.fullName}</h2>
-                          <p className='text-xs'> {postedTime(post.createdAt)}</p>
+                {loading && <div className="text-center">Loading...</div>}
+                { !loading && (
+                  posts.map((post, index) => (
+                    <div key={index} onClick={() => {
+                      handleClick(post)
+                      navigate('/post')
+                      }} className='inline-block cursor-pointer mb-2 w-full'>
+                    <div className='p-4 w-full flex gap-3 rounded-md border-2'>
+                      <div className=''>
+                        <div className='border-2 border-gray-200 p-1 rounded-full w-14 h-14'>
+                          <img src={post.client.avatar} className='w-full object-cover h-full rounded-full' alt="" />
                         </div>
-                        <div className='flex items-center gap-7'>
-                          <h3 className='text-sm'>Budget: {post?.budget}$</h3>
+                      </div>
+
+                      <div className='font-poppins pt-2 w-full'>
+                        <div className='flex justify-between'>
                           <div>
-                          <i onClick={(event) => {
-                            event.stopPropagation();
-                            toggleSave(post?._id) 
-                            }} className={`${savedPosts[post._id] ? "ri-bookmark-fill" : "ri-bookmark-line"} text-lg`}></i>
+                            <h2 className='font-semibold capitalize '>{post?.client.fullName}</h2>
+                            <p className='text-xs'> {postedTime(post.createdAt)}</p>
+                          </div>
+                          <div className='flex items-center gap-7'>
+                            <h3 className='text-sm'>Budget: {post?.budget}$</h3>
+                            <div>
+                            <i onClick={(event) => {
+                              event.stopPropagation();
+                              toggleSave(post?._id) 
+                              }} className={`${postId[post._id] ? "ri-bookmark-fill" : "ri-bookmark-line"} text-lg`}></i>
+                            </div>
+                          </div>
+                        </div>
+                        <div className='mt-2 font-poppins'>
+                          <h2 className='font-semibold text-sm capitalize'>{post?.title}</h2>
+                          <div className='overflow-hidden'>
+                            <h2 className='line-clamp-3 leading-normal font-normal text-black text-opacity-65 text-sm tracking-wide'>{post.description}</h2>
                           </div>
                         </div>
                       </div>
-                      <div className='mt-2 font-poppins'>
-                        <h2 className='font-semibold text-sm capitalize'>{post?.title}</h2>
-                        <h2 className='font-normal text-black text-opacity-65 text-sm tracking-wide'>{post.description}</h2>
-                      </div>
+
                     </div>
-  
                   </div>
+                  ))
+                  )
+                }
                 </div>
-                ))
-                )
-              }
-              </div>
               {/* this below id for bookmarked */}
-              <div className={`${tabs === 'bookmarked' ? 'block' : 'hidden'}`}>
-                <h1>er</h1>
-              </div>
+              
+              
               
             </div>
           </div>
@@ -189,3 +198,4 @@ function FreelancerDashboard() {
 }
 
 export default FreelancerDashboard
+

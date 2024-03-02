@@ -35,7 +35,7 @@ function AboutUs() {
                                 </div>
                         </div>
                         <div className="font-poppins relative order-1 md:order-2 w-full">
-                            <img src="https://img.freepik.com/free-photo/3d-cartoon-style-character_23-2151034077.jpg?t=st=1709044577~exp=1709048177~hmac=404b4145956d4bca57e22cd6c0add31761a85ab64058d8bf7138ec38366e2a84&w=740" alt="About Us Image" className="w-full h-auto rounded" />
+                            <img src="https://img.freepik.com/free-photo/front-view-lawyer-portrait_23-2151202432.jpg?t=st=1709204030~exp=1709207630~hmac=c8b035d24da63c981d8ee66d273f233d9941bbb5326e396692b744c87b5b2715&w=996" alt="About Us Image" className="w-full h-full object-cover rounded" />
                             <div className='absolute border-2 -left-8 rounded-md shadow-lg top-2 z-20'>
                                 <div className='flex gap-2 p-2 w-28 bg-white'>
                                     <div><i class="ri-shield-check-fill text-lg"></i></div>

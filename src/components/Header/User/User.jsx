@@ -11,13 +11,11 @@ function User() {
     const navigate = useNavigate()
     const ref = useRef(null);
     const [cookies] = useCookies(['accessToken']);
-    const accessToken = cookies['accessToken'];
-    // console.log(accessToken)
+    const [notificationOn, setNotificationOn] = useState(false)
     const dispatch = useDispatch()
-    const [isFreelancer, setIsFreelancer] = useState(true)
     const [open, setOpen] = useState(false)
     const userData = useSelector((state) => state.auth.userData)
-    console.log("this is user", userData)
+    // console.log("this is user", userData)
     useEffect(() => {
         const handleClickOutside = (event) => {
           if (ref.current && !ref.current.contains(event.target)) {
@@ -32,36 +30,41 @@ function User() {
         };
       }, [ref]);
 
-    const logOut = async () => {
+    const logOut = () => {
         try {
-            const logoutRes = await axios.post(
-                `${import.meta.env.VITE_SERVER_URL}/api/v1/users/logout`,
-                { _id: userData.user._id },
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`
-                    },
-                    withCredentials: true // Send cookies with the request
-                }
-            );
+            // const logoutRes = await axios.post(
+            //     `${import.meta.env.VITE_SERVER_URL}/api/v1/users/logout`,
+            //     { _id: userData.user._id },
+            //     {
+            //         headers: {
+            //             Authorization: `Bearer ${accessToken}`
+            //         },
+            //         withCredentials: true // Send cookies with the request
+            //     }
+            // );
     
-            console.log(logoutRes.data);
-            console.log("logout")
-                if(logoutRes){
-                    localStorage.removeItem('userData');
-                    dispatch(logout());
-                    navigate("/")
-                    toast.success("User logged Out!")
-                }
-            // if (logoutRes.data.status === 200) {
-                
-            // }
+            // console.log(logoutRes.data);
+            // console.log("logout")
+                // if(logoutRes){
+                //     localStorage.removeItem('userData');
+                //     dispatch(logout());
+                //     navigate("/")
+                //     toast.success("User logged Out!")
+                // }
+            localStorage.removeItem('userData');
+            dispatch(logout());
+            navigate("/")
+            toast.success("User logged Out!")
         } catch (error) {
             console.error("Error logging out:", error);
         }
     };
     
-    
+    //For notifications
+    const showNotifications = () => {
+        console.log("show notifications", notificationOn)
+        setNotificationOn((prev) => !prev)
+    }
 
   return (
     <div className='md:flex gap-6 hidden'> 
@@ -70,9 +73,14 @@ function User() {
             <i className="ri-search-line"></i>
         </div>
         <div className='md:flex items-center gap-2 hidden'>
-        <div>
+        <div onClick={() => showNotifications()}>
             <div className='relative w-8 h-8 bg-gray-100 rounded-full items-center justify-center flex'> <i className=" ri-notification-3-line"></i>
-            <div className='absolute right-2 top-2 w-2 h-2 bg-yellow-300 rounded-full'></div>
+                 <div className='absolute right-2 top-2 w-2 h-2 bg-yellow-300 rounded-full'></div>
+                 <div onClick={(e) => e.stopPropagation()} className={`${notificationOn ? 'block' : 'hidden'} right-0 top-12 p-2 rounded-md absolute w-56 bg-white border`}>
+                    <div className='bg-gray-50 p-2 rounded'>
+                        <p className='text-sm opacity-95 first-letter:uppercase'>you have a new notification</p>
+                    </div>
+                 </div>
             </div>
         </div>
         <div className='relative'>

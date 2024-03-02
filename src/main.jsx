@@ -24,6 +24,13 @@ import CreatePost from './components/CreatePost.jsx'
 import MyPost from './pages/Posts/MyPost.jsx'
 import {Post} from './pages/Posts/Post.jsx'
 import About from './pages/About.jsx'
+import {Apply} from './pages/Posts/Apply.jsx'
+import Applications from './pages/Posts/Applications.jsx'
+import Profile from './components/Header/User/Profile.jsx'
+import ApplicantInfo from './pages/Posts/ApplicantInfo.jsx'
+import MyApplication from './components/MyApplication.jsx'
+import Team from './components/Team.jsx'
+
 
 const router = createBrowserRouter(
   
@@ -33,10 +40,16 @@ const router = createBrowserRouter(
         <Route path='' element={<Home/>}/>
         <Route path='signup' element={<SignUp/>}/>
         <Route path='login' element={<Login/>}/>
+        <Route path='applicantinfo' element={<ApplicantInfo/>}/>
         <Route path='about' element={<About/>}/>
+        <Route path='team' element={<Team/>}/>
         <Route path='mypost' element={<MyPost/>}/>
         <Route path='post' element={<Post/>}/>
+        <Route path='applications' element={<Applications/>}/>
+        <Route path='apply/:id' element={<Apply/>}/>
         <Route path='contact' element={<Contact/>}/>
+        <Route path='myapplication' element={<MyApplication/>}/>
+        <Route path='profile/:id' element={<Profile/>}/>
         <Route path='dashboard' element={
 
             <Dashboard/>
@@ -49,9 +62,7 @@ const router = createBrowserRouter(
         <Route path='login/forgot-password' element={<ForgotPassword/>}/>
         <Route path='resetpassword/:token' element={<ResetPassword/>}/>
         <Route path='freelancerprofile' element={
- 
             <FreelancerProfile/>
-
         }/>
         <Route path='updatefreelancerprofile' element={
 

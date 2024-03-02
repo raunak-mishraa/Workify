@@ -1,11 +1,11 @@
 import React from 'react'
 import Container from '../container/Container'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Logo, Navlinks, Button, Input }from '../index'
 import { useSelector } from 'react-redux'
 import User from './User/User'
 function Header() {
-  const isUser = useSelector((state) => state.auth.userData?.user.isClient)
+  const isClient = useSelector((state) => state.auth.userData?.user.isClient)
   const authStatus = useSelector((state) => state.auth.status)
   // console.log(authStatus)
   // console.log(authData)
@@ -28,17 +28,35 @@ function Header() {
               </div>
               <ul className='cursor-pointer items-center md:flex hidden gap-12 text-black text-opacity-85 md:ml-12 text-base'>
 
-                {isUser ?
-                 (<li className='hover:opacity-70 transition delay-75 ease-in-out'>
-                  <Link to='/mypost'>
-                    My Post
-                  </Link>
-                  </li>) 
+                {isClient ?
+                 (<>
+                  <li className=''>
+                    <NavLink className={({isActive}) => ` ${isActive && 'text-blue-500'}`} to='/mypost'>
+                      My Post
+                    </NavLink>
+                    </li>
+                    <li className='transition delay-75 ease-in-out'>
+                    <NavLink to='/applications' className={({isActive}) => ` ${isActive && 'text-blue-500'}`} >
+                      Applications
+                    </NavLink>
+                    </li>
+                    <li className='transition delay-75 ease-in-out'>
+                    <NavLink to='/createpost' className={({isActive}) => ` ${isActive && 'text-blue-500'}`} >
+                      Create
+                    </NavLink>
+                    </li>
+                  </>
+                  ) 
                  : (!authStatus && <li className='hover:opacity-70 transition delay-75 ease-in-out'>
                     <Link to='/'>
                       Home
                     </Link>
                 </li>)}
+               {!isClient && <li className='transition delay-75 ease-in-out'>
+                    <NavLink to='/myapplication' className={({isActive}) => ` ${isActive && ' opacity-65'}`} >
+                      My Appliction
+                    </NavLink>
+                    </li>}
 
                 <Navlinks/>
               </ul>

@@ -3,6 +3,9 @@ export const categoryData = [
         category: 'Web Development',
     },
     {
+        category: 'Technical Writing',
+    },
+    {
         category: 'Mobile Development',
     },
     {
