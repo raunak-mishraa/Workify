@@ -80,7 +80,7 @@ function Apply() {
             <div>
               <h2 className='text-base font-medium opacity-95 text-black'>Skills Required</h2>
               <div className='space-x-2 mt-4'>
-                {selectedPost.tags.map((tag)=>(
+                {selectedPost?.tags.map((tag)=>(
                   <span className='p-2 px-3 text-xs  rounded-md border-1 bg-gray-100 inline-block opacity-90'>{tag}</span>
                 ))}
               </div>

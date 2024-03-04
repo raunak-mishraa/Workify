@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../../../../store/authSlice'
+import {searchFreelancer, searchClientPosts} from '../../../../store/searchSlice'
 import { useCookies } from 'react-cookie';
 import axios from 'axios'
 import { toast } from 'react-toastify';
@@ -15,7 +16,7 @@ function User() {
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     const userData = useSelector((state) => state.auth.userData)
-    // console.log("this is user", userData)
+    const [searchValue, setSearchValue] = useState('')
     useEffect(() => {
         const handleClickOutside = (event) => {
           if (ref.current && !ref.current.contains(event.target)) {
@@ -68,14 +69,79 @@ function User() {
         setNotificationOn((prev) => !prev)
     }
 
+    //for searching
+    // const search = (e) =>{
+    //     let search_query = e.target.value;
+    //     useEffect((()=>{
+    //         console.log(search_query)
+    //     }),[])
+    // }
+
+
+//    if(userData?.user.isClient){
+//     useEffect(()=>{
+//         const query = searchValue;
+//         axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search//freelancers/search?query=${query}`)
+//         .then((res)=>{
+//             console.log(res.data)
+//         })
+//         .catch((error)=>{
+//             console.log(error)
+//         })
+//     },[searchValue])
+ 
+//    }
+    const search = () =>{
+        if(userData?.user.isClient) {
+            const query = searchValue;
+            axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search/freelancers/search?query=${query}`)
+            .then((res)=>{
+                if(res){
+                    // console.log(res.data.data)
+                    setSearchValue('')
+                    dispatch(searchFreelancer(res.data.data))
+                    navigate('/search')
+                }
+            })
+            .catch((error)=>{
+                navigate('/search')
+                setSearchValue('s')
+                dispatch(searchFreelancer([]))
+                console.log(error)
+            })
+        }
+        else{
+            const query = searchValue;
+            axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search/client_posts/search?query=${query}`)
+            .then((res)=>{
+                if(res){
+                    // console.log(res.data.data)
+                    setSearchValue('')
+                    dispatch(searchClientPosts(res.data.data))
+                    navigate('/search')
+                }
+            })
+            .catch((error)=>{
+                navigate('/search')
+                setSearchValue('s')
+                dispatch(searchClientPosts([]))
+                console.log(error)
+            })
+        }
+    }
+
   return (
     <div className='md:flex gap-6 hidden'> 
         <div className='flex py-2 px-3 border border-gray-200 rounded outline-none max-w-xl'>
-            <input type="search" name="searchValue" id=""  placeholder={userData?.user?.isClient ? 'Search Freelancer' : 'Search Jobs'} className='outline-none' />
-            <i className="ri-search-line"></i>
+            <input onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    search();
+                }
+            }} type="search" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} name="searchValue" id=""  placeholder={userData?.user?.isClient ? 'Search Freelancer' : 'Search Jobs'} className='text-gray-800 outline-none appearance-none' />
+            <i onClick={search} className="ri-search-line"></i>
         </div>
         <div className='md:flex items-center gap-2 hidden'>
-        <div onClick={() => showNotifications()}>
+        <div onClick={showNotifications}>
             <div className='relative w-8 h-8 bg-gray-100 rounded-full items-center justify-center flex'> <i className=" ri-notification-3-line"></i>
                  <div className='absolute right-2 top-2 w-2 h-2 bg-yellow-300 rounded-full'></div>
                  <div onClick={(e) => e.stopPropagation()} className={`${notificationOn ? 'block' : 'hidden'} right-0 top-12 p-2 rounded-md absolute w-56 bg-white border`}>

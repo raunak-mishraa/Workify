@@ -150,7 +150,7 @@ function FreelancerDashboard() {
                       }} className='inline-block cursor-pointer mb-2 w-full'>
                     <div className='p-4 w-full flex gap-3 rounded-md border-2'>
                       <div className=''>
-                        <div className='border-2 border-gray-200 p-1 rounded-full w-14 h-14'>
+                        <div className='border-2 border-gray-100 p-1 rounded-full w-14 h-14'>
                           <img src={post?.client?.avatar} className='w-full object-cover h-full rounded-full' alt="" />
                         </div>
                       </div>

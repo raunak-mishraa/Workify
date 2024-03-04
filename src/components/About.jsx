@@ -1,5 +1,5 @@
 import React from 'react';
-
+import AboutImg from '../assets/images/about.jpg';
 function AboutUs() {
     return (
         <div className="font-poppins bg-gray-100 min-h-screen w-full">
@@ -13,21 +13,21 @@ function AboutUs() {
                                 </p>
                                 <div className='mt-10 opacity-85'>
                                 <div className='flex gap-4 mb-4'>
-                                <div className='w-56 p-2 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                                <div className='w-56 p-2 border border-solid border-gray-300 items-center flex gap-3 md:text-base text-sm font-bold rounded-md '>
                                 <i className="ri-award-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-100"></i>
                                 <h3 className='font-bold'>Quality Job</h3>
                                 </div>
-                                <div className='w-56 p-2 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                                <div className='w-56 p-2 border border-solid border-gray-300 items-center flex gap-3 md:text-base text-sm font-bold rounded-md '>
                                 <i className="ri-box-3-fill rounded-md flex items-center justify-center w-8 h-8 bg-gray-100"></i>
                                 <h3 className='font-bold'>No Bid</h3>
                                 </div>
                                 </div>
                                 <div className='flex gap-4'>
-                                <div  className='w-56 p-2 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                                <div className='w-56 p-2 border border-solid border-gray-300 flex items-center gap-3 md:text-base text-sm font-bold rounded-md '>
                                 <i className="ri-currency-fill w-8 h-8 rounded-md flex items-center justify-center bg-gray-100"></i>
                                 <h3 className='font-bold'>No Extra Charge</h3>
                                 </div>
-                                <div  className='w-56 p-2 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                                <div  className='w-56 p-2 border border-solid border-gray-300 flex items-center gap-3 md:text-base text-sm font-bold rounded-md '>
                                 <i className="ri-briefcase-4-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-100"></i>
                                 <h3 className='font-bold'>International</h3>
                                 </div>
@@ -35,7 +35,7 @@ function AboutUs() {
                                 </div>
                         </div>
                         <div className="font-poppins relative order-1 md:order-2 w-full">
-                            <img src="https://img.freepik.com/free-photo/front-view-lawyer-portrait_23-2151202432.jpg?t=st=1709204030~exp=1709207630~hmac=c8b035d24da63c981d8ee66d273f233d9941bbb5326e396692b744c87b5b2715&w=996" alt="About Us Image" className="w-full h-full object-cover rounded" />
+                            <img src={AboutImg} alt="About Us Image" className="w-full h-full object-cover rounded" />
                             <div className='absolute border-2 -left-8 rounded-md shadow-lg top-2 z-20'>
                                 <div className='flex gap-2 p-2 w-28 bg-white'>
                                     <div><i class="ri-shield-check-fill text-lg"></i></div>

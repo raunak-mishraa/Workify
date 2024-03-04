@@ -3,9 +3,9 @@ import { Container, ContactImg, Input, Button } from '../components/index'
 
 function Contact() {
   return (
-    <section className='min-h-screen py-4 w-full h-full flex items-center justify-center'>
+    <section className='min-h-[90%] py-4 w-full flex items-center justify-center'>
       <Container>
-         <div className='flex flex-wrap rounded-[30px] h-[85vh]  justify-center items-center overflow-hidden'>
+         <div className='flex flex-wrap rounded-[30px] h-[75vh]  justify-center items-center overflow-hidden'>
           <div className='md:w-1/2 h-full hidden md:block object-center'>
             <img src={ContactImg} className=' w-full object-center' alt="" />
           </div>
