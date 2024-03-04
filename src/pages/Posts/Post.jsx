@@ -53,9 +53,11 @@ function Post() {
                               <span className='text-lg font-semibold'>Skills Required</span>
                               <div className='my-2 flex space-x-1'>
                                 {/* // Skillls */}
-                                <span className='text-xs font-medium p-1 rounded-md border-2'>Logo deigner</span>
-                                <span className='text-xs font-medium p-1 rounded-md border-2'>adobe illustration</span>
-                                <span className='text-xs font-medium p-1 rounded-md border-2'>Logo Design</span>
+                                {
+                                  selectedPost?.tags.map((skill, index) => (
+                                    <span key={index} className='bg-gray-200 px-2 py-1 rounded-md text-xs font-medium'>{skill}</span>
+                                  ))
+                                }
                               </div>
                             </div>
                           </div>

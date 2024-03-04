@@ -4,18 +4,18 @@ import App from './App.jsx'
 import './index.css'
 import Home from './pages/Home.jsx'
 import 'remixicon/fonts/remixicon.css'
-import { RouterProvider, createBrowserRouter, createRoutesFromChildren, createRoutesFromElements, Route } from 'react-router-dom'
+import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 import SignUp from './pages/Signup.jsx'
 import Login from './pages/Login.jsx'
 import Contact from './pages/Contact.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {
   FreelancerProfile, 
-  UpdateFreelancerProfile, 
+  UpdateProfile, 
   ForgotPassword, 
   ResetPassword,
 } from './components/index.js'
-import { Provider, useSelector } from 'react-redux'
+import { Provider } from 'react-redux'
 import store from '../store/store.js'
 import Dashboard from './pages/Dashboard.jsx'
 import { ToastContainer } from 'react-toastify';
@@ -30,6 +30,7 @@ import Profile from './components/Header/User/Profile.jsx'
 import ApplicantInfo from './pages/Posts/ApplicantInfo.jsx'
 import MyApplication from './components/MyApplication.jsx'
 import Team from './components/Team.jsx'
+import Search from './components/Search.jsx'
 
 
 const router = createBrowserRouter(
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
         <Route path='team' element={<Team/>}/>
         <Route path='mypost' element={<MyPost/>}/>
         <Route path='post' element={<Post/>}/>
+        <Route path='search' element={<Search/>}/>
         <Route path='applications' element={<Applications/>}/>
         <Route path='apply/:id' element={<Apply/>}/>
         <Route path='contact' element={<Contact/>}/>
@@ -64,9 +66,9 @@ const router = createBrowserRouter(
         <Route path='freelancerprofile' element={
             <FreelancerProfile/>
         }/>
-        <Route path='updatefreelancerprofile' element={
+        <Route path='updateprofile' element={
 
-            <UpdateFreelancerProfile/>
+            <UpdateProfile/>
 
         }/>
       </Route>

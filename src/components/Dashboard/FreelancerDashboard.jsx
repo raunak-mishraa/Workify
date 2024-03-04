@@ -89,7 +89,7 @@ function FreelancerDashboard() {
           <div className='flex justify-between text-left md:w-4/5 bg-gradient-to-tr rounded-md from-cyan-500 to-blue-600 w-full'>
             <div className='p-9'>
               <div className='space-y-2'>
-                <h2 className='text-2xl text-white font-poppins font-semibold capitalize'>"Welcome {userData?.user.fullName}"</h2>
+                <h2 className='text-2xl text-white font-poppins font-semibold capitalize'>"Welcome {userData?.user?.fullName}"</h2>
                 <p className='leading-7 text-xl text-white font-semibold'>Dive into endless opportunities and creative ventures.<br></br> Let your skills shine bright on our platform.</p>
               </div>
                 <div className='mt-8 flex bg-white py-2 px-3 border border-gray-200 rounded outline-none md:w-80 w-full'>
@@ -151,14 +151,14 @@ function FreelancerDashboard() {
                     <div className='p-4 w-full flex gap-3 rounded-md border-2'>
                       <div className=''>
                         <div className='border-2 border-gray-200 p-1 rounded-full w-14 h-14'>
-                          <img src={post.client.avatar} className='w-full object-cover h-full rounded-full' alt="" />
+                          <img src={post?.client?.avatar} className='w-full object-cover h-full rounded-full' alt="" />
                         </div>
                       </div>
 
                       <div className='font-poppins pt-2 w-full'>
                         <div className='flex justify-between'>
                           <div>
-                            <h2 className='font-semibold capitalize '>{post?.client.fullName}</h2>
+                            <h2 className='font-semibold capitalize '>{post?.client?.fullName}</h2>
                             <p className='text-xs'> {postedTime(post.createdAt)}</p>
                           </div>
                           <div className='flex items-center gap-7'>

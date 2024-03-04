@@ -1,9 +1,10 @@
+// import Header from './components/Header/Header'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import { Outlet } from 'react-router-dom'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../store/authSlice'
+import { login, updateUserAvatar } from '../store/authSlice'
 import { selectPost } from '../store/postSlice'
 import 'react-toastify/dist/ReactToastify.css';
 import { setApplicationData } from '../store/applicationSlice';
@@ -18,17 +19,20 @@ function App() {
     if (selectedPostData) {
       dispatch(selectPost(JSON.parse(selectedPostData)));
     }
-  },[])
+  },[dispatch, selectedPostData])
+
   useEffect(() => {
     if (userData) {
-      dispatch(login(JSON.parse(userData)));
+      const userDataObj = userData;
+      dispatch(login(JSON.parse(userDataObj)));
     }
-  }, []);
+  }, [dispatch, userData]);
+  
   useEffect(() => {
     if (applicationData) {
       dispatch(setApplicationData(JSON.parse(applicationData)));
     }
-  }, []);
+  }, [applicationData]);
 
   return (
     <>

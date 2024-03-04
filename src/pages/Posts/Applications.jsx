@@ -29,7 +29,7 @@ function Applications() {
         <div className='rounded-md p-6 my-8  bg-gray-100 '>
                 <div className='cursor-pointer mx-auto md:w-[70%] space-y-4 w-full'>
                        {
-                        applications.length > 0 ? (
+                        applications?.length > 0 ? (
                                 applications.map((application, index) => (
                                     <div key={index} className='w-full font-poppins p-6 bg-white rounded-md'>
                                     <div className='flex items-center justify-between'>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const storedAvatar = localStorage.getItem('avatar');
 const initialState = {
-    status : false,
+    status: false,
     userData: null
 }
 
@@ -16,11 +16,22 @@ const authSlice = createSlice({
         logout: (state) => {
             state.status = false;
             state.userData = null;
-            // localStorage.setItem('userData',null);
-        }
+            localStorage.removeItem('avatar');
+        },
+        updateUserAvatar: (state, action) => {
+            state.userData = {
+                ...state.userData,
+                user: {
+                    ...state.userData.user,
+                    avatar: action.payload
+                }
+            };
+            // Also update the stored avatar in localStorage
+            // localStorage.setItem('avatar', action.payload);
+        },
      }
 })
 
-export const {login, logout} = authSlice.actions;
+export const {login, logout, updateUserAvatar } = authSlice.actions;
 
 export default authSlice.reducer;

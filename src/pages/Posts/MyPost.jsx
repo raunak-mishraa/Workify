@@ -31,7 +31,7 @@ function MyPost() {
                 <div className='cursor-pointer mx-auto md:w-[70%] space-y-4 w-full'>
                 {loading && <div className='w-full h-10 flex justify-center items-center'>Loading</div>}
                 {
-                    !loading && (postData.length > 0 
+                    !loading && (postData?.length > 0 
                     ? postData.map((post, index) => 
                         <div key={index} className='relative w-full font-poppins p-6 bg-white rounded-md'>
                             <h2 className='text-lg font-semibold text-black text-opacity-70'>{post.title}</h2>

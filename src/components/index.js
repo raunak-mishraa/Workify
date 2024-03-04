@@ -13,7 +13,7 @@ import SignUp from "./SignUp";
 import FreelancerDashboard from "../components/Dashboard/FreelancerDashboard";
 import ContactImg from "../assets/images/contactImg.png";
 import FreelancerProfile from "./Header/User/Freelancer/FreelancerProfile";
-import UpdateFreelancerProfile from "./Header/User/Freelancer/UpdateFreelancerProfile";
+import UpdateProfile from "./Header/User/Freelancer/UpdateProfile";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import ClientDashboard from "../components/Dashboard/ClientDashboard";
@@ -34,7 +34,7 @@ export {
     FreelancerDashboard,
     ContactImg,
     FreelancerProfile,
-    UpdateFreelancerProfile,
+    UpdateProfile,
     ForgotPassword,
     ResetPassword,
     ClientDashboard

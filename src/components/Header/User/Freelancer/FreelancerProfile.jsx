@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Container} from "../../../index"
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUserAvatar } from '../../../../../store/authSlice'
+import  Axios  from 'axios'
+import { toast } from 'react-toastify'
 function FreelancerProfile() {
-    const userData = useSelector((state) => state.auth.userData)
-    // console.log("this is profile page", userData)
+    const dispatch = useDispatch()
+    const userData = useSelector(state => state.auth.userData)
+    console.log("this is profile page", userData)
     
     // console.log("this is the data",userData)
     // const userData = {user:{ fullName: 'John Doe',
@@ -13,20 +17,56 @@ function FreelancerProfile() {
     // profession: 'Web Developer'}
        
     // }
+    const fileInputRef = useRef(null);
+    const handleFileInputClick = () => {
+        fileInputRef.current.click();
+    };
+
+    const handleFileInputChange = (event) => {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append('avatar', file);
+        Axios.defaults.withCredentials = true;
+        Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/update-avatar`, formData)
+            .then(response => {
+                const newAvatar = response.data.data.avatar;
+                const updatedUserData = {
+                    ...userData,
+                    user: {
+                        ...userData.user,
+                        avatar: newAvatar
+                    }
+                };
+                localStorage.setItem('userData', JSON.stringify(updatedUserData));
+                dispatch(updateUserAvatar(newAvatar));
+                toast.success(response.data.message);
+                console.log('File uploaded successfully:', response.data);
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error uploading file:', error);
+            });
+
+    };
+
   return (
     <section className='max-w-6xl mx-auto font-poppins h-[60vh] flex justify-center items-center'>
         <Container>
         <div className='flex justify-center h-full'>
         <div className='w-2/6 '>
             <div className='h-auto border-2 rounded-md p-4 border-gray-200 '>
-                <div className=' flex flex-col gap-6 justify-center'>
+                <div className='flex flex-col gap-6 justify-center'>
                     {/* profile_url */}
                     <div className='flex gap-2 items-center '>
-                        <div className='w-16 h-16'>
-                            <img src={userData?.user.avatar} alt="profile" className='w-full h-full  object-cover rounded-full'/>
-                        </div>
+                    <div className='w-16 h-16 relative cursor-pointer' onClick={handleFileInputClick}>
+                                        <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileInputChange} />
+                                        <img src={userData?.user.avatar} className='w-full h-full object-cover rounded-full' alt="" />
+                                        <div className='absolute w-6 h-6 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 bottom-0 right-0'>
+                                            <i className='ri-pencil-line text-blue-500'></i>
+                                        </div>
+                                    </div>
                         <div className=' opacity-85'>
-                            <h2 className='text-xl font-semibold'>{userData?.user.fullName}
+                            <h2 className='text-lg font-semibold first-letter:uppercase'>{userData?.user.fullName}
                             <i class="ri-verified-badge-fill ml-1 text-base text-cyan-600"></i>
                             </h2>
                             <h2 className='font-medium text-sm'>{userData?.user.profession}</h2>
@@ -62,7 +102,7 @@ function FreelancerProfile() {
                         </div>
                    </div>
                    <div className='absolute right-4 border-2 w-8 h-8 rounded-full flex justify-center items-center  top-3'>
-                    <Link to='/updatefreelancerprofile'><i className='ri-pencil-fill text-blue-400'></i></Link>
+                    <Link to='/updateprofile'><i className='ri-pencil-fill text-blue-400'></i></Link>
                     
                    </div>
                 </div>
