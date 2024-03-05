@@ -12,12 +12,13 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import FreelancerDashboard from "../components/Dashboard/FreelancerDashboard";
 import ContactImg from "../assets/images/contactImg.png";
-import FreelancerProfile from "./Header/User/Freelancer/FreelancerProfile";
-import UpdateProfile from "./Header/User/Freelancer/UpdateProfile";
+import UserProfile from "./Header/User/UserProfile/UserProfile";
+import UpdateProfile from "./Header/User/UserProfile/UpdateProfile";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import ClientDashboard from "../components/Dashboard/ClientDashboard";
 import CreatePost from "./CreatePost";
+import Message from "./RTC/Message";
 export { 
     Logo,
     Navlinks,
@@ -33,10 +34,11 @@ export {
     googleImg,
     FreelancerDashboard,
     ContactImg,
-    FreelancerProfile,
+    UserProfile,
     UpdateProfile,
     ForgotPassword,
     ResetPassword,
-    ClientDashboard
+    ClientDashboard,
+    Message
 
 };

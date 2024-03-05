@@ -10,10 +10,11 @@ import Login from './pages/Login.jsx'
 import Contact from './pages/Contact.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import {
-  FreelancerProfile, 
+  UserProfile, 
   UpdateProfile, 
   ForgotPassword, 
   ResetPassword,
+  Message
 } from './components/index.js'
 import { Provider } from 'react-redux'
 import store from '../store/store.js'
@@ -31,6 +32,7 @@ import ApplicantInfo from './pages/Posts/ApplicantInfo.jsx'
 import MyApplication from './components/MyApplication.jsx'
 import Team from './components/Team.jsx'
 import Search from './components/Search.jsx'
+import DeleteAccount from './components/Header/User/UserProfile/DeleteAccount.jsx'
 
 
 const router = createBrowserRouter(
@@ -46,10 +48,12 @@ const router = createBrowserRouter(
         <Route path='team' element={<Team/>}/>
         <Route path='mypost' element={<MyPost/>}/>
         <Route path='post' element={<Post/>}/>
+        <Route path='message' element={<Message/>}/>
         <Route path='search' element={<Search/>}/>
         <Route path='applications' element={<Applications/>}/>
         <Route path='apply/:id' element={<Apply/>}/>
         <Route path='contact' element={<Contact/>}/>
+        <Route path='deleteaccount' element={<DeleteAccount/>}/>
         <Route path='myapplication' element={<MyApplication/>}/>
         <Route path='profile/:id' element={<Profile/>}/>
         <Route path='dashboard' element={
@@ -63,8 +67,8 @@ const router = createBrowserRouter(
         />
         <Route path='login/forgot-password' element={<ForgotPassword/>}/>
         <Route path='resetpassword/:token' element={<ResetPassword/>}/>
-        <Route path='freelancerprofile' element={
-            <FreelancerProfile/>
+        <Route path='userprofile' element={
+            <UserProfile/>
         }/>
         <Route path='updateprofile' element={
 

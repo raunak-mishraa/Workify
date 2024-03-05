@@ -105,7 +105,7 @@ function User() {
             })
             .catch((error)=>{
                 navigate('/search')
-                setSearchValue('s')
+                setSearchValue('')
                 dispatch(searchFreelancer([]))
                 console.log(error)
             })
@@ -123,7 +123,7 @@ function User() {
             })
             .catch((error)=>{
                 navigate('/search')
-                setSearchValue('s')
+                setSearchValue('')
                 dispatch(searchClientPosts([]))
                 console.log(error)
             })
@@ -146,7 +146,7 @@ function User() {
                  <div className='absolute right-2 top-2 w-2 h-2 bg-yellow-300 rounded-full'></div>
                  <div onClick={(e) => e.stopPropagation()} className={`${notificationOn ? 'block' : 'hidden'} right-0 top-12 p-2 rounded-md absolute w-56 bg-white border`}>
                     <div className='bg-gray-50 p-2 rounded'>
-                        <p className='text-sm opacity-95 first-letter:uppercase'>you have a new notification</p>
+                        <p className='text-sm opacity-95 first-letter:uppercase'>you don't have a new notification</p>
                     </div>
                  </div>
             </div>
@@ -160,9 +160,9 @@ function User() {
         <div className='w-4 h-4 left-3 absolute mt-1 bg-white rotate-45'></div>
             <div className='text-base mt-3 rounded-md bg-white border border-gray-200 overflow-hidden'>
                 <div className='hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center'>
-                    <Link to='freelancerprofile'><i className="ri-user-line"></i> Profile</Link>
+                    <Link to='userprofile'><i className="ri-user-line"></i> Profile</Link>
                 </div>
-                <div className='cursor-pointer hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center'>
+                <div className='cursor-pointer hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center' onClick={()=>navigate('/message')}>
                     <i className="ri-message-line"></i> Messages
                 </div>
                 

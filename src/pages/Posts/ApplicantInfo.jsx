@@ -20,7 +20,7 @@ console.log(applicantsData)
                <div className='space-y-6'>
                     <div className='flex'>
                         <div className='w-1/3'>Full name</div>
-                        <div className='w-2/3 opacity-70'>{applicantsData?.userId.fullName}</div>
+                        <div className='w-2/3 opacity-70'>{applicantsData?.userId?.fullName}</div>
                     </div>
                     <hr className='border-b border-gray-100'/>
                     <div className='flex'>
@@ -33,7 +33,7 @@ console.log(applicantsData)
                     <hr className='border-b border-gray-100'/>
                     <div className='flex'>
                         <div className='w-1/3'>Email Address</div>
-                        <div className='w-2/3 opacity-70'>{applicantsData?.userId.email}</div>
+                        <div className='w-2/3 opacity-70'>{applicantsData?.userId?.email}</div>
                     </div>
                     <hr className='border-b border-gray-100'/>
                     <div className='flex'>

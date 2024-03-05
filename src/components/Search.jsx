@@ -41,7 +41,7 @@ function Search() {
   return (
     <section>
         <Container>
-            <div className='rounded-md p-6 my-8 bg-gray-50 '>
+            <div className={`rounded-md p-6 my-8 ${isClient && " bg-gray-50"} `}>
             {
                 isClient ? (
                     searchData?.length > 0 

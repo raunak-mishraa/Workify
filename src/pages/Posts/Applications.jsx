@@ -38,11 +38,11 @@ function Applications() {
                                             navigate('/profile/1')
                                         }} className='flex items-center gap-2 font-poppins'>
                                             <div>
-                                                <img src={application?.userId.avatar} alt="" className='p-1 border-blue-100 border-2 w-12 h-12 object-cover rounded-full' />
+                                                <img src={application?.userId?.avatar} alt="" className='p-1 border-blue-100 border-2 w-12 h-12 object-cover rounded-full' />
                                             </div>
                                             <div className='leading-1 text-sm'>
-                                                <h2 className='first-letter:capitalize font-semibold text-black text-opacity-90 '>{application?.userId.fullName}</h2>
-                                                <h2 className='font-medium text-black text-opacity-70'>{application?.userId.profession}</h2>
+                                                <h2 className='first-letter:capitalize font-semibold text-black text-opacity-90 '>{application?.userId?.fullName}</h2>
+                                                <h2 className='font-medium text-black text-opacity-70'>{application?.userId?.profession}</h2>
                                             </div>
                                         </div>
                                         <div>

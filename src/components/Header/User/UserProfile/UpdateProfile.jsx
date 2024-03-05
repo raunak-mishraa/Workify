@@ -36,7 +36,7 @@ function UpdateProfile() {
         <Container>
             <div className='flex  items-center justify-center h-[80vh]'>
                 <div className='w-1/2'>
-                    <h2 className='text-center text-2xl font-semibold font-poppins opacity-80'>Update Freelancer Profile</h2>
+                    <h2 className='text-center text-2xl font-semibold font-poppins opacity-80'>Update {!userData?.user?.isClient ? "Freelancer" : "Client"} Profile</h2>
                     <div className=' mt-8 w-full border-2 rounded-md p-4'>
                         <form className='font-poppins' onSubmit={handleSubmit(handleUpdate)}>
                             {/* profileImg */}

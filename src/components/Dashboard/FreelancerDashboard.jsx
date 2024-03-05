@@ -112,7 +112,7 @@ function FreelancerDashboard() {
             </div>
           </div>
         </div>
-        <div className='mt-8 p-6 pl-0 font-poppins font-medium text-black text-opacity-75'>
+        <div className='mt-8 pl-0 font-poppins font-medium text-black text-opacity-75'>
           <div>
             <h2>Works you might like</h2>
             <div className='mt-4'>
@@ -135,7 +135,7 @@ function FreelancerDashboard() {
                 </li>
               </ul>
               {/* this below is for recent */}
-              {tabs === 'recent' && !loading && posts.length === 0 ? (
+              {!loading && posts.length === 0 ? (
                 <p className='text-center'>No post found</p>
               ):
               (null)
@@ -148,7 +148,7 @@ function FreelancerDashboard() {
                       handleClick(post)
                       navigate('/post')
                       }} className='inline-block cursor-pointer mb-2 w-full'>
-                    <div className='p-4 w-full flex gap-3 rounded-md border-2'>
+                    <div className='p-2 md:p-4 w-full flex gap-3 rounded-md border-2'>
                       <div className=''>
                         <div className='border-2 border-gray-100 p-1 rounded-full w-14 h-14'>
                           <img src={post?.client?.avatar} className='w-full object-cover h-full rounded-full' alt="" />
@@ -171,10 +171,15 @@ function FreelancerDashboard() {
                             </div>
                           </div>
                         </div>
-                        <div className='mt-2 font-poppins'>
+                        <div className='mt-2 space-y-2 font-poppins'>
                           <h2 className='font-semibold text-sm capitalize'>{post?.title}</h2>
                           <div className='overflow-hidden'>
                             <h2 className='line-clamp-3 leading-normal font-normal text-black text-opacity-65 text-sm tracking-wide'>{post.description}</h2>
+                          </div>
+                          <div>
+                            {post?.tags.map((tag, index) => (
+                              <span key={index} className='text-xs bg-gray-100 px-2 py-1 rounded-md mr-2'>{tag}</span>
+                            ))}
                           </div>
                         </div>
                       </div>
