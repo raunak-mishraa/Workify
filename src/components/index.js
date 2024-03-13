@@ -18,7 +18,13 @@ import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import ClientDashboard from "../components/Dashboard/ClientDashboard";
 import CreatePost from "./CreatePost";
+import Gigs from "./Gig/Gigs";
+import Gig from "./Gig/Gig";
+import MyGigs from "./Gig/MyGigs";
 import Message from "./RTC/Message";
+import Orders from "./Orders/Orders";
+import Add from "./Gig/Add";
+import Messages from "./RTC/Messages";
 export { 
     Logo,
     Navlinks,
@@ -39,6 +45,11 @@ export {
     ForgotPassword,
     ResetPassword,
     ClientDashboard,
-    Message
-
+    Message,
+    Gigs,
+    Gig,
+    MyGigs,
+    Orders,
+    Messages,
+    Add
 };

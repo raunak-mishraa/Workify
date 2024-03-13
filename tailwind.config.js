@@ -9,6 +9,8 @@ export default {
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
         assistant: ['Assistant', 'sans-serif'],
+        Roboto: ['Roboto', 'sans-serif'],
+        Montserrat: ["Montserrat", 'sans-serif']
       },
     },
   },

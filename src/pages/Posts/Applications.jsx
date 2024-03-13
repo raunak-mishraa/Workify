@@ -53,9 +53,9 @@ function Applications() {
                                                 Details
                                             </div>
                                         </div>
-                                        <div className=''>
+                                        <Link to='/message' className=''>
                                             <i className='w-10 h-10 flex justify-center items-center rounded-full bg-gray-100 top-2 ri-message-line text-black text-opacity-90'></i>
-                                        </div>
+                                        </Link>
                                     </div>
                                    
                                    

@@ -14,7 +14,7 @@ function Header() {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <header className='font-poppins z-50 top-0'>
+    <header className='font-poppins z-50 sticky bg-white top-0'>
       <Container>
         <nav>
           <div className='flex items-center justify-between h-20'>

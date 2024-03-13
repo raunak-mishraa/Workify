@@ -14,7 +14,13 @@ import {
   UpdateProfile, 
   ForgotPassword, 
   ResetPassword,
-  Message
+  Message,
+  Gigs,
+  Gig,
+  MyGigs,
+  Orders,
+  Messages,
+  Add
 } from './components/index.js'
 import { Provider } from 'react-redux'
 import store from '../store/store.js'
@@ -33,6 +39,7 @@ import MyApplication from './components/MyApplication.jsx'
 import Team from './components/Team.jsx'
 import Search from './components/Search.jsx'
 import DeleteAccount from './components/Header/User/UserProfile/DeleteAccount.jsx'
+import PNF from './pages/PNF.jsx'
 
 
 const router = createBrowserRouter(
@@ -48,11 +55,18 @@ const router = createBrowserRouter(
         <Route path='team' element={<Team/>}/>
         <Route path='mypost' element={<MyPost/>}/>
         <Route path='post' element={<Post/>}/>
+        <Route path='gigs' element={<Gigs/>}/>
+        <Route path='mygigs' element={<MyGigs/>}/>
+        <Route path='orders' element={<Orders/>}/>
+        <Route path='gig/123' element={<Gig/>}/>
         <Route path='message' element={<Message/>}/>
+        <Route path='messages' element={<Messages/>}/>
+        <Route path='add' element={<Add/>}/>
         <Route path='search' element={<Search/>}/>
         <Route path='applications' element={<Applications/>}/>
         <Route path='apply/:id' element={<Apply/>}/>
         <Route path='contact' element={<Contact/>}/>
+        <Route path='*' element={<PNF/>}/>
         <Route path='deleteaccount' element={<DeleteAccount/>}/>
         <Route path='myapplication' element={<MyApplication/>}/>
         <Route path='profile/:id' element={<Profile/>}/>
@@ -62,7 +76,9 @@ const router = createBrowserRouter(
 
         }/>
         <Route path='createpost' element={
+
             <CreatePost/>
+
         }
         />
         <Route path='login/forgot-password' element={<ForgotPassword/>}/>

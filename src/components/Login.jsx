@@ -7,34 +7,50 @@ import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { login as loginUser } from '../../store/authSlice'
 import { useGoogleLogin } from '@react-oauth/google';
-import  Axios  from 'axios'
+import  axios  from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from "react-toastify"
+// import { jwtDecode } from "jwt-decode";
 function Login() {
   const navigate = useNavigate()
   const {register, handleSubmit} = useForm();
   const dispatch = useDispatch()
   const [error, setError] = React.useState('')
+  // const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
 
-  Axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
   const login = async(userData) => {  
     try {
-      const response = await Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/login`, {
+      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/login`, {
           email: userData.email.toLowerCase(),
           password: userData.password
-        }, 
-      {
-        headers: {
-          'Content-Type': 'application/json'
         }
-      });
+     );
       
       const responseData = response.data.message;
+      console.log("login",responseData)
       if(responseData){
         navigate('/dashboard');
         localStorage.setItem('userData', JSON.stringify(responseData));
       }
       if (responseData.accessToken) {
+        // const accessToken = responseData.accessToken;
+        // const decodedToken = jwtDecode(accessToken);
+        
+        // Convert token expiry time to Date object
+        // let expiryTime = new Date(decodedToken.exp * 1000);
+        // console.log(expiryTime);
+        
+        // Set cookie with expiration time
+        // setCookie('accessToken', responseData.accessToken, { 
+        //   secure: true, 
+        //   sameSite: 'strict', 
+        //   httpOnly: true, 
+        //   expires: new Date(decodedToken.exp * 1000) // Set cookie expiration time
+        // });
+        
+        // setCookie('refreshToken', responseData.refreshToken, { secure: true, sameSite: 'strict' });
+
         toast.success("User Logged In!", {
           autoClose: 2000,
         });
@@ -48,9 +64,9 @@ function Login() {
     }
   }
   
-  const loginWithGoogle = useGoogleLogin({
-    onSuccess: tokenResponse => console.log(tokenResponse),
-  });
+  // const loginWithGoogle = useGoogleLogin({
+  //   onSuccess: tokenResponse => console.log(tokenResponse),
+  // });
    
   return (
     <section className='font-poppins'>

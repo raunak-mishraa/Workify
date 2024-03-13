@@ -1,17 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Container from '../container/Container'
 import  landingImg  from '../../assets/images/landingImg.png'
 import goalImg from '../../assets/images/goal.gif'
-import { whyImg, noCash } from '..'
+import { whyImg } from '..'
 import { useId } from 'react'
 import Button from '../Button'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Categories from './Categories'
-import { motion } from "framer-motion"
+// import axios from 'axios'
+import { searchClientPosts } from '../../../store/searchSlice'
+import { useDispatch } from 'react-redux'
+import useSearch from '../../hooks/useSearch'
 function Home() {
   const id = useId()
   const navigate = useNavigate()
+  const [searchValue, setSearchValue] = useState('')
+
+  const dispatch = useDispatch()
+  let searchData = useSearch(searchValue)
+  const search = () => {
+    // const query = searchValue;
+    // axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search/client_posts/search?query=${query}`)
+    // .then((res)=>{
+    //     if(res){
+    //         // console.log(res.data.data)
+    //         setSearchValue('')
+    //         dispatch(searchClientPosts(res.data.data))
+    //         navigate('/search')
+    //     }
+    // })
+    // .catch((error)=>{
+    //     navigate('/search')
+    //     setSearchValue('')
+    //     dispatch(searchClientPosts([]))
+    //     console.log(error)
+    // })
+    if(searchData){
+      dispatch(searchClientPosts(searchData))
+      navigate('/search')
+    }
+    else{
+      dispatch(searchClientPosts([]))
+      navigate('/search')
+    }
+
+    // console.log(searchData)
+    // const options = Object.keys(currencyInfo)
+  }
   return (
     <>
     <section className='font-assistant bg-gradient-to-r from-slate-50 via-sky-50 to-indigo-50 bg-blue-100'>
@@ -29,17 +65,28 @@ function Home() {
                   <p className='leading-7 font-poppins  tracking-wide'>Clients, and Build Your Business</p>
                 </div>
                 <div className='hover:shadow-md duration-300 ease-linear flex items-center justify-between bg-white md:mt-8 mt-14 py-2 md:px-4 px-2 rounded-md md:rounded-3xl'>
-                  <div className='flex'>
-                    <label className='rounded-full w-10 h-10 flex items-center justify-center py-2 bg-slate-100 cursor-pointer' htmlFor={id}>
-                    <i className="text-cyan-500 ri-search-line"></i>
-                    </label>
-                    <input type="text" 
-                    id={id}
-                    className='ml-4 text-xs outline-none bg-transparent '
-                    placeholder='Job title or keyword'/>
-                  </div>
-                  <div>
-                    <Button className='text-xs md:text-sm text-white bg-gradient-to-r from-blue-500  to-cyan-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-500 py-3 md:px-4 px-2 md:rounded-xl rounded-md '>
+                <div className='flex flex-1'>
+                  <label className='rounded-full w-10 h-10 flex items-center justify-center bg-slate-100 cursor-pointer' htmlFor={id}>
+                      <i className="text-cyan-500 ri-search-line"></i>
+                  </label>
+                  <input 
+                      type="search" 
+                      value={searchValue} 
+                      onChange={(e)=>setSearchValue(e.target.value)} 
+                      name="searchValue"
+                      onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                              search();
+                          }
+                      }} 
+                      id={id}
+                      className='ml-4 text-base outline-none bg-transparent focus: flex-grow'
+                      placeholder='Job title or keyword'
+                  />
+                </div>  
+
+                  <div className=''>
+                    <Button onClick={search} className='text-xs md:text-sm text-white bg-gradient-to-r from-blue-500  to-cyan-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-500 py-3 md:px-4 px-2 md:rounded-xl rounded-md '>
                       Find Work
                     </Button>
                   </div>

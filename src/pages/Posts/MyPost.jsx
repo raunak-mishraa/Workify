@@ -43,7 +43,7 @@ function MyPost() {
                     )
                     :(<div className='flex justify-center items-center flex-col gap-3'>
                         <div className='w-10 h-10 flex justify-center items-center rounded-full opacity-35 border-2 border-gray-950'>
-                            <i class="ri-pencil-fill"></i>
+                            <i className="ri-pencil-fill"></i>
                         </div>
                         <h1 className='text-center font-poppins text-black text-opacity-70 font-bold text-xl'>You Don't Have Any Post Yet</h1>
                         <Link to='/createpost' className='cursor-pointer bg-blue-600 p-2 text-sm text-white rounded-md'>Create Post <i className="ri-add-line"></i></Link>

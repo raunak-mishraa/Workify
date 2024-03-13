@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Post() {
   const navigate = useNavigate();
   const selectedPost = useSelector((state) => state.post.selectedPost);
+  const isUser = useSelector((state) => state.auth.status);
   console.log(selectedPost)
   const timestamp = selectedPost?.createdAt;
   const postedTime = () => {
@@ -66,7 +67,7 @@ function Post() {
                     <div className='font-poppins w-2/6 py-10'>
                       <div className='w-[60%] ml-auto'>
                         <div className='space-y-3'>
-                          <Button onClick={() => navigate(`/apply/${selectedPost._id}`)} className='py-2 w-full bg-gradient-to-r from-cyan-600 to-blue-500 rounded-xl text-white '>Apply now</Button>
+                          <Button onClick={() => isUser ? navigate(`/apply/${selectedPost._id}`) : navigate('/login')} className='py-2 w-full bg-gradient-to-r from-cyan-600 to-blue-500 rounded-xl text-white '>Apply now</Button>
                           <Button className='py-1.5 w-full bg-gradient-to-r border-2 border-blue-500 rounded-xl text-black text-opacity-80 font-semibold'>Save Job</Button>
                         </div>
                         <div className='mt-20 space-y-6'>

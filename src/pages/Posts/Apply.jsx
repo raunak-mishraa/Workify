@@ -45,6 +45,8 @@ function Apply() {
       }
     } 
     catch (error) {
+      setLoading(false)
+      toast.error('Application failed to submit');
       console.log(error);
     }
 

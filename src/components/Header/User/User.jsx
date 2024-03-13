@@ -4,14 +4,13 @@ import { useSelector,useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../../../../store/authSlice'
 import {searchFreelancer, searchClientPosts} from '../../../../store/searchSlice'
-import { useCookies } from 'react-cookie';
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
 function User() {
     const navigate = useNavigate()
     const ref = useRef(null);
-    const [cookies] = useCookies(['accessToken']);
+    // const [cookies] = useCookies(['accessToken']);
     const [notificationOn, setNotificationOn] = useState(false)
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
@@ -31,18 +30,19 @@ function User() {
         };
       }, [ref]);
 
-    const logOut = () => {
+    const logOut = async() => {
         try {
-            // const logoutRes = await axios.post(
-            //     `${import.meta.env.VITE_SERVER_URL}/api/v1/users/logout`,
-            //     { _id: userData.user._id },
-            //     {
-            //         headers: {
-            //             Authorization: `Bearer ${accessToken}`
-            //         },
-            //         withCredentials: true // Send cookies with the request
-            //     }
-            // );
+            const logoutRes = await axios.post(
+                `${import.meta.env.VITE_SERVER_URL}/api/v1/users/logout`,
+                { _id: userData.user._id },
+                {
+                    headers: {
+                        // Authorization: `Bearer ${cookies.accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true // Send cookies with the request
+                }
+            );
     
             // console.log(logoutRes.data);
             // console.log("logout")
@@ -57,7 +57,15 @@ function User() {
             localStorage.removeItem('selectedPostData');
             dispatch(logout());
             navigate("/")
-            toast.success("User logged Out!")
+            toast.success("User logged Out!",{
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+               
+            })
         } catch (error) {
             console.error("Error logging out:", error);
         }

@@ -48,7 +48,11 @@ function UpdateProfile() {
                             <div className='space-y-3'>
                             <Input {...register('fullName')} placeholder="Enter your name" className="w-full"/>
                             <Input type='email' {...register('email')} placeholder="Enter your email" className="w-full"/>
-                            <Input {...register('profession')} placeholder="Your profession" className="w-full" />
+                            {
+                                !userData?.user?.isClient && (
+                                    <Input {...register('profession')} placeholder="Enter your profession" className="w-full"/>
+                                )
+                            }
                             </div>
                             <Button type='submit' className='mt-6 w-full rounded-md font-semibold py-2 text-white bg-gradient-to-r from-cyan-500 to-blue-500'>Update Profile</Button>
                         </form>

@@ -89,12 +89,17 @@ function Search() {
                                        </div>
                                      </div>
                                    </div>
-                                   <div className='mt-2 font-poppins'>
-                                     <h2 className='font-semibold text-sm capitalize'>{post?.title}</h2>
-                                     <div className='overflow-hidden'>
-                                       <h2 className='line-clamp-3 leading-normal font-normal text-black text-opacity-65 text-sm tracking-wide'>{post.description}</h2>
-                                     </div>
-                                   </div>
+                                   <div className='mt-2 space-y-2 font-poppins'>
+                                    <h2 className='font-medium opacity-90 text-sm capitalize'>{post?.title}</h2>
+                                    <div className='overflow-hidden'>
+                                      <h2 className='line-clamp-3 leading-normal font-normal text-black text-opacity-65 text-sm tracking-wide'>{post.description}</h2>
+                                    </div>
+                                    <div>
+                                      {post?.tags.map((tag, index) => (
+                                        <span key={index} className='text-xs bg-gray-100 px-2 py-1 rounded-md mr-2'>{tag}</span>
+                                      ))}
+                                    </div>
+                                  </div>
                                  </div>
            
                                </div>
