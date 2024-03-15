@@ -58,7 +58,7 @@ const router = createBrowserRouter(
         <Route path='gigs' element={<Gigs/>}/>
         <Route path='mygigs' element={<MyGigs/>}/>
         <Route path='orders' element={<Orders/>}/>
-        <Route path='gig/123' element={<Gig/>}/>
+        <Route path='gig/:id' element={<Gig/>}/>
         <Route path='message' element={<Message/>}/>
         <Route path='messages' element={<Messages/>}/>
         <Route path='add' element={<Add/>}/>

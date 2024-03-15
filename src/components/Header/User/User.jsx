@@ -67,6 +67,10 @@ function User() {
                
             })
         } catch (error) {
+            toast.error("Internet Connection Error!", {
+                autoClose: 1000,
+                hideProgressBar: false,
+            })
             console.error("Error logging out:", error);
         }
     };
@@ -100,23 +104,24 @@ function User() {
  
 //    }
     const search = () =>{
+        // i changed here 
         if(userData?.user.isClient) {
-            const query = searchValue;
-            axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search/freelancers/search?query=${query}`)
-            .then((res)=>{
-                if(res){
-                    // console.log(res.data.data)
-                    setSearchValue('')
-                    dispatch(searchFreelancer(res.data.data))
-                    navigate('/search')
-                }
-            })
-            .catch((error)=>{
-                navigate('/search')
-                setSearchValue('')
-                dispatch(searchFreelancer([]))
-                console.log(error)
-            })
+            // const query = searchValue;
+            // axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/gigs?category=${query}`)
+            // .then((res)=>{
+            //     if(res){
+            //         // console.log(res.data.data)
+            //         setSearchValue('')
+            //         dispatch(searchFreelancer(res.data.data))
+            //         navigate('/search')
+            //     }
+            // })
+            // .catch((error)=>{
+            //     navigate('/search')
+            //     setSearchValue('')
+            //     dispatch(searchFreelancer([]))
+            //     console.log(error)
+            // })
         }
         else{
             const query = searchValue;
@@ -145,7 +150,7 @@ function User() {
                 if (e.key === 'Enter') {
                     search();
                 }
-            }} type="search" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} name="searchValue" id=""  placeholder={userData?.user?.isClient ? 'Search Freelancer' : 'Search Jobs'} className='text-gray-800 outline-none appearance-none' />
+            }} type="search" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} name="searchValue" id=""  placeholder={userData?.user?.isClient ? 'Search For Gigs' : 'Search Jobs'} className='text-gray-800 outline-none appearance-none' />
             <i onClick={search} className="ri-search-line"></i>
         </div>
         <div className='md:flex items-center gap-2 hidden'>
@@ -168,10 +173,13 @@ function User() {
         <div className='w-4 h-4 left-3 absolute mt-1 bg-white rotate-45'></div>
             <div className='text-base mt-3 rounded-md bg-white border border-gray-200 overflow-hidden'>
                 <div className='hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center'>
-                    <Link to='userprofile'><i className="ri-user-line"></i> Profile</Link>
+                    <Link to='/userprofile'><i className="ri-user-line"></i> Profile</Link>
                 </div>
-                <div className='cursor-pointer hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center' onClick={()=>navigate('/message')}>
+                <div className='cursor-pointer hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center' onClick={()=>navigate('/messages')}>
                     <i className="ri-message-line"></i> Messages
+                </div>
+                <div className='hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center'>
+                    {userData?.user?.isClient ? <Link to='orders'><i className="ri-folder-5-line"></i> Orders</Link> : <Link to='/mygigs'><i className="ri-folder-5-line"></i> MyGigs</Link>}
                 </div>
                 
                 <hr />

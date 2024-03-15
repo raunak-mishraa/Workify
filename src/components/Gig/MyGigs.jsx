@@ -8,13 +8,13 @@ function MyGigs() {
     <section className='py-8'>
         <Container>
             <div className='flex items-center justify-between'>
-                <h1 className='text-2xl font-bold font-Roboto'>Gigs</h1>
+                <h1 className='text-2xl opacity-80 font-bold font-Roboto'>Gigs</h1>
                 <Link to='/add'>
                     <Button className='text-white font-Roboto font-medium p-2 cursor-pointer bg-sky-500'>Add New Gig</Button>
                 </Link>
             </div>
             <table className='w-full text-left'>
-                <tr className='h-12 font-Roboto'>
+                <tr className='h-12 font-Roboto opacity-90'>
                     <th>Image</th>
                     <th>Title</th>
                     <th>Price</th>

@@ -54,3 +54,41 @@ export const categoryData = [
         category: 'Video Editing',
     }
 ]
+
+export const categories = [{
+    icon: 'ri-code-s-slash-line',
+    name: 'Development & IT',
+    rating: '4.85/5',
+    skills: '130 Skills'
+},
+{
+    icon: 'ri-palette-line',
+    name: 'Graphics & Design',
+    rating: '4.85/5',
+    skills: '130 Skills'
+},
+{
+    icon: 'ri-computer-line',
+    name: 'Digital Marketing',
+    rating: '4.85/5',
+    skills: '130 Skills'
+},
+{
+    icon: 'ri-edit-2-line',
+    name: 'Writing & Translation',
+    rating: '4.85/5',
+    skills: '130 Skills'
+},
+{
+    icon: 'ri-movie-line',
+    name: 'Video & Animation',
+    rating: '4.85/5',
+    skills: '130 Skills'
+},
+{
+    icon: 'ri-music-2-fill',
+    name: 'Music & Audio',
+    rating: '4.85/5',
+    skills: '130 Skills'
+}
+]

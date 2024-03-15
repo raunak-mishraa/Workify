@@ -2,8 +2,9 @@ import React from 'react';
 import AboutImg from '../assets/images/about.jpg';
 function AboutUs() {
     return (
-        <div className="font-poppins bg-gray-100 min-h-screen w-full">
-            <div className="container mx-auto py-12  w-full">
+        <div className="font-poppins bg-gray-100 py-20 my-10 w-full">
+            <div className="container flex justify-center items-center h-full w-full">
+                {/* <div>hiu</div> */}
                 <div className="md:max-w-4xl w-full m-auto bg-white p-8 rounded shadow-md">
                     <div className="grid gap-4 md:grid-cols-2 grid-cols-1">
                         <div className=" order-2 md:order-1">
@@ -48,6 +49,7 @@ function AboutUs() {
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     );

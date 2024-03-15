@@ -5,6 +5,30 @@ import {Logo} from '../index'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLinkedinIn, faSquareInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 function Footer() {
+
+  const footerLinks = [
+    {
+      name:'Graphic & Design',
+      footerLink :'/gigs?category=design'
+    },
+    {
+      name:'Programming & Tech',
+      footerLink :'/gigs?category=programming'
+    },
+    {
+      name:'Digital Marketing',
+      footerLink :'/gigs?category=digitalmarketing'
+    },
+    {
+      name:'Video & Animation',
+      footerLink :'/gigs?category=video&animation'
+    },
+    {
+      name:'Writing & Translation',
+      footerLink :'/gigs?category=writingandtranslation'
+    },
+
+  ]
   const navigate = useNavigate();
   return (
     <footer className='bg-slate-50 pt-16 font-poppins '>{/* removed class -z-10 bottom-0  */}
@@ -48,7 +72,14 @@ function Footer() {
                 <div>
                 <h2 className="opacity-85 uppercase text-black font-semibold mb-4">Categories</h2>
                 <ul className='text-black text-opacity-70 text-base font-normal'>
-                  <li className='mb-4 hover:underline'>
+                  {
+                    footerLinks.map((link, index)=>(
+                      <li key={index} className='mb-4 hover:underline'>
+                        <Link to={link.footerLink}>{link.name}</Link>
+                      </li>
+                    ))
+                  }
+                  {/* <li className='mb-4 hover:underline'>
                     <Link to='/'>Graphic & Design</Link>
                   </li>
                   <li className='mb-4 hover:underline'>
@@ -62,7 +93,7 @@ function Footer() {
                   </li>
                   <li className='mb-4 hover:underline'>
                     <Link to='/'>Writing & Translation</Link>
-                  </li>
+                  </li> */}
                 </ul>
                 </div>
               </div>

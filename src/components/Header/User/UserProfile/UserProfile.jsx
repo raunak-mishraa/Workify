@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUserAvatar } from '../../../../../store/authSlice'
 import  Axios  from 'axios'
+import { countries } from '../../../../assets/Data/country'
 import { toast } from 'react-toastify'
 function UserProfile() {
     const navigate = useNavigate()
@@ -113,6 +114,24 @@ function UserProfile() {
                     
                    </div>
                 </div>
+
+                <div className='flex items-center justify-between mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200 relative'>
+                    {/* <h2 className='text-lg '>Add Country</h2> */}
+
+                         <select className='border p-3 focus:outline-dashed text-black text-opacity-85'>
+                         { countries.map((country, i) => {
+                            return(
+                                <option className='bg-gray-800 text-white' value={country.name}>{country.name}</option>
+                            )
+                        })
+                    }
+                         </select>
+                         <Button className='w-24 p-2 bg-black rounded-sm text-white'>
+                            Update
+                         </Button>
+
+                </div>
+
             </div>
                 )
             }

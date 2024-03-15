@@ -8,7 +8,15 @@ import { login, updateUserAvatar } from '../store/authSlice'
 import { selectPost } from '../store/postSlice'
 import 'react-toastify/dist/ReactToastify.css';
 import { setApplicationData } from '../store/applicationSlice';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+
+
 function App() {
+  const queryClient = new QueryClient()
   const dispatch = useDispatch()
   const userData = localStorage.getItem('userData');
   const selectedPostData = localStorage.getItem('selectedPostData');
@@ -35,13 +43,13 @@ function App() {
   }, [applicationData]);
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
     <Header/>
       <main>
       <Outlet/>
       </main>
     <Footer/>
-    </>
+    </QueryClientProvider>
   )
 }
 

@@ -1,58 +1,79 @@
 import React from 'react'
 import Container from '../container/Container'
-import Input from '../Input'
+import { Link } from 'react-router-dom'
+import Button from '../Button'
 
 function Message() {
   return (
     <section>
         <Container>
-           <div className='h-[90vh] rounded-md overflow-hidden flex'>
-            <div className='w-1/4 border-2'>
-              <div className='h-14 bg-gray-100'>
-                {/* search */}
-              </div>
-              <div>
-                <div className='p-4 gap-3 flex items-center font-poppins border-b hover:bg-gray-100'>
-                  <div className='w-12 h-12 rounded-full'>
-                     <img src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1709894982~exp=1709898582~hmac=9929b982d1bafbde7a7048a03325b8d64f9a1b6b21b08985568b80ff062c3ba6&w=996" alt="" className='w-full h-full object-cover bg-black rounded-full'/>
-                  </div>
-                  <div className=' flex gap-1 flex-col justify-center'>
-                    <h2 className='font-medium leading-4 mt-1 opacity-85'>Raunak Mishra</h2>
-                    <h2 className='text-sm text-black text-opacity-50'>Freelancer</h2>
-                  </div>
+            <div className='flex justify-center w-full'>
+                <div className='m-12 w-full'>
+                    <span className='opacity-60 text-sm'>
+                         <Link to="/messages">Messages</Link>  John Doe 
+                    </span>
+                    <div className='my-7 p-10 flex flex-col gap-5 h-[500px] overflow-y-scroll'>
+                        <div className='flex gap-4 max-w-[600px] text-base'>
+                            <img
+                                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                alt=""
+                                className='rounded-full w-12 h-12 object-cover'
+                                />
+                                <p className='p-4 bg-gray-200 rounded-xl opacity-85'>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil accusantium io.
+                                </p>
+                        </div>
+                        <div className='flex flex-row-reverse self-end gap-4 max-w-[600px] text-base'>
+                            <img
+                                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                alt=""
+                                className='rounded-full w-12 h-12 object-cover'
+                                />
+                                <p className='p-4 bg-blue-400 rounded-xl opacity-85'>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil accusantium io.
+                                </p>
+                        </div>
+                        <div className='flex gap-4 max-w-[600px] text-base'>
+                            <img
+                                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                alt=""
+                                className='rounded-full w-12 h-12 object-cover'
+                                />
+                                <p className='p-4 bg-gray-200 rounded-xl opacity-85'>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil accusantium io.
+                                </p>
+                        </div>
+                        <div className='flex flex-row-reverse self-end gap-4 max-w-[600px] text-base'>
+                            <img
+                                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                alt=""
+                                className='rounded-full w-12 h-12 object-cover'
+                                />
+                                <p className='p-4 bg-blue-400 rounded-xl opacity-85'>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil accusantium io.
+                                </p>
+                        </div>
+                        <div className='flex gap-4 max-w-[600px] text-base'>
+                            <img
+                                src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                alt=""
+                                className='rounded-full w-12 h-12 object-cover'
+                                />
+                                <p className='p-4 bg-gray-200 rounded-xl opacity-85'>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil accusantium io.
+                                </p>
+                        </div>
+                    </div>
+                    <hr className='mb-5 h-0.5 bg-gray-50'/>
+                    <div className='flex justify-between items-center'>
+                        <textarea color='30' rows='10' className='focus:outline-dashed focus:outline-blue-500 p-4 w-[80%] h-16 outline-none border rounded-xl' placeholder='Write a message'></textarea>
+                        <Button className='bg-blue-600 p-4 rounded-md w-[15%] text-white'>
+                            Send
+                        </Button>
+                    </div>
+                    {/* <p className='opacity-60 text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa nihil accusantium io.</p> */}
                 </div>
-               
-              </div>
             </div>
-            <div className='w-3/4 border-2 relative -left-0.5 '>
-              <div className='h-14'>
-                <div className='flex h-full p-4 gap-2 border-b items-center font-poppins'>
-                  <div className='w-9 h-9'>
-                    <img src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1709894982~exp=1709898582~hmac=9929b982d1bafbde7a7048a03325b8d64f9a1b6b21b08985568b80ff062c3ba6&w=996" alt="" className='w-full h-full object-cover bg-black rounded-full'/>
-                  </div>
-                  <div className=' flex flex-col justify-center tracking-normal'>
-                    <h2 className='font-medium text-sm leading-4 mt-1 opacity-85'>Raunak Mishra</h2>
-                    <h2 className='text-sm text-black text-opacity-50'>Freelancer</h2>
-                  </div>
-                </div>
-              </div>
-              <div className='p-4 bg-gray-100 h-full'>
-                 <div className='gap-3 flex flex-col items-start'>
-                    <span className='p-2 rounded-md bg-gray-300  text-black text-opacity-80 rounded-br-none'>hellow</span>
-                    <span className='p-2 rounded-md bg-gray-300  text-black text-opacity-80 rounded-br-none'>Hey raunak</span>
-                 </div> 
-                 <div className='gap-3 flex flex-col items-end'>
-                    <span className='p-2 rounded-md bg-gray-300  text-black text-opacity-80 rounded-bl-none'>hellow</span>
-                    <span className='p-2 rounded-md bg-gray-300  text-black text-opacity-80 rounded-bl-none'>Hey raunak</span>
-                 </div> 
-              </div>
-              {/* message */}
-              <div className='absolute bottom-0 w-full'>
-                <Input className="w-full bg-white rounded-none"/>
-                
-              </div>
-            </div>
-           </div>
         </Container>
     </section>
   )
