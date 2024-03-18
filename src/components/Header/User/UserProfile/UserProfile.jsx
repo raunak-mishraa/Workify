@@ -144,7 +144,6 @@ function UserProfile() {
             .then((response)=>
             {
                 setSkill('')
-               
                 setMessage(response.data.message);
                 console.log(response.data);
                 toast.success(response.data.message, {
