@@ -5,6 +5,22 @@ import { useSelector } from 'react-redux';
 
 function Navlinks({className = 'flex'}) {
     const isAuth = useSelector(state => state.auth.status);
+    // const userData = useSelector(state => state.auth.userData);
+      // axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/freelancers/search?[plddfd]`,)
+            // .then((res)=>{
+            //     if(res){
+            //         // console.log(res.data.data)
+            //         setSearchValue('')
+            //         dispatch(searchFreelancer(res.data.data))
+            //         navigate('/search')
+            //     }
+            // })
+            // .catch((error)=>{
+            //     navigate('/search')
+            //     setSearchValue('')
+            //     dispatch(searchFreelancer([]))
+            //     console.log(error)
+            // })
 
    const [heading, setHeading] = React.useState('')
   return (!isAuth ?

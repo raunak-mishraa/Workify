@@ -23,6 +23,7 @@ function MyApplication() {
        
     }, [])
      console.log(applicationData)
+     
     const handleDeleteApplication = (id) => {
         console.log(id)
         axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/v1/applications/deleteapplication/${id}`,{
@@ -44,7 +45,22 @@ function MyApplication() {
         <Container>
         <div className='rounded-md p-6 my-8  bg-gray-100 '>
                 <div className='cursor-pointer mx-auto md:w-[70%] space-y-4 w-full'>
-                {loading && <div className='w-full h-10 flex justify-center items-center'>Loading</div>}
+                {loading && (
+                    <div className='space-y-4'>
+                        <div className='bg-white animate-pulse p-4 space-y-2 relative'>
+                            <div className='bg-gray-200 w-24 h-4 ropunded'></div>
+                            <div className='bg-gray-200 w-36 h-4 rounded'></div>
+                            <div className='bg-gray-200 w-48 h-4 rounded'></div>
+                            <div className='absolute top-1 right-2 bg-gray-200 w-6 h-6 rounded'></div>
+                        </div>
+                        <div className='bg-white animate-pulse p-4 space-y-2 relative'>
+                            <div className='bg-gray-200 w-24 h-4 ropunded'></div>
+                            <div className='bg-gray-200 w-36 h-4 rounded'></div>
+                            <div className='bg-gray-200 w-48 h-4 rounded'></div>
+                            <div className='absolute top-1 right-2 bg-gray-200 w-6 h-6 rounded'></div>
+                        </div>
+                    </div>
+                )}
                 {
                     !loading && (applicationData.length > 0 
                     ? applicationData.map((application, index) => 

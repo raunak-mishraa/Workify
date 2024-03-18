@@ -74,7 +74,7 @@ function Login() {
         <div className='flex text-base items-center justify-center'>
           <div className='flex justify-center flex-col w-full sm:w-96'>
             <h2 className='md:text-2xl opacity-90 font-medium text-center'>Login to your account</h2>
-            <div className='flex cursor-pointer gap-2 mt-4 mb-2 w-full justify-center py-3 rounded-full bg-slate-100'>
+            <div className='flex cursor-pointer gap-2 mt-4 mb-2 w-full justify-center py-3 rounded-full bg-gray-100'>
               <img src={googleImg} alt="googleimage" />
               <button onClick={()=>loginWithGoogle()} className='opacity-70 font-medium'>Sign in with google</button>
             </div>

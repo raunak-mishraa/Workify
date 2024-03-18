@@ -15,7 +15,7 @@ function FreelancerDashboard() {
   // const [savedPosts, setSavedPosts] = useState({});
   // const [bookmarkedPost, setBookmarkedPost] = useState([]);
   const [tabs, setTabs] = useState('recent')
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -141,7 +141,40 @@ function FreelancerDashboard() {
               (null)
               }
               <div className={`${tabs === 'recent' ? 'block' : 'hidden'}`}>
-                {loading && <div className="text-center">Loading...</div>}
+                {loading && (
+                  <div>
+                    <div className="bg-gray-100 p-4 rounded animate-pulse">
+                       <div className='flex items-start gap-4 w-full'>
+                       <div className='w-14 h-14 bg-gray-200 rounded-full'></div>
+                         <div className='space-y-1 w-full'>
+                         <div className='w-20 h-3 bg-gray-200'></div>
+                         <div className='w-32 h-2 bg-gray-200 rounded'></div>
+                         <div className='w-64 h-4 bg-gray-200 rounded'></div>
+                         <div className='w-full h-14 bg-gray-200 rounded'></div>
+                         <div className='flex space-x-2'>
+                           <div className='w-12 h-2 bg-gray-200 rounded'></div>
+                           <div className='w-12 h-2 bg-gray-200 rounded'></div>
+                         </div>
+                         </div>
+                       </div>
+                    </div>
+                    <div className="bg-gray-100 p-4 rounded animate-pulse">
+                       <div className='flex items-start gap-4 w-full'>
+                       <div className='w-14 h-14 bg-gray-200 rounded-full'></div>
+                         <div className='space-y-1 w-full'>
+                         <div className='w-20 h-3 bg-gray-200'></div>
+                         <div className='w-32 h-2 bg-gray-200 rounded'></div>
+                         <div className='w-64 h-4 bg-gray-200 rounded'></div>
+                         <div className='w-full h-14 bg-gray-200 rounded'></div>
+                         <div className='flex space-x-2'>
+                           <div className='w-12 h-2 bg-gray-200 rounded'></div>
+                           <div className='w-12 h-2 bg-gray-200 rounded'></div>
+                         </div>
+                         </div>
+                       </div>
+                       </div>
+                    </div>
+                )}
                 { !loading && (
                   posts.map((post, index) => (
                     <div key={index} onClick={() => {
@@ -191,7 +224,9 @@ function FreelancerDashboard() {
                 }
                 </div>
               {/* this below id for bookmarked */}
-              
+              <div className={`${tabs === 'bookmarked' ? 'block' : 'hidden'}`}>
+            
+              </div>
               
               
             </div>

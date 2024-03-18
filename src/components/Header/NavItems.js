@@ -5,16 +5,13 @@ export const links = [{
         {
             head:'Skills',
             sublink:[
-                {name:'Web Development', link:'/web-development'},
-                {name:'Mobile Development', link:'/mobile-development'},
-                {name:'Design', link:'/design'},
-                {name:'Writing', link:'/writing'},
-                {name:'Sales & Marketing', link:'/sales'},
-                {name:'Admin Support', link:'/admin-support'},
-                {name:'Customer Service', link:'/customer-service'},
-                {name:'Graphics & Design', link:'/graphics-design'},
-                {name:'Digital Marketing', link:'/digital-marketing'},
-                {name:'SEO Analytics', link:'/seo-analytics'},
+                {name:'Web Development', link:'/gigs?category=webdevelopment'},
+                {name:'Mobile Development', link:'gigs?category=mobiledevelopment'},
+                {name:'Writing', link:'/gigs?category=writingandtranslation'},
+                {name:'Sales & Marketing', link:'/gigs?category=sales'},
+                {name:'Graphics & Design', link:'gigs?category=design'},
+                {name:'Digital Marketing', link:'gigs?category=marketing'},
+                {name:'SEO Analytics', link:'gigs?category=seo'},
             ]
         }
     ]
