@@ -43,7 +43,7 @@ function MyApplication() {
   return (
     <section>
         <Container>
-        <div className='rounded-md p-6 my-8  bg-gray-100 '>
+        <div className='rounded-md p-6 my-8  bg-gray-50 '>
                 <div className='cursor-pointer mx-auto md:w-[70%] space-y-4 w-full'>
                 {loading && (
                     <div className='space-y-4'>

@@ -11,8 +11,8 @@ function Team() {
                 <h1 className="text-3xl font-semibold  text-black text-opacity-80">Our Team</h1>
                   <p className='text-black text-opacity-60'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ut voluptas nisi suscipit laudantium iste iusto harum hic nulla ea magnam perspiciatis, dolorem totam in dignissimos quam eaque ipsum quas?</p>
                </div>
-              <div className='py-10 flex justify-between'>
-              <div className='w-1/4 space-y-1 bg-white border p-4  rounded-2xl'>
+              <div className='py-10 flex flex-wrap gap-4 w-full justify-between'>
+              <div className='sm:w-1/4 w-full space-y-1 bg-white border p-4  rounded-2xl'>
                 <div className=' flex justify-center items-center h-auto p-4 rounded-full'>
                   <div>
                     <img src={RaunakImage} className='w-28 h-28 object-cover rounded-full border-2 p-1 overflow-hidden'/>
@@ -24,7 +24,7 @@ function Team() {
                     <p className='line-clamp-1 font-medium text-sm text-black text-opacity-60'>MERN Stack Developer, UI/UX Designer</p>
                   </div>
                 </div>
-                <div className=' border flex justify-center items-center h-auto p-4 '>
+                <div className='border flex justify-center items-center h-auto p-4 '>
                   <div className='flex justify-center gap-5 text-lg'>
                     <i className='ri-instagram-line'></i>
                     <i className='ri-twitter-line'></i>
@@ -32,7 +32,7 @@ function Team() {
                   </div>
                 </div>
                </div>
-              <div className='w-1/4 space-y-1 bg-white border p-4  rounded-2xl'>
+              <div className='sm:w-1/4 w-full space-y-1 bg-white border p-4  rounded-2xl'>
                 <div className=' flex justify-center items-center h-auto p-4 rounded-full'>
                   <div>
                     <img src={KetanImage} className='w-28 h-28 object-cover rounded-full border-2 p-1 overflow-hidden'/>
@@ -45,14 +45,14 @@ function Team() {
                   </div>
                 </div>
                 <div className=' border flex justify-center items-center h-auto p-4 '>
-                  <div className='flex justify-center gap-5 text-lg'>
+                  <div className='flex justify-center text-lg'>
                     <i className='ri-instagram-line'></i>
                     <i className='ri-twitter-line'></i>
                     <i className='ri-linkedin-line'></i>
                   </div>
                 </div>
                </div>
-              <div className='w-1/4 space-y-1 bg-white border p-4  rounded-2xl'>
+              <div className='sm:w-1/4 w-full  space-y-1 bg-white border p-4  rounded-2xl'>
                 <div className=' flex justify-center items-center h-auto p-4 rounded-full'>
                   <div>
                     <img src='' className='w-28 h-28 object-cover rounded-full border-2 border-blue-400 p-1 overflow-hidden'/>

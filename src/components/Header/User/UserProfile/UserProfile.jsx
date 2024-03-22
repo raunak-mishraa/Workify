@@ -13,14 +13,15 @@ function UserProfile() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const userData = useSelector(state => state.auth.userData)
-    const [tabs, setTabs] = React.useState('profile')
+    const [tabs, setTabs] = React.useState('projects')
     const [openSkillBtn, setOpenSkillBtn] = useState(false)
     const [openAddProjects, setOpenAddProjects] = useState(false)
     const [countryName, SetCountryName] = useState('India')
     const [skill, setSkill] = useState('')
     const [skills, setSkills] = useState([]);
+    const [deleteMessage, setDeleteMessage] = useState('')
     const [projectData, setProjectData] = useState()
-    const [message, setMessage] = useState('');
+    const [skillList, setSkillList] = useState('');
     const [project, setProject] = useState({
         title: '',
         projectUrl: ''
@@ -93,13 +94,13 @@ function UserProfile() {
         .then((res) => {
             toast.success("Project deleted successfully")
             console.log(res.data)
+            setDeleteMessage(res.data)
         })
     }
 
 
     //fetching projectdata
     useEffect(() => {
-        const fetchData = () => {
             try {
                  newRequest.get(`/project`)
                  .then((res) => {
@@ -109,9 +110,7 @@ function UserProfile() {
             } catch (error) {
                 console.error("Error fetching project data:", error);
             }
-        };
-            fetchData();
-    }, [addProject, handleDeleteProject]);
+    }, [project, deleteMessage]);
 
 
     //Add projects to state
@@ -134,6 +133,7 @@ function UserProfile() {
         }
     };
 
+    //add skills
     const handleSubmit = async (e) => {
             e.preventDefault();
             await Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/add-skill`, {
@@ -144,7 +144,7 @@ function UserProfile() {
             .then((response)=>
             {
                 setSkill('')
-                setMessage(response.data.message);
+                setSkills([])
                 console.log(response.data);
                 toast.success(response.data.message, {
                     autoClose:1000
@@ -152,22 +152,43 @@ function UserProfile() {
                 console.log(response.data.message);
             })        
          .catch (error=>{
-            setMessage('An error occurred while adding skills.');
             console.error(error);
         }) 
     };
 
 
-    //render skills
-    // useEffect(() => {
-    //     Axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/skills`)
-    // })
+    // render skills
+    useEffect(() => {
+        Axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/user-skill`, {
+            withCredentials:true
+        })
+        .then((res)=>{
+           setSkillList(res.data)
+        })
+    },[skills])
 
+
+    //delete Skills
+    const handleDeleteSkill = (skillValue) => {
+        console.log(skillValue);
+        Axios.defaults.withCredentials = true;
+        Axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/delete-skill`, {
+            data: { skillValue } 
+        })
+        .then((res) => {
+            setSkills([])
+            console.log(res.data);
+        })
+        .catch(e => {
+            console.log(e);
+        });
+    };
+    
   return (
     <section className='max-w-6xl mx-auto font-poppins h-auto my-6 flex justify-center items-center'>
         <Container>
-        <div className='flex justify-center h-full'>
-        <div className='w-2/6 '>
+        <div className='flex flex-wrap sm:flex-nowrap justify-center h-full'>
+        <div className='sm:w-2/6 w-full'>
             <div className='h-auto border-2 rounded-md p-4 border-gray-200 sticky top-20 left-0'>
                 <div className='flex flex-col gap-6 justify-center'>
                     {/* profile_url */}
@@ -209,7 +230,7 @@ function UserProfile() {
         </div>
             {
                 tabs === 'profile' && (
-                    <div className='w-5/6 p-4'>
+                    <div className='sm:w-5/6 p-4 w-full'>
                 <h2 className='text-2xl font-semibold opacity-80'>Profile Info <span className='opacity-80 text-base'>({userData?.user.username})</span></h2>
                 <div className=' mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200 relative'>
                     <h2 className='text-lg '>Account</h2>
@@ -232,15 +253,15 @@ function UserProfile() {
                 <div className='flex items-center justify-between mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200 relative'>
                     {/* <h2 className='text-lg '>Add Country</h2> */}
 
-                         <select className='border p-3 focus:outline-dashed text-black text-opacity-85'>
+                         <select className='border p-2 sm:p-3 focus:outline-dashed text-black text-opacity-85 text-xs sm:text-base'>
                          { countries.map((country, i) => {
                             return(
-                                <option key={i} className='bg-gray-800 text-white' value={ country.name }>{country.name}</option>
+                                <option key={i} className='bg-gray-800 text-white ' value={ country.name }>{country.name}</option>
                             )
                         })
                     }
                          </select>
-                         <Button className='w-24 p-2 bg-black rounded-md text-white'>
+                         <Button className='w-24 p-2 bg-black rounded-md text-white text-xs sm:text-base'>
                             Update
                          </Button>
 
@@ -251,7 +272,7 @@ function UserProfile() {
             }
             {
                 tabs === 'skills' && (
-                    <div className='w-5/6 p-4'>
+                    <div className='sm:w-5/6 p-4 w-full'>
                 <h2 className='text-2xl font-semibold opacity-80'>Skills</h2>
                 <div className='space-y-6 mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200'>
                 <div className='space-y-4'>
@@ -267,7 +288,7 @@ function UserProfile() {
                         <div className='space-y-3   font-poppins text-base'>
                                 <div className='border-2 p-4 rounded-md flex flex-wrap gap-2'>
                                    {skillList.map(skill =>(
-                                      <span key={skill.id} className='text-xs p-2 rounded-lg bg-gray-100'>{skill.name} <i onClick={()=> {alert(`deleted, ${skill.name}`)}} className='ri-close-fill p-0.5 bg-gray-300 rounded-full cursor-pointer text-black ml-1'></i></span>
+                                      <span key={skill} className='text-xs p-2 rounded-lg bg-gray-100'>{skill} <i onClick={() =>handleDeleteSkill(skill)} className='ri-close-fill p-0.5 bg-gray-300 rounded-full cursor-pointer text-black ml-1'></i></span>
                                    ))}
                                 </div>
                          </div>
@@ -279,7 +300,7 @@ function UserProfile() {
            
             {
                 tabs === 'projects' && (
-                    <div className='w-5/6 p-4'>
+                    <div className='sm:w-5/6 p-4 w-full'>
                 <h2 className='text-2xl font-semibold opacity-80'>Projects</h2>
                 <div className='space-y-6 mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200'>
                     <div className='space-y-4'>
@@ -309,10 +330,14 @@ function UserProfile() {
                              projectData?.map(project => 
                                 (
                                     <div key={project?._id} className='w-full flex items-center p-2 px-4 rounded-lg justify-between font-poppins  bg-gray-100'>
-                                        <div className='first-letter:capitalize font-bold text-black text-opacity-85'>{project?.title}</div>
-                                        <div className='flex items-center gap-3'>
+                                        <div className='first-letter:capitalize font-bold text-black text-opacity-85 sm:text-base text-sm'>{project?.title}</div>
+                                        <div className='hidden sm:flex items-center gap-3 '>
                                             <div onClick={() => handleDeleteProject(project._id)} className='cursor-pointer text-white p-2 bg-black font-poppins w-20 text-center rounded-md font-medium'>Delete</div>
                                             <Link to={project?.projectUrl}  className='cursor-pointer text-black p-2 bg-gray-50 border-2 font-poppins w-20 text-center rounded-md font-medium'>Show</Link>
+                                        </div>
+                                        <div className='sm:hidden space-x-1'>
+                                            <i className='ri-eye-line w-24 h-24 p-1 rounded-full bg-black text-white text-sm'></i>
+                                            <i className="ri-delete-bin-6-line w-24 h-24 p-1 rounded-full bg-blue-500 text-white text-sm"></i>
                                         </div>
                                     </div>
                                     )

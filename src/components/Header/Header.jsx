@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { Logo, Navlinks, Button, Input } from '../index';
 import { useSelector } from 'react-redux';
 import User from './User/User';
+import UserSD from './User/UserProfile/UserSD';
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
@@ -17,15 +18,21 @@ function Header() {
     <header className='font-poppins z-50 sticky bg-white top-0'>
       <Container>
         <nav>
-          <div className='flex items-center justify-between h-20'>
+          <div className='flex items-center justify-between h-20 w-full'>
             <div className='flex items-center w-full'>
-              <div className='z-50 flex justify-between md:w-auto w-full'>
-                <Link to={authStatus ? '/dashboard' : '/'}>
-                  <Logo />
-                </Link>
+              <div className='z-50 flex gap-2 items-center md:w-auto w-full'>
                 <div className="text-3xl md:hidden" onClick={() => setOpen(!open)}>
                   <i className={`${open ? 'ri-close-fill' : 'ri-menu-line'} duration-500`}></i>
                 </div>
+                <Link to={authStatus ? '/dashboard' : '/'}>
+                  <Logo />
+                </Link>
+              </div>
+              <div className='sm:hidden'>
+                {authStatus ?
+                <UserSD/> :
+                <Link to='/signup' className='p-2 bg-gradient-to-tr text-sm text-white rounded-md from-sky-500 to-blue-600'>Register</Link>
+                }
               </div>
               <ul className='cursor-pointer items-center md:flex hidden gap-12 text-black text-opacity-85 md:ml-12 text-base'>
                 {isClient ? (
@@ -64,8 +71,8 @@ function Header() {
               <User />
             ) : (
               <div className='md:flex gap-2 hidden'>
-                <Button onClick={() => navigate('/login')} className='px-4 py-1 border-2 border-sky-400 rounded-lg' type='button'>Login</Button>
-                <Button onClick={() => navigate('/signup')} className='border-2 border-cyan-400 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-transparent hover:border-2 hover:text-black hover:to-transparent hover:border-sky-400 text-white rounded-md transition duration-300' type='button' bgColor='bg-gradient-to-r from-cyan-500 to-blue-500' textColor='text-white'>SignUp</Button>
+                <Button onClick={() => navigate('/login')} className='px-4 py-1 border-2 border-sky-400 rounded-lg hover:bg-gradient-to-tr hover:text-white hover:from-sky-500 hover:to-blue-600 transition duration-300' type='button'>Login</Button>
+                <Button onClick={() => navigate('/signup')} className='border-2 border-cyan-400 px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-transparent hover:border-2 hover:text-black hover:to-transparent hover:border-sky-400 text-white rounded-md transition duration-300' type='button' bgColor='bg-gradient-to-r from-cyan-500 to-blue-500' textColor='text-white'>SignUp</Button>
               </div>
             )}
             {/* mobile view */}

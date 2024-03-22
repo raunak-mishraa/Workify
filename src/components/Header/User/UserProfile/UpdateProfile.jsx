@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react'
 import {Button, Container, Input} from '../../../index.js'
 // import PrevImage from "../../../../assets/images/author.jpg"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import  Axios  from 'axios'
+import { toast } from 'react-toastify'
+import { login } from '../../../../../store/authSlice.js'
 function UpdateProfile() {
     const userData = useSelector((state) => state.auth.userData)
+    console.log(userData)
     const { register, handleSubmit } = useForm();
-    // const data = {
-    //     username: 'John Doe',
-    //     email: 'xyz@gmail.com',
-    //     profession: 'Web Developer'
-    // }
+    const dispatch = useDispatch()
     const [username, setUserName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [profession, setProfession] = React.useState("");
@@ -24,6 +23,10 @@ function UpdateProfile() {
         Axios.defaults.withCredentials = true;
         Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/update-profile`, data)
         .then(response => {
+            dispatch(login({...userData, user:response.data.data}));
+            toast.success(response.data.message,{
+                autoClose:1000
+            })
             console.log(response);
         })
         .catch(error => {
@@ -35,7 +38,7 @@ function UpdateProfile() {
     <section className='w-full'>
         <Container>
             <div className='flex  items-center justify-center h-[80vh]'>
-                <div className='w-1/2'>
+                <div className='sm:w-1/2 w-full'>
                     <h2 className='text-center text-2xl font-semibold font-poppins opacity-80'>Update {!userData?.user?.isClient ? "Freelancer" : "Client"} Profile</h2>
                     <div className=' mt-8 w-full border-2 rounded-md p-4'>
                         <form className='font-poppins' onSubmit={handleSubmit(handleUpdate)}>

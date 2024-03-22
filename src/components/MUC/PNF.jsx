@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from '../components'
+import { Container } from '..'
 import { Link } from 'react-router-dom'
 
 function PNF() {

@@ -2,7 +2,7 @@ import React from 'react';
 import AboutImg from '../assets/images/about.jpg';
 function AboutUs() {
     return (
-        <div className="font-poppins bg-gray-100 py-20 my-10 w-full">
+        <div className="font-poppins bg-gray-50 sm:py-20 my-10 w-full">
             <div className="container flex justify-center items-center h-full w-full">
                 {/* <div>hiu</div> */}
                 <div className="md:max-w-4xl w-full m-auto bg-white p-8 rounded shadow-md">

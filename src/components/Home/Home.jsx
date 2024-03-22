@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Container from '../container/Container'
 import  landingImg  from '../../assets/images/landingImg.png'
 import goalImg from '../../assets/images/goal.gif'
-import { whyImg } from '..'
+import { Input, whyImg } from '..'
 import { useId } from 'react'
 import Button from '../Button'
 import { Link } from 'react-router-dom'
@@ -20,22 +20,7 @@ function Home() {
   const dispatch = useDispatch()
   let searchData = useSearch(searchValue)
   const search = () => {
-    // const query = searchValue;
-    // axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search/client_posts/search?query=${query}`)
-    // .then((res)=>{
-    //     if(res){
-    //         // console.log(res.data.data)
-    //         setSearchValue('')
-    //         dispatch(searchClientPosts(res.data.data))
-    //         navigate('/search')
-    //     }
-    // })
-    // .catch((error)=>{
-    //     navigate('/search')
-    //     setSearchValue('')
-    //     dispatch(searchClientPosts([]))
-    //     console.log(error)
-    // })
+
     if(searchData){
       dispatch(searchClientPosts(searchData))
       navigate('/search')
@@ -69,7 +54,8 @@ function Home() {
                   <label className='rounded-full w-10 h-10 flex items-center justify-center bg-slate-100 cursor-pointer' htmlFor={id}>
                       <i className="text-cyan-500 ri-search-line"></i>
                   </label>
-                  <input 
+                  {/* <Input className="w-full"/> */}
+                  {/* <input 
                       type="search" 
                       value={searchValue} 
                       onChange={(e)=>setSearchValue(e.target.value)} 
@@ -82,9 +68,8 @@ function Home() {
                       id={id}
                       className='ml-4 text-base outline-none bg-transparent focus: flex-grow'
                       placeholder='Job title or keyword'
-                  />
+                  /> */}
                 </div>  
-
                   <div className=''>
                     <Button onClick={search} className='text-xs md:text-sm text-white bg-gradient-to-r from-blue-500  to-cyan-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-500 py-3 md:px-4 px-2 md:rounded-xl rounded-md '>
                       Find Work
@@ -98,58 +83,8 @@ function Home() {
         </div>
       </Container>
     </section>
-    {/* <section className='py-10 sm:py-20 font-[assistant]'>
-      <Container>
-        <div>
-          <h2 className='block text-2xl opacity-90 md:text-3xl font-bold'>Browse Categories</h2>
-          <div className='mt-5 text-base grid sm:grid-cols-2 gap-5 md:grid-cols-3 sm:flex-row md:gap-7'>
-            <Link to='' className='opacity-90 p-6 py-10 rounded-lg bg-slate-50 shadow-md flex flex-col gap-3 hover:bg-slate-200 duration-200 ease-in'>
-              <h4 className='font-medium tracking-wider'><i className="mr-2 ri-code-s-slash-line"></i>Development & IT</h4>
-              <div className='flex justify-between'>
-                <div><i className="text-blue-700 ri-star-fill mr-2"></i>4.85/5</div>
-                <div>130 Skills</div>
-              </div>
-            </Link>
-            <Link to='' className='opacity-90 p-6 py-10 rounded-lg bg-slate-50 shadow-md flex flex-col gap-3 hover:bg-slate-200 duration-200 ease-in'>
-              <h4 className='font-medium tracking-wider'><i className="mr-2 ri-palette-line"></i>Graphics & Design</h4>
-              <div className='flex justify-between'>
-                <div><i className="text-blue-700 ri-star-fill mr-2"></i>4.85/5</div>
-                <div>130 Skills</div>
-              </div>
-            </Link>
-            <Link to='' className='opacity-90 p-6 py-10 rounded-lg bg-slate-50 shadow-md flex flex-col gap-3 hover:bg-slate-200 duration-200 ease-in'>
-              <h4 className='font-medium tracking-wider'><i className="mr-2 ri-computer-line"></i>Digital Marketing</h4>
-              <div className='flex justify-between'>
-                <div><i className="text-blue-700 ri-star-fill mr-2"></i>4.85/5</div>
-                <div>130 Skills</div>
-              </div>
-            </Link>
-            <Link to='' className='opacity-90 p-6 py-10 rounded-lg bg-slate-50 shadow-md flex flex-col gap-3 hover:bg-slate-200 duration-200 ease-in'>
-              <h4 className='font-medium tracking-wider'><i className="mr-2 ri-edit-2-line"></i>Writing & Translation</h4>
-              <div className='flex justify-between'>
-                <div><i className="text-blue-700 ri-star-fill mr-2"></i>4.85/5</div>
-                <div>130 Skills</div>
-              </div>
-            </Link>
-            <Link to='' className='opacity-90 p-6 py-10 rounded-lg bg-slate-50 shadow-md flex flex-col gap-3 hover:bg-slate-200 duration-200 ease-in'>
-              <h4 className='font-medium tracking-wider'><i className="mr-2 ri-movie-line"></i>Video & Animation</h4>
-              <div className='flex justify-between'>
-                <div><i className="text-blue-700 ri-star-fill mr-2"></i>4.85/5</div>
-                <div>130 Skills</div>
-              </div>
-            </Link>
-            <Link to='' className='opacity-90 p-6 py-10 rounded-lg bg-slate-50 shadow-md flex flex-col gap-3 hover:bg-slate-200 duration-200 ease-in'>
-              <h4 className='font-medium tracking-wider'><i className="mr-2 ri-music-2-fill"></i>Music & Audio</h4>
-              <div className='flex justify-between'>
-                <div><i className="text-blue-700 ri-star-fill mr-2"></i>4.85/5</div>
-                <div>130 Skills</div>
-              </div>
-            </Link>
-            
-          </div>
-        </div>
-      </Container>  
-    </section> */}
+
+    {/* Categories section  */}
     <Categories/>
     <section className='py-10 sm:py-20'>
       <Container>
@@ -163,21 +98,21 @@ function Home() {
                 <p className='my-4 opacity-80'>Tired of the freelance rat race? We offer a refreshing alternative! Unlike traditional platforms, we empower new freelancers with curated projects, personalized mentorship, and a supportive community—all commission-free. Join us and launch your freelance journey with confidence!</p>
                 <div className='mt-10 opacity-85'>
                   <div className='flex gap-4 mb-4'>
-                  <div className='w-56 p-4 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                  <div className='w-56 p-3 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold items-center rounded-md '>
                   <i className="ri-award-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-100"></i>
                   <h3 className='font-bold'>Quality Job</h3>
                   </div>
-                  <div className='w-56 p-4 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                  <div className='w-56 p-3 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold items-center rounded-md '>
                   <i className="ri-box-3-fill rounded-md flex items-center justify-center w-8 h-8 bg-gray-100"></i>
                   <h3 className='font-bold'>No Bid</h3>
                   </div>
                   </div>
                   <div className='flex gap-4'>
-                  <div  className='w-56 p-4 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                  <div  className='w-56 p-3 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold items-center rounded-md '>
                   <i className="ri-currency-fill w-8 h-8 rounded-md flex items-center justify-center bg-gray-100"></i>
                   <h3 className='font-bold'>No Extra Charge</h3>
                   </div>
-                  <div  className='w-56 p-4 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold rounded-md '>
+                  <div  className='w-56 p-3 border border-solid border-gray-300 flex gap-3 md:text-base text-sm font-bold items-center rounded-md '>
                   <i className="ri-briefcase-4-fill rounded-md w-8 h-8 flex items-center justify-center bg-gray-100"></i>
                   <h3 className='font-bold'>International</h3>
                   </div>

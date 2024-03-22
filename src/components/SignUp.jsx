@@ -85,7 +85,7 @@ function SignUp() {
             <h2 className='md:text-2xl opacity-90 font-medium text-center'>Create new account</h2>
             <div className='flex cursor-pointer gap-2 mt-4 mb-2 w-full justify-center py-3 rounded-full bg-slate-100'>
               <img src={googleImg} alt="googleimage" />
-              <span className='opacity-70 font-medium'>Sign in with google</span>
+              <span className='opacity-70 font-medium'>Sign up with google</span>
             </div>
             <div className='text-center opacity-70'>or</div>
            

@@ -1,26 +1,55 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { links } from './NavItems'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import useSearch from '../../hooks/useSearch';
+import { searchClientPosts, searchFreelancer } from '../../../store/searchSlice';
+import axios from 'axios';
 
 function Navlinks({className = 'flex'}) {
     const isAuth = useSelector(state => state.auth.status);
+    const [searchValue, setSearchValue] = useState('')
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    let searchData = useSearch(searchValue)
+    const search = (searchItem, isFreelancer, searchUser) => {
+        // console.log(searchUser)
+        if(isFreelancer === "Find Jobs"){
+           console.log(isFreelancer)
+                setSearchValue(searchItem)
+                console.log(searchValue)
+            if(searchData){
+                dispatch(searchClientPosts(searchData))
+                navigate('/search')
+            }
+            else{
+                dispatch(searchClientPosts([]))
+                navigate('/search')
+            }
+       }
+       else{
+        const query = searchUser;
+        // alert(searchUser)
+        console.log(isFreelancer)
+        // console.log(searchValue)
+            axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search/freelancers/search?query=${query}`)
+            .then((res)=>{
+                console.log(res.data)
+                    dispatch(searchFreelancer(res.data.data))
+                    navigate('/search_user')
+            })
+            .catch((error)=>{
+                navigate('/search_user')
+                setSearchValue('')
+                dispatch(searchFreelancer([]))
+                console.log(error)
+            })
+       }
+    }
+
     // const userData = useSelector(state => state.auth.userData);
-      // axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/freelancers/search?[plddfd]`,)
-            // .then((res)=>{
-            //     if(res){
-            //         // console.log(res.data.data)
-            //         setSearchValue('')
-            //         dispatch(searchFreelancer(res.data.data))
-            //         navigate('/search')
-            //     }
-            // })
-            // .catch((error)=>{
-            //     navigate('/search')
-            //     setSearchValue('')
-            //     dispatch(searchFreelancer([]))
-            //     console.log(error)
-            // })
+   
 
    const [heading, setHeading] = React.useState('')
   return (!isAuth ?
@@ -46,8 +75,8 @@ function Navlinks({className = 'flex'}) {
                                         <div key={mysublink.head}>
                                             <h2 className='text-lg font-semibold'>{mysublink.head}</h2>
                                             {mysublink.sublink.map(slink=>(
-                                                <li key={slink.name} className='text-gray-600 text-sm my-2.5'>
-                                                    <Link className='hover:underline' to={slink.link}>{slink.name}</Link>    
+                                                <li onClick={()=>search(slink.name,link.name,slink.link)} key={slink.name} className='text-gray-600 text-sm my-2.5'>
+                                                    <div className='hover:underline' >{slink.name}</div>    
                                                 </li>
                                             ))}
                                         </div>

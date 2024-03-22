@@ -41,7 +41,7 @@ function Search() {
   return (
     <section>
         <Container>
-            <div className={`rounded-md p-6 my-8 ${isClient && " bg-gray-50"} `}>
+            <div className={`rounded-md sm:p-6 my-8 ${isClient && " bg-gray-50"} `}>
             {
                 isClient ? (
                     searchData?.length > 0 
@@ -94,7 +94,7 @@ function Search() {
                                     <div className='overflow-hidden'>
                                       <h2 className='line-clamp-3 leading-normal font-normal text-black text-opacity-65 text-sm tracking-wide'>{post.description}</h2>
                                     </div>
-                                    <div>
+                                    <div className='flex gap-2 flex-wrap'>
                                       {post?.tags.map((tag, index) => (
                                         <span key={index} className='text-xs bg-gray-100 px-2 py-1 rounded-md mr-2'>{tag}</span>
                                       ))}

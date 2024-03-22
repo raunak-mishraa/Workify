@@ -39,7 +39,8 @@ import MyApplication from './components/MyApplication.jsx'
 import Team from './components/Team.jsx'
 import Search from './components/Search.jsx'
 import DeleteAccount from './components/Header/User/UserProfile/DeleteAccount.jsx'
-import PNF from './pages/PNF.jsx'
+import PNF from './components/MUC/PNF.jsx'
+import SearchUser from './components/searchUser.jsx'
 
 
 const router = createBrowserRouter(
@@ -63,6 +64,7 @@ const router = createBrowserRouter(
         <Route path='messages' element={<Messages/>}/>
         <Route path='add' element={<Add/>}/>
         <Route path='search' element={<Search/>}/>
+        <Route path='search_user' element={<SearchUser/>}/>
         <Route path='applications' element={<Applications/>}/>
         <Route path='apply/:id' element={<Apply/>}/>
         <Route path='contact' element={<Contact/>}/>

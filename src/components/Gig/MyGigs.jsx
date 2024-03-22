@@ -10,7 +10,7 @@ function MyGigs() {
             <div className='flex items-center justify-between'>
                 <h1 className='text-2xl opacity-80 font-bold font-Roboto'>Gigs</h1>
                 <Link to='/add'>
-                    <Button className='text-white font-Roboto font-medium p-2 cursor-pointer bg-sky-500'>Add New Gig</Button>
+                    <Button className='text-white font-Roboto font-medium p-2 p cursor-pointer text-sm rounded-md bg-blue-500'>Add New Gig</Button>
                 </Link>
             </div>
             <table className='w-full text-left'>

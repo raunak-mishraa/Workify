@@ -53,7 +53,8 @@ function Add() {
                         <input type="text" className='p-3 border' placeholder="e.g. setting up a domain" />
                         <input type="text" className='p-3 border' placeholder="e.g. hosting" />
                         <label htmlFor="" className='opacity-80'>Price</label>
-                        <input type="number" />
+                        <input type="number" 
+                        className='p-3 border'/>
                     </div>
                     </div>
                 </div>
