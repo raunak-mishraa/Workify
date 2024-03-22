@@ -40,7 +40,8 @@ import Team from './components/Team.jsx'
 import Search from './components/Search.jsx'
 import DeleteAccount from './components/Header/User/UserProfile/DeleteAccount.jsx'
 import PNF from './components/MUC/PNF.jsx'
-import SearchUser from './components/searchUser.jsx'
+import SearchUser from './components/SearchUser.jsx'
+
 
 
 const router = createBrowserRouter(
