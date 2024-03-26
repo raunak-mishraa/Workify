@@ -4,7 +4,7 @@ import Button from '../Button'
 import Slide from '../Slider/Slide'
 import { useQuery } from '@tanstack/react-query'
 import  newRequest  from '../../assets/utils/newRequest'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import InfiniteCarousel from 'react-snap-infinite-carousel';
 import Reviews from '../Reviews/Reviews'
 function Gig() {
@@ -146,7 +146,9 @@ function Gig() {
                         </div>
                       ))}
                     </div>
+                    <Link to={`/pay/${id}`}>
                     <Button className='font-Roboto bg-blue-500 w-full text-white p-2 font-medium text-base cursor-pointer'>Continue</Button>
+                    </Link>
                 </div>
            </div>}
         </Container>

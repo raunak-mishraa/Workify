@@ -43,15 +43,7 @@ function User() {
                     withCredentials: true // Send cookies with the request
                 }
             );
-    
-            // console.log(logoutRes.data);
-            // console.log("logout")
-                // if(logoutRes){
-                //     localStorage.removeItem('userData');
-                //     dispatch(logout());
-                //     navigate("/")
-                //     toast.success("User logged Out!")
-                // }
+
             localStorage.removeItem('userData');
             localStorage.removeItem('applicationData');
             localStorage.removeItem('selectedPostData');
@@ -80,48 +72,10 @@ function User() {
         console.log("show notifications", notificationOn)
         setNotificationOn((prev) => !prev)
     }
-
-    //for searching
-    // const search = (e) =>{
-    //     let search_query = e.target.value;
-    //     useEffect((()=>{
-    //         console.log(search_query)
-    //     }),[])
-    // }
-
-
-//    if(userData?.user.isClient){
-//     useEffect(()=>{
-//         const query = searchValue;
-//         axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search//freelancers/search?query=${query}`)
-//         .then((res)=>{
-//             console.log(res.data)
-//         })
-//         .catch((error)=>{
-//             console.log(error)
-//         })
-//     },[searchValue])
- 
-//    }
     const search = () =>{
         // i changed here 
         if(userData?.user.isClient) {
-            // const query = searchValue;
-            // axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/gigs?category=${query}`)
-            // .then((res)=>{
-            //     if(res){
-            //         // console.log(res.data.data)
-            //         setSearchValue('')
-            //         dispatch(searchFreelancer(res.data.data))
-            //         navigate('/search')
-            //     }
-            // })
-            // .catch((error)=>{
-            //     navigate('/search')
-            //     setSearchValue('')
-            //     dispatch(searchFreelancer([]))
-            //     console.log(error)
-            // })
+           navigate(`/gigs?search=${searchValue}`)
         }
         else{
             const query = searchValue;

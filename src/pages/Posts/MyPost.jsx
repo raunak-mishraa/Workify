@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container } from '../../components'
 import  Axios  from 'axios'
 import { Link } from 'react-router-dom';
+import Spinner from '../../components/MUC/Spinner';
 
 function MyPost() {
     const [loading, setLoading] = useState(true)
@@ -29,7 +30,7 @@ function MyPost() {
         <Container>
             <div className='rounded-md p-6 my-8  bg-gray-100 '>
                 <div className='cursor-pointer mx-auto md:w-[70%] space-y-4 w-full'>
-                {loading && <div className='w-full h-10 flex justify-center items-center'>Loading</div>}
+                {loading && <div className='w-full h-10 flex justify-center items-center'><Spinner/></div>}
                 {
                     !loading && (postData?.length > 0 
                     ? postData.map((post, index) => 

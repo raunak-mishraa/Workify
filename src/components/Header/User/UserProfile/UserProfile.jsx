@@ -13,7 +13,7 @@ function UserProfile() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const userData = useSelector(state => state.auth.userData)
-    const [tabs, setTabs] = React.useState('projects')
+    const [tabs, setTabs] = React.useState('profile')
     const [openSkillBtn, setOpenSkillBtn] = useState(false)
     const [openAddProjects, setOpenAddProjects] = useState(false)
     const [countryName, SetCountryName] = useState('India')

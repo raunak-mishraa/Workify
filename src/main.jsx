@@ -41,8 +41,11 @@ import Search from './components/Search.jsx'
 import DeleteAccount from './components/Header/User/UserProfile/DeleteAccount.jsx'
 import PNF from './components/MUC/PNF.jsx'
 import SearchUser from './components/SearchUser.jsx'
-
-
+import Pay from './pages/Pay.jsx'
+import Success from './components/success/Success.jsx'
+import Policy from './pages/Policy.jsx'
+import TermAndCondition from './pages/TermAndCondition.jsx'
+import Copyright from './pages/Copyright.jsx'
 
 const router = createBrowserRouter(
   
@@ -86,12 +89,26 @@ const router = createBrowserRouter(
         />
         <Route path='login/forgot-password' element={<ForgotPassword/>}/>
         <Route path='resetpassword/:token' element={<ResetPassword/>}/>
-        <Route path='userprofile' element={
-            <UserProfile/>
+        <Route path='pay/:id' element={<Pay/>}/>
+        <Route path='success' element={<Success/>}/>
+        <Route path='success' element={<Success/>}/>
+        <Route path='privacy-policy' element={
+            <Policy/>
+        }/>
+        <Route path='term-and-conditions' element={
+            <TermAndCondition/>
+        }/>
+        <Route path='copyright' element={
+            <Copyright/>
         }/>
         <Route path='updateprofile' element={
 
             <UpdateProfile/>
+
+        }/>
+        <Route path='userprofile' element={
+
+            <UserProfile/>
 
         }/>
       </Route>

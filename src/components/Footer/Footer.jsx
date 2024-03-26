@@ -102,13 +102,13 @@ function Footer() {
                 <h2 className="uppercase text-black opacity-85 font-semibold mb-4">Terms</h2>
                 <ul className='text-black text-opacity-70 text-base font-normal'>
                   <li className='mb-4 hover:underline'>
-                    <Link to='/' >Privacy Policy</Link>
+                    <Link to='/privacy-policy' >Privacy Policy</Link>
                   </li>
                   <li className='mb-4 hover:underline'>
-                    <Link to='/'>Terms and Conditions</Link>
+                    <Link to='/term-and-conditions'>Terms and Conditions</Link>
                   </li>
                   <li className='mb-4 hover:underline'>
-                    <Link to='/'>Copyright Policy</Link>
+                    <Link to='/copyright'>Copyright Policy</Link>
                   </li>
                 </ul>
                 </div>

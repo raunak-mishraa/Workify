@@ -14,7 +14,7 @@ function Navlinks({className = 'flex'}) {
 
     let searchData = useSearch(searchValue)
     const search = (searchItem, isFreelancer, searchUser) => {
-        // console.log(searchUser)
+        console.log(searchItem)
         if(isFreelancer === "Find Jobs"){
            console.log(isFreelancer)
                 setSearchValue(searchItem)
@@ -75,7 +75,7 @@ function Navlinks({className = 'flex'}) {
                                         <div key={mysublink.head}>
                                             <h2 className='text-lg font-semibold'>{mysublink.head}</h2>
                                             {mysublink.sublink.map(slink=>(
-                                                <li onClick={()=>search(slink.name,link.name,slink.link)} key={slink.name} className='text-gray-600 text-sm my-2.5'>
+                                                <li onClick={()=>search(slink.link,link.name,slink.link)} key={slink.name} className='text-gray-600 text-sm my-2.5'>
                                                     <div className='hover:underline' >{slink.name}</div>    
                                                 </li>
                                             ))}

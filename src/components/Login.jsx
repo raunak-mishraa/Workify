@@ -60,6 +60,7 @@ function Login() {
     } catch (error) {
         toast.error("Invalid user credentials",{
           autoClose: 2000,
+          hideProgressBar: true
         })
     }
   }

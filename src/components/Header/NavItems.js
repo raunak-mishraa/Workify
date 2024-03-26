@@ -5,7 +5,7 @@ export const links = [{
         {
             head:'Skills',
             sublink:[
-                {name:'Web Development', link:''},
+                {name:'Web Development', link:'web'},
                 {name:'Mobile Development', link:''},
                 {name:'Writing', link:''},
                 {name:'Sales & Marketing', link:''},
