@@ -57,7 +57,7 @@ function UpdateProfile() {
                                 )
                             }
                             </div>
-                            <Button type='submit' className='mt-6 w-full rounded-md font-semibold py-2 text-white bg-gradient-to-r from-cyan-500 to-blue-500'>Update Profile</Button>
+                            <Button type='submit' className='mt-6 w-full rounded-md font-medium py-2 text-white bg-gradient-to-tr from-cyan-500 to-blue-600'>Update Profile</Button>
                         </form>
                     </div>
                 </div>

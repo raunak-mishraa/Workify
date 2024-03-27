@@ -250,7 +250,7 @@ function UserProfile() {
                    </div>
                 </div>
 
-                <div className='flex items-center justify-between mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200 relative'>
+                <div className='sm:flex block space-y-2 sm:space-y-0 items-center justify-between mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200 relative'>
                     {/* <h2 className='text-lg '>Add Country</h2> */}
 
                          <select className='border p-2 sm:p-3 focus:outline-dashed text-black text-opacity-85 text-xs sm:text-base'>
@@ -261,7 +261,7 @@ function UserProfile() {
                         })
                     }
                          </select>
-                         <Button className='w-24 p-2 bg-black rounded-md text-white text-xs sm:text-base'>
+                         <Button className='sm:w-24 w-full p-2 bg-black rounded-md text-white text-xs sm:text-base'>
                             Update
                          </Button>
 

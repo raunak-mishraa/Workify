@@ -6,6 +6,7 @@ import Gigcards from './Gigcards'
 import { useQuery } from '@tanstack/react-query'
 import newRequest from '../../assets/utils/newRequest'
 import { useLocation } from 'react-router-dom'
+import GigsLoader from '../MUC/GigsLoader'
 function Gigs() {
     const [open, setOpen] = React.useState(false)
     const [sort, setSort] = React.useState('sales')
@@ -65,7 +66,7 @@ function Gigs() {
               </div>
                <div>
                <div className='flex flex-wrap justify-between gap-2  w-full mt-3'>
-                    {isPending ? "loading" : error ? "Something went wrong" :data.map((gig, index) => {
+                    {isPending ? <GigsLoader/> : error ? "Something went wrong" :data.map((gig, index) => {
                         return <Gigcards key={index} gig={gig} />
                     })}
                 </div>

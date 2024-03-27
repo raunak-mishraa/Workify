@@ -38,7 +38,7 @@ function Home() {
     <section className='font-assistant bg-gradient-to-r from-slate-50 via-sky-50 to-indigo-50 bg-blue-100'>
       <Container>
         <div className='flex flex-wrap justify-center items-center py-10 xl:py-0'>
-            <div className='px-4 text-center md:text-left md:pl-10 w-full md:w-1/2'>
+            <div className='sm:px-4 px-2 text-center md:text-left md:pl-10 w-full md:w-1/2'>
               <h1 className='font-poppins text-3xl xl:text-5xl font-thin'><span className='font-bold bg-gradient-to-r from-cyan-500 to-blue-500 text-transparent bg-clip-text'>Freelance</span> your way</h1>
 
               <h1 className='opacity-85 font-poppins text-3xl xl:text-5xl justify-center md:justify-normal my-2 flex items-center gap-2'>
@@ -50,27 +50,31 @@ function Home() {
                   <p className='leading-7 font-poppins  tracking-wide'>Clients, and Build Your Business</p>
                 </div>
                 <div className='hover:shadow-md duration-300 ease-linear flex items-center justify-between bg-white md:mt-8 mt-14 py-2 md:px-4 px-2 rounded-md md:rounded-3xl'>
-                <div className='flex flex-1'>
+                <div className='flex items-center w-full sm:w-[80%]'>
+                  <div className='w-[50px]'>
                   <label className='rounded-full w-10 h-10 flex items-center justify-center bg-slate-100 cursor-pointer' htmlFor={id}>
                       <i className="text-cyan-500 ri-search-line"></i>
                   </label>
-                  {/* <Input className="w-full"/> */}
-                  {/* <input 
-                      type="search" 
-                      value={searchValue} 
-                      onChange={(e)=>setSearchValue(e.target.value)} 
-                      name="searchValue"
-                      onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                              search();
-                          }
-                      }} 
-                      id={id}
-                      className='ml-4 text-base outline-none bg-transparent focus: flex-grow'
-                      placeholder='Job title or keyword'
-                  /> */}
+                  </div>
+                  <div className='max-w-full flex-1 '>
+                    <input 
+                          type="search" 
+                          value={searchValue} 
+                          onChange={(e)=>setSearchValue(e.target.value)} 
+                          name="searchValue"
+                          onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                  search();
+                              }
+                          }} 
+                          id={id}
+                          className='text-base outline-none bg-transparent w-full'
+                          placeholder='Job title or keyword'
+                      />
+                  </div>
+                  
                 </div>  
-                  <div className=''>
+                  <div className='flex w-[100px] justify-end'>
                     <Button onClick={search} className='text-xs md:text-sm text-white bg-gradient-to-r from-blue-500  to-cyan-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-500 py-3 md:px-4 px-2 md:rounded-xl rounded-md '>
                       Find Work
                     </Button>

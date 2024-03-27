@@ -85,8 +85,50 @@ function Header() {
                   Home
                 </Button>
               </li>
-              <Navlinks className='block' />
-             {(isClient)  
+              { !authStatus 
+              ? ( 
+                <div>
+                  <Navlinks className='block' />
+                  <li className='py-7'>
+                    <Button onClick={() => {
+                      navigate('/login');
+                      setOpen(!open);
+                    }}>
+                      Login
+                    </Button>
+                  </li>
+                </div>
+               ) 
+              : isClient ? (
+                <div>
+                  <li>
+                  <Button onClick={() => {
+                      navigate('/mypost');
+                      setOpen(!open);
+                    }} className='py-7'>
+                      My Post
+                    </Button>
+                  </li>
+                  <li>
+                  <Button onClick={() => {
+                      navigate('/applications');
+                      setOpen(!open);
+                    }} className='py-7'>
+                    Applications
+                    </Button>
+                  </li>
+                </div>
+              ) : (
+                <li>
+                  <Button onClick={() => {
+                      navigate('/myapplication');
+                      setOpen(!open);
+                    }} className='py-7'>
+                    My Application
+                  </Button>
+                </li>
+              )}
+             {/* {(isClient && authStatus)
              ? (<>
              <li>
              <Button onClick={() => {
@@ -113,22 +155,7 @@ function Header() {
                 </Button>
               </div>
              </>) 
-             : (<div>
-               <Button onClick={() => {
-                navigate('/myapplication');
-                setOpen(!open);
-              }} className='py-7'>
-                MyApplication
-              </Button>
-              <div className='w-full p-1 rounded-md text-center bg-slate-100 mt-7'>
-                <Button onClick={() => {
-                  navigate('/signup');
-                  setOpen(!open);
-                }} className='rounded-md bg-blue-500 w-full py-2 text-white'>
-                  SignUp
-                </Button>
-              </div>
-             </div>)}
+             : ("e")} */}
             </ul>
           </div>
         </nav>
