@@ -78,16 +78,47 @@ function Header() {
             {/* mobile view */}
             <ul className={`md:hidden bg-white z-10 fixed w-full h-full bottom-0 py-20 px-6 duration-500 ${open ? 'left-0' : 'left-[-100%]'}`}>
               <li className='py-7 hover:opacity-70 transition delay-75 ease-in-out'>
-                <Link to='/'>
+                <Button onClick={() => {
+                navigate(`${authStatus ? '/dashboard' : '/'}`);
+                setOpen(!open);
+              }}>
                   Home
-                </Link>
+                </Button>
               </li>
               <Navlinks className='block' />
-              <Button onClick={() => {
-                navigate('/login');
+             {(isClient)  
+             ? (<>
+             <li>
+             <Button onClick={() => {
+                navigate('/mypost');
                 setOpen(!open);
               }} className='py-7'>
-                Login
+                My Post
+              </Button>
+             </li>
+            <li>
+            <Button onClick={() => {
+                navigate('/applications');
+                setOpen(!open);
+              }} className='py-7'>
+               Applications
+              </Button>
+            </li>
+              <div className='w-full p-1 rounded-md text-center bg-slate-100 mt-7'>
+                <Button onClick={() => {
+                  navigate('/signup');
+                  setOpen(!open);
+                }} className='rounded-md bg-blue-500 w-full py-2 text-white'>
+                  SignUp
+                </Button>
+              </div>
+             </>) 
+             : (<div>
+               <Button onClick={() => {
+                navigate('/myapplication');
+                setOpen(!open);
+              }} className='py-7'>
+                MyApplication
               </Button>
               <div className='w-full p-1 rounded-md text-center bg-slate-100 mt-7'>
                 <Button onClick={() => {
@@ -97,6 +128,7 @@ function Header() {
                   SignUp
                 </Button>
               </div>
+             </div>)}
             </ul>
           </div>
         </nav>

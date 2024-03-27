@@ -68,7 +68,7 @@ function UserSD() {
             <img className='w-full h-full object-cover' src={userData?.user?.avatar} alt="profile" />
         </div>
         <div className={`absolute right-0 top-13 z-10  py-2 ${open ? 'block' : 'hidden'} w-[158px]`}>
-        <div className='w-4 h-4 left-3 absolute mt-1 bg-white border -z-10 rotate-45'></div>
+        <div className='w-4 h-4 right-3 absolute mt-1 bg-white border -z-10 rotate-45'></div>
             <div className='text-base mt-3 rounded-md bg-white border border-gray-200 overflow-hidden w-full'>
                 <div className='hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center'>
                     <Link to='/userprofile'><i className="ri-user-line"></i> Profile</Link>

@@ -42,14 +42,14 @@ function Gigs() {
                     <h1 className='text-2xl font-bold opacity-90'>AI Artists</h1>
                     <p className='font-medium opacity-55'>Explore the boundaries of art and technology with Workify's AI artists </p>
                </div>
-              <div className='flex justify-between mt-4'>
+              <div className='sm:flex justify-between mt-4'>
                 <div className='font-Roboto text-sm flex items-center gap-2'>
                     <span className='font-semibold text-base opacity-80'>Budget</span>
-                    <input ref={minRef}  type="text" className='p-2 outline-none border rounded' placeholder='min'/>
-                    <input ref={maxRef} type="text" className='p-2 outline-none border rounded'  placeholder='max'/>
+                    <input ref={minRef}  type="text" className='w-16 sm:w-auto p-2 outline-none border rounded' placeholder='min'/>
+                    <input ref={maxRef} type="text" className='w-16 sm:w-auto p-2 outline-none border rounded'  placeholder='max'/>
                     <Button onClick={apply} className='p-2 px-3 bg-blue-300 rounded-md'>Apply</Button>
                 </div>
-                <div className='flex font-Roboto items-center gap-2 relative'>
+                <div className='flex font-Roboto items-center mt-5 sm:mt-0 gap-2 relative'>
                     <span className='font-medium text-sm opacity-50'>Sort By</span>
                     <div className='cursor-pointer' onClick={()=>setOpen((prev)=>!prev)}>
                         <span className='font-semibold opacity-90'>{sort === 'sales' ? 'Best Selling' : 'Newest'}</span>
