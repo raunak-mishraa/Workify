@@ -1,17 +1,6 @@
 {
-    "routes":[
-        {
-            "src":"/",
-            "dest":"/"
-        },
-        {
-            "src":"",
-            "dest":"/"
-        },
-        {
-            "src":"/login",
-            "dest":"/"
-        }
-
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/index.html" }
     ]
-}
+  }
+  
