@@ -206,7 +206,7 @@ function FreelancerDashboard() {
                     <div key={index} onClick={() => {
                       handleClick(post)
                       navigate('/post')
-                      }} className='inline-block bg-gray-100 cursor-pointer mb-2 w-full'>
+                      }} className='inline-block bg-gray-50 cursor-pointer mb-2 w-full'>
                     <div className='p-2 md:p-4 w-full flex gap-3 rounded-md border-2'>
                       <div className=''>
                         <div className='border-2 border-gray-100 p-1 rounded-full w-14 h-14'>
@@ -264,7 +264,7 @@ function FreelancerDashboard() {
                     <div key={post._id} onClick={() => {
                       handleClick(post)
                       navigate('/post')
-                      }} className='inline-block cursor-pointer mb-2 w-full'>
+                      }} className='inline-block bg-gray-50 cursor-pointer mb-2 w-full'>
                     <div className='p-2 md:p-4 w-full flex gap-3 rounded-md border-2'>
                       <div className=''>
                         <div className='border-2 border-gray-100 p-1 rounded-full w-14 h-14'>
