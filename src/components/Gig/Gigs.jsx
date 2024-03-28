@@ -65,11 +65,13 @@ function Gigs() {
                 </div>
               </div>
                <div>
-               <div className='flex flex-wrap justify-between gap-2  w-full mt-3'>
-                    {isPending ? <GigsLoader/> : error ? "Something went wrong" :data.map((gig, index) => {
+               <div className='grid lg:grid-cols-4  md:grid-cols-3 sm:grid-cols-2 justify-between gap-2  w-full mt-3'>
+               {
+                    isPending ? <GigsLoader/> : error ? "Something went wrong" : data.map((gig, index) => {
                         return <Gigcards key={index} gig={gig} />
-                    })}
-                </div>
+                    })
+                }
+               </div>
                </div>
             </div>
         </Container>

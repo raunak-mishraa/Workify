@@ -97,6 +97,14 @@ function Header() {
                       Login
                     </Button>
                   </li>
+                  <div className='w-full p-1 rounded-md text-center bg-slate-100 mt-7'>
+                <Button onClick={() => {
+                  navigate('/signup');
+                  setOpen(!open);
+                }} className='rounded-md bg-blue-500 w-full py-2 text-white'>
+                  SignUp
+                </Button>
+              </div>
                 </div>
                ) 
               : isClient ? (

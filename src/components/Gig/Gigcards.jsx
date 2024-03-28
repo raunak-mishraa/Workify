@@ -11,7 +11,7 @@ function Gigcards({gig}) {
       console.log(data)
       console.log(gig.userId)
   return (
-    <div className='sm:w-[24%] w-full'>
+    <div className='w-full'>
         <Link to={`/gig/${gig._id}`}>
             <div className='mb-2 overflow-hidden'>
                 <div className='border'>

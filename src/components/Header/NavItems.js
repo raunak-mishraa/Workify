@@ -6,12 +6,12 @@ export const links = [{
             head:'Skills',
             sublink:[
                 {name:'Web Development', link:'web'},
-                {name:'Mobile Development', link:''},
-                {name:'Writing', link:''},
-                {name:'Sales & Marketing', link:''},
-                {name:'Graphics & Design', link:''},
-                {name:'Digital Marketing', link:''},
-                {name:'SEO Analytics', link:''},
+                {name:'Mobile Development', link:'mobile'},
+                {name:'Writing', link:'writing'},
+                {name:'Sales & Marketing', link:'marketing'},
+                {name:'Graphics & Design', link:'graphics-design'},
+                {name:'Digital Marketing', link:'digital-marketing'},
+                {name:'SEO Analytics', link:'seo-analytics'},
             ]
         }
     ]

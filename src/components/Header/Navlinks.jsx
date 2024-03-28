@@ -13,7 +13,9 @@ function Navlinks({className = 'flex'}) {
     const navigate = useNavigate()
 
     let searchData = useSearch(searchValue)
+    console.log("getting",searchData)
     const search = (searchItem, isFreelancer, searchUser) => {
+   
         console.log(searchItem)
         if(isFreelancer === "Find Jobs"){
            console.log(isFreelancer)
