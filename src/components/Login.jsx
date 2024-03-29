@@ -110,6 +110,7 @@ function Login() {
             <Button type='submit' className='w-full py-3 mt-6 text-white bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full '>
               Login
             </Button>
+            
             </form>
             
           </div>

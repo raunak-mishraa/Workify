@@ -253,7 +253,7 @@ function UserProfile() {
                 <div className='sm:flex block space-y-2 sm:space-y-0 items-center justify-between mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200 relative'>
                     {/* <h2 className='text-lg '>Add Country</h2> */}
 
-                         <select className='border p-2 sm:p-3 focus:outline-dashed text-black text-opacity-85 text-xs sm:text-base'>
+                         <select className='border p-2 sm:p-3 focus:outline-dashed text-black text-opacity-85 text-xs sm:text-base sm:w-auto w-full'>
                          { countries.map((country, i) => {
                             return(
                                 <option key={i} className='bg-gray-800 text-white ' value={ country.name }>{country.name}</option>

@@ -7,8 +7,7 @@ import newRequest from "../../assets/utils/newRequest";
 import Container from "../container/Container";
 
 const Messages = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
+  const currentUser = JSON.parse(localStorage.getItem("userData"));
   const queryClient = useQueryClient();
 
   const { isPending, error, data } = useQuery({
@@ -19,18 +18,18 @@ const Messages = () => {
       }),
   });
 
-  const mutation = useMutation({
-    mutationFn: (id) => {
-      return newRequest.put(`/conversations/${id}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["conversations"]);
-    },
-  });
+  // const mutation = useMutation({
+  //   mutationFn: (id) => {
+  //     return newRequest.put(`/conversations/${id}`);
+  //   },
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(["conversations"]);
+  //   },
+  // });
 
-  const handleRead = (id) => {
-    mutation.mutate(id);
-  };
+  // const handleRead = (id) => {
+  //   mutation.mutate(id);
+  // };
 
   return (
     <section>
@@ -47,7 +46,7 @@ const Messages = () => {
             </div>
             <table>
               <tr>
-                <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
+                <th>{currentUser.user.isClient ? "Freelancer" : "Client"}</th>
                 <th>Last Message</th>
                 <th>Date</th>
                 <th>Action</th>
@@ -55,8 +54,8 @@ const Messages = () => {
               {data.map((c) => (
                 <tr
                   className={
-                    ((currentUser.isSeller && !c.readBySeller) ||
-                      (!currentUser.isSeller && !c.readByBuyer)) &&
+                    ((currentUser.user.isClient && !c.readByClient) ||
+                      (!currentUser.user.isClient && !c.readByFreelancer)) &&
                     "active"
                   }
                   key={c.id}

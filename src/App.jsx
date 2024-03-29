@@ -2,7 +2,7 @@
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import { Outlet } from 'react-router-dom'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login, updateUserAvatar } from '../store/authSlice'
 import { selectPost } from '../store/postSlice'
@@ -12,7 +12,8 @@ import {
   QueryClient,
   QueryClientProvider,
   useQuery,
-} from '@tanstack/react-query'
+} from '@tanstack/react-query';
+import PageLoader from './components/MUC/PageLoader';
 
 
 function App() {
@@ -21,8 +22,12 @@ function App() {
   const userData = localStorage.getItem('userData');
   const selectedPostData = localStorage.getItem('selectedPostData');
   const applicationData = localStorage.getItem('applicationData');
-// console.log(userData)
-  // Check if user data exists in local storage
+  const [loading, setLoading] = useState(true);
+
+  window.onload = () => {
+    setLoading(false);
+  };
+
   useEffect(() => {
     if (selectedPostData) {
       dispatch(selectPost(JSON.parse(selectedPostData)));
@@ -44,11 +49,17 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-    <Header/>
-      <main>
-      <Outlet/>
-      </main>
-    <Footer/>
+    {
+      loading ? <PageLoader/> : (
+        <>
+          <Header/>
+          <main>
+          <Outlet/>
+          </main>
+          <Footer/>
+        </>
+      )
+    }
     </QueryClientProvider>
   )
 }

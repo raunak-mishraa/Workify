@@ -76,7 +76,7 @@ function Post() {
                                 {/* // Skillls */}
                                 {
                                   selectedPost?.tags.map((skill, index) => (
-                                    <span key={index} className='bg-gray-200 px-2 py-1 rounded-md text-xs font-medium'>{skill}</span>
+                                    <span key={index} className='bg-gray-100 px-2 py-1 rounded-md text-xs font-medium'>{skill}</span>
                                   ))
                                 }
                               </div>

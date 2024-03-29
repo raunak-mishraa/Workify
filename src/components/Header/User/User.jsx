@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 function User() {
     const navigate = useNavigate()
     const ref = useRef(null);
+    const nref = useRef(null);
     // const [cookies] = useCookies(['accessToken']);
     const [notificationOn, setNotificationOn] = useState(false)
     const dispatch = useDispatch()
@@ -29,6 +30,20 @@ function User() {
           document.removeEventListener('click', handleClickOutside);
         };
       }, [ref]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (nref.current && !nref.current.contains(event.target)) {
+            setNotificationOn(false);
+          }
+        };
+    
+        document.addEventListener('click', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('click', handleClickOutside);
+        };
+      }, [nref]);
 
     const logOut = async() => {
         try {
@@ -68,10 +83,10 @@ function User() {
     };
     
     //For notifications
-    const showNotifications = () => {
-        console.log("show notifications", notificationOn)
-        setNotificationOn((prev) => !prev)
-    }
+    // const showNotifications = () => {
+    //     console.log("show notifications", notificationOn)
+    //     setNotificationOn((prev) => !prev)
+    // }
     const search = () =>{
         // i changed here 
         if(userData?.user.isClient) {
@@ -108,9 +123,12 @@ function User() {
             <i onClick={search} className="ri-search-line"></i>
         </div>
         <div className='md:flex items-center gap-2 hidden'>
-        <div onClick={showNotifications}>
+        <div ref={nref} onClick={()=>setNotificationOn((prev) => !prev)}>
             <div className='relative w-8 h-8 bg-gray-100 rounded-full items-center justify-center flex'> <i className=" ri-notification-3-line"></i>
-                 <div className='absolute right-2 top-2 w-2 h-2 bg-yellow-300 rounded-full'></div>
+            <span className ="absolute top-2 right-2 flex h-2 w-2">
+            <span className ="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span className ="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
                  <div onClick={(e) => e.stopPropagation()} className={`${notificationOn ? 'block' : 'hidden'} right-0 top-12 p-2 rounded-md absolute w-56 bg-white border`}>
                     <div className='bg-gray-50 p-2 rounded'>
                         <p className='text-sm opacity-95 first-letter:uppercase'>you don't have a new notification</p>
