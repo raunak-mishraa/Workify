@@ -45,7 +45,7 @@ function Team() {
                   </div>
                 </div>
                 <div className=' border flex justify-center items-center h-auto p-4 '>
-                  <div className='flex justify-center text-lg'>
+                  <div className='flex justify-center  gap-5 text-lg'>
                     <i className='ri-instagram-line'></i>
                     <i className='ri-twitter-line'></i>
                     <i className='ri-linkedin-line'></i>
