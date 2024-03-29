@@ -83,13 +83,14 @@ const CheckoutForm = () => {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+   <section className="w-[40%]">
+     <form className="space-y-2" id="payment-form" onSubmit={handleSubmit}>
       <LinkAuthenticationElement
         id="link-authentication-element"
         onChange={(e) => setEmail(e.target?.value)}
       />
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+      <button disabled={isLoading || !stripe || !elements} id="submit" className="p-2 font-poppins border rounded-sm text-white mt-4 text-sm bg-blue-300">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
@@ -97,6 +98,7 @@ const CheckoutForm = () => {
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
+   </section>
   );
 };
 

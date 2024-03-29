@@ -37,8 +37,8 @@ function Pay() {
     appearance,
   };
   return (
-    <Container>
-    <div>
+     <Container>
+    <div className='h-[70vh] flex items-center justify-center'>
     {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
