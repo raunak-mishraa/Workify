@@ -55,7 +55,7 @@ function Team() {
               <div className='sm:w-1/4 w-full  space-y-1 bg-white border p-4  rounded-2xl'>
                 <div className=' flex justify-center items-center h-auto p-4 rounded-full'>
                   <div>
-                    <img src='' className='w-28 h-28 object-cover rounded-full border-2 border-blue-400 p-1 overflow-hidden'/>
+                    <img src='https://media-bom2-1.cdn.whatsapp.net/v/t61.24694-24/416474544_433504799340814_6671205655335699028_n.jpg?ccb=11-4&oh=01_ASAn9Y9tLyKE9kfZEsstIA59sc6lQpF6nLQfqlW0Cv6MIQ&oe=6613930F&_nc_sid=e6ed6c&_nc_cat=110' className='w-28 h-28 object-cover rounded-full border-2  p-1 overflow-hidden'/>
                   </div>
                 </div>
                 <div className='text-center border flex justify-center items-center h-auto p-4 '>
