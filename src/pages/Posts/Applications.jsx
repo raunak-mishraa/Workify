@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { Container } from '../../components'
+import { Button, Container } from '../../components'
 import { Link, useNavigate } from 'react-router-dom'
 import  Axios  from 'axios'
 import { useDispatch } from 'react-redux'
 import { setApplicationData } from '../../../store/applicationSlice'
+import newRequest from '../../assets/utils/newRequest'
 
 function Applications() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const clientData = JSON.parse(localStorage.getItem('userData'))
     const [applications, setApplications] = useState([])
     useEffect(()=>{
         Axios.defaults.withCredentials = true;
@@ -22,6 +24,29 @@ function Applications() {
     const handleApp = (application) => {
         localStorage.setItem('applicationData', JSON.stringify(application));
         dispatch(setApplicationData(application))
+    }
+
+    const handleContact = async(application) => {
+        // console.log(clientData.user._id)
+        const freelancerId = application;
+        const clientId = clientData.user._id;
+        const id = freelancerId + clientId;
+        console.log(freelancerId, clientId, id)
+        try{
+            const res = await newRequest.get(`/conversations/single/${id}`);
+            navigate(`/message/${res.data.id}`);
+            // console.log(res.data, freelancerId, clientId, id)
+        }
+        catch(err){
+            console.log(err.response.status)
+            if (err.response.status === 404) {
+                const res = await newRequest.post(`/conversations/`, {
+                  to: clientData.user.isClient ? freelancerId : clientId,
+                });
+                navigate(`/message/${res.data.id}`);
+              }
+        }
+        // alert(freelancerId)
     }
   return (
     <section>
@@ -53,9 +78,9 @@ function Applications() {
                                                 Details
                                             </div>
                                         </div>
-                                        <Link to='/message' className=''>
+                                        <Button onClick={()=>handleContact(application.userId._id)} className=''>
                                             <i className='w-10 h-10 flex justify-center items-center rounded-full bg-gray-100 top-2 ri-message-line text-black text-opacity-90'></i>
-                                        </Link>
+                                        </Button>
                                     </div>
                                    
                                    
