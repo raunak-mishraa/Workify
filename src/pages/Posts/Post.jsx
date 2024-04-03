@@ -100,7 +100,7 @@ function Post() {
                               <img src={selectedPost?.client.avatar} className='w-7 h-7 object-cover rounded-full' alt="" />
                               <div>
                                 <h3 className='text-sm font-semibold capitalize'>{selectedPost?.client.fullName}</h3>
-                                <h3 className='text-sm font-medium'><i class="ri-verified-badge-fill text-blue-700"></i> Payment Verified</h3>
+                                <h3 className='text-sm font-medium'><i className="ri-verified-badge-fill text-blue-700"></i> Payment Verified</h3>
                               </div>
                              </div>
                               

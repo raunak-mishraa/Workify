@@ -9,7 +9,7 @@ function Team() {
             <div>
                <div className='space-y-2  text-black font-poppins  mt-8'>
                 <h1 className="text-3xl font-semibold  text-black text-opacity-80">Our Team</h1>
-                  <p className='text-black text-opacity-60'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ut voluptas nisi suscipit laudantium iste iusto harum hic nulla ea magnam perspiciatis, dolorem totam in dignissimos quam eaque ipsum quas?</p>
+                  <p className='text-black text-opacity-60'>At Workify, our team members are the driving force behind every innovation and success. Their diverse expertise, dedication, and collaborative spirit ensure that Workify remains at the forefront of delivering exceptional solutions to our users, shaping the future of work one keystroke at a time.</p>
                </div>
               <div className='py-10 flex flex-wrap gap-4 w-full justify-between'>
               <div className='sm:w-1/4 w-full space-y-1 bg-white border p-4  rounded-2xl'>

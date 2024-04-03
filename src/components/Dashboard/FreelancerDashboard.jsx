@@ -43,12 +43,21 @@ function FreelancerDashboard() {
     queryFn: () =>
       newRequest(`/posts/get-bookmarked-posts`)
       .then((res) =>{ 
+        if(res.data.success === false){
+          navigate('/login')
+          localStorage.removeItem('userData');
+          localStorage.removeItem('applicationData');
+          localStorage.removeItem('selectedPostData');
+          dispatch(logout());
+        }
         console.log("book",res.data)
         return res.data.data
       })
-      .catch((e)=>{
-        toast.error("Error fetching posts. Please try again later.");
-      })
+      // .catch((e)=>{
+      //   toast.error("Error fetching posts. Please try again later.",{
+      //     autoClose: 1000
+      //   });
+      // })
       
   })
 

@@ -51,21 +51,21 @@ function Applications() {
   return (
     <section>
         <Container>
-        <div className='rounded-md p-6 my-8  bg-gray-100 '>
+        <div className='rounded-md  sm:p-6 my-8  bg-gray-100 '>
                 <div className='cursor-pointer mx-auto md:w-[70%] space-y-4 w-full'>
                        {
                         applications?.length > 0 ? (
                                 applications.map((application, index) => (
-                                    <div key={index} className='w-full font-poppins p-6 bg-white rounded-md'>
+                                    <div key={index} className='w-full font-poppins p-2 sm:p-6 bg-white rounded-md'>
                                     <div className='flex items-center justify-between'>
                                         <div onClick={(e) => {
                                             e.stopPropagation()
                                             navigate('/profile/1')
                                         }} className='flex items-center gap-2 font-poppins'>
-                                            <div>
-                                                <img src={application?.userId?.avatar} alt="" className='p-1 border-blue-100 border-2 w-12 h-12 object-cover rounded-full' />
+                                            <div className='sm:w-12 sm:h-12 h-8 w-8'>
+                                                <img src={application?.userId?.avatar} alt="" className='sm:p-1 w-full h-full border-blue-100 border-2  object-cover rounded-full' />
                                             </div>
-                                            <div className='leading-1 text-sm'>
+                                            <div className='sm:leading-1 text-xs sm:text-sm'>
                                                 <h2 className='first-letter:capitalize font-semibold text-black text-opacity-90 '>{application?.userId?.fullName}</h2>
                                                 <h2 className='font-medium text-black text-opacity-70'>{application?.userId?.profession}</h2>
                                             </div>
@@ -74,12 +74,12 @@ function Applications() {
                                             <div onClick={() => {
                                                 handleApp(application)
                                                 navigate('/applicantinfo')
-                                            }} className='border border-blue-100 px-8 p-2  text-black text-opacity-85'>
+                                            }} className='border border-blue-100 sm:px-8 sm:p-2 p-1 sm:text-base text-xs text-black text-opacity-85'>
                                                 Details
                                             </div>
                                         </div>
                                         <Button onClick={()=>handleContact(application.userId._id)} className=''>
-                                            <i className='w-10 h-10 flex justify-center items-center rounded-full bg-gray-100 top-2 ri-message-line text-black text-opacity-90'></i>
+                                            <i className='sm:w-10 sm:h-10 flex justify-center items-center rounded-full sm:text-base text-sm bg-gray-100 top-2 ri-message-line text-black text-opacity-90'></i>
                                         </Button>
                                     </div>
                                    
