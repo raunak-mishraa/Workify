@@ -7,11 +7,13 @@ import { useDispatch } from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from "react-toastify"
 import { professionData } from '../assets/Data/profession'
+import AuthLoader from './MUC/AuthLoader'
 
 function SignUp() {
   const navigate = useNavigate()
   const [file, setFile] = React.useState(null)
   const dispatch = useDispatch()
+  const [loading, setLoading] = React.useState(false)
   const [user, setUser] = useState({
     username: "",
     fullName: "",
@@ -23,6 +25,7 @@ function SignUp() {
   })
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
   
     const formData = new FormData();
@@ -47,6 +50,7 @@ function SignUp() {
       console.log(response.data);
       const responseData = response.data;
       if(responseData){
+        setLoading(false);
         toast.success("Successefully Registered!",{
           autoClose: 2000,
         });        
@@ -55,6 +59,7 @@ function SignUp() {
       // if(responseData) dispatch(login(responseData)); // Dispatch action to update authentication state
       navigate('/login'); // Redirect to dashboard or any other page
     } catch (error) {
+      setLoading(false);
       console.log("register", error.message);
     }
   }
@@ -156,7 +161,7 @@ function SignUp() {
               SignUp
             </Button>
             </form>
-           
+            {loading && <AuthLoader/>}
           </div>
         </div>
       </Container>

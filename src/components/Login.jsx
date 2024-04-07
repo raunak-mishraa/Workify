@@ -10,16 +10,19 @@ import { useGoogleLogin } from '@react-oauth/google';
 import  axios  from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from "react-toastify"
+import AuthLoader from './MUC/AuthLoader'
 // import { jwtDecode } from "jwt-decode";
 function Login() {
   const navigate = useNavigate()
   const {register, handleSubmit} = useForm();
+  const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch()
   const [error, setError] = React.useState('')
   // const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
 
   axios.defaults.withCredentials = true;
   const login = async(userData) => {  
+    setLoading(true);
     try {
       const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/login`, {
           email: userData.email.toLowerCase(),
@@ -50,14 +53,15 @@ function Login() {
         // });
         
         // setCookie('refreshToken', responseData.refreshToken, { secure: true, sameSite: 'strict' });
-
+        setLoading(false);
         toast.success("User Logged In!", {
-          autoClose: 2000,
+          autoClose: 1000,
         });
         dispatch(loginUser(responseData));
       } 
 
     } catch (error) {
+      setLoading(false);
         toast.error("Invalid user credentials",{
           autoClose: 2000,
           hideProgressBar: true
@@ -112,7 +116,7 @@ function Login() {
             </Button>
             
             </form>
-            
+           {loading && <AuthLoader/>}
           </div>
         </div>
       </Container>

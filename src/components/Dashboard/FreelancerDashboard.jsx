@@ -43,34 +43,18 @@ function FreelancerDashboard() {
     queryFn: () =>
       newRequest(`/posts/get-bookmarked-posts`)
       .then((res) =>{ 
-        if(res.data.success === false){
-          navigate('/login')
-          localStorage.removeItem('userData');
-          localStorage.removeItem('applicationData');
-          localStorage.removeItem('selectedPostData');
-          dispatch(logout());
-        }
         console.log("book",res.data)
         return res.data.data
       })
-      // .catch((e)=>{
-      //   toast.error("Error fetching posts. Please try again later.",{
-      //     autoClose: 1000
-      //   });
-      // })
+      .catch((e) => {
+        console.error("Error fetching posts:", e);
+        // dispatch(logout());
+        localStorage.removeItem('userData');
+        navigate('/login');
+        throw e; // Re-throwing the error so that React Query can handle it
+      })
       
   })
-
-
-  // useEffect(() => {
-  //   axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/posts/get-bookmarked-posts`,{withCredentials:true})
-  //   .then((res) => {
-  //     setBookmarkedPost(res.data.data)
-  //   })
-  //   .catch((e)=>{
-  //     console.log(e)
-  //   })
-  // }, [])
 
 
 
