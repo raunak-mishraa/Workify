@@ -48,7 +48,7 @@ function Message() {
             <div className='flex justify-center w-full'>
                 <div className='md:m-12  w-full'>
                     <span className='opacity-60 text-sm'>
-                         <Link to="/messages">Message between</Link>  {data && data[0]?.userId?.fullName.toUpperCase() } & {data && data[1].userId.fullName.toUpperCase() }
+                         <Link to="/messages">Message between</Link>  {data && data[0]?.userId?.fullName.toUpperCase() } & {data && data[1]?.userId?.fullName.toUpperCase() }
                     </span>
                     {isPending ? "LOading" : error ? "error" :
                     (<div className='my-7 sm:p-10 flex flex-col gap-5 min-h-[30vh] sm:h-[300px] overflow-y-scroll w-full items-end'>
