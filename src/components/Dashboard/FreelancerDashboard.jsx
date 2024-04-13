@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import newRequest from '../../assets/utils/newRequest.js'
 import axios from 'axios'
+import { logout } from '../../../store/authSlice.js'
 import useSearch from '../../hooks/useSearch.js'
 import { searchClientPosts } from '../../../store/searchSlice.js'
 import PostLoader from '../MUC/PostLoader.jsx'
@@ -49,7 +50,8 @@ function FreelancerDashboard() {
       .catch((e) => {
         console.error("Error fetching posts:", e);
         // dispatch(logout());
-        localStorage.removeItem('userData');
+        // localStorage.removeItem('userData');
+        dispatch(logout());
         navigate('/login');
         throw e; // Re-throwing the error so that React Query can handle it
       })
