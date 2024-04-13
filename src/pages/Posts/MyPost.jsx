@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from '../../components'
 import  Axios  from 'axios'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Spinner from '../../components/MUC/Spinner';
+import { logout } from '../../../store/authSlice';
+import { useDispatch } from 'react-redux';
 
 function MyPost() {
     const [loading, setLoading] = useState(true)
+    const  navigate  = useNavigate();
+    const dispatch = useDispatch();
     Axios.defaults.withCredentials = true;
     const [postData, setPostData] = useState([])
     useEffect(() => {
@@ -14,7 +18,11 @@ function MyPost() {
               setPostData(res.data.data)
               setLoading(false)
          })
-         .catch((err) => console.log(err))
+         .catch((err) => {
+            dispatch(logout())
+            navigate('/login')
+            console.log(err)
+        })
        
     }, [])
      console.log(postData)
