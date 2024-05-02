@@ -59,6 +59,9 @@ function SignUp() {
       // if(responseData) dispatch(login(responseData)); // Dispatch action to update authentication state
       navigate('/login'); // Redirect to dashboard or any other page
     } catch (error) {
+      // if(avatar===""){
+      //   toast.error("Please upload an avatar");
+      // }
       setLoading(false);
       toast.error("Error: Username or Gmail already taken. Please choose another.");
       console.log("register", error.message);
