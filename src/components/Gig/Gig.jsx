@@ -54,7 +54,7 @@ function Gig() {
                     )}
                 </div>}
                 
-               {/* <Slide images={data?.images}/> */}
+               <Slide images={data?.images}/>
                 <h2 className='font-Roboto font-bold opacity-90 text-xl my-4'>About This Gig</h2>
                 <p className='opacity-60 leading-6'>
                   {data?.desc}
