@@ -17,21 +17,12 @@ function Home() {
   const navigate = useNavigate()
   const [searchValue, setSearchValue] = useState('')
 
-  const dispatch = useDispatch()
-  let searchData = useSearch(searchValue)
+
   const search = () => {
-
-    if(searchData){
-      dispatch(searchClientPosts(searchData))
-      navigate('/search')
+    if(searchValue !== ''){
+      navigate(`/search/${searchValue}`)
     }
-    else{
-      dispatch(searchClientPosts([]))
-      navigate('/search')
-    }
-
-    // console.log(searchData)
-    // const options = Object.keys(currencyInfo)
+  
   }
   return (
     <>

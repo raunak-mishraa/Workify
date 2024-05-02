@@ -113,12 +113,12 @@ function FreelancerDashboard() {
       }
   }
 
-  const searchData = useSearch(searchValue)
-
   //search
   const searchJob = () =>{
-    dispatch(searchClientPosts(searchData))
-    navigate('/search')
+    if(searchValue !== ''){
+      navigate(`/search/${searchValue}`)
+    }
+
   }
 
   return (

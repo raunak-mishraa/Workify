@@ -22,7 +22,7 @@ import {
   Messages,
   Add
 } from './components/index.js'
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux'  
 import store from '../store/store.js'
 import Dashboard from './pages/Dashboard.jsx'
 import { ToastContainer } from 'react-toastify';
@@ -46,6 +46,7 @@ import Success from './components/success/Success.jsx'
 import Policy from './pages/Policy.jsx'
 import TermAndCondition from './pages/TermAndCondition.jsx'
 import Copyright from './pages/Copyright.jsx'
+import HIW from './pages/HIW.jsx'
 
 const router = createBrowserRouter(
   
@@ -67,11 +68,12 @@ const router = createBrowserRouter(
         <Route path='message/:id' element={<Message/>}/>
         <Route path='messages' element={<Messages/>}/>
         <Route path='add' element={<Add/>}/>
-        <Route path='search' element={<Search/>}/>
+        <Route path='search/:id' element={<Search/>}/>
         <Route path='search_user' element={<SearchUser/>}/>
         <Route path='applications' element={<Applications/>}/>
         <Route path='apply/:id' element={<Apply/>}/>
         <Route path='contact' element={<Contact/>}/>
+        <Route path='how-it-works' element={<HIW/>}/>
         <Route path='*' element={<PNF/>}/>
         <Route path='deleteaccount' element={<DeleteAccount/>}/>
         <Route path='myapplication' element={<MyApplication/>}/>

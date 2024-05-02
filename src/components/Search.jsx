@@ -3,15 +3,20 @@ import Container from './container/Container'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectPost } from '../../store/postSlice'
 import { useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import useSearch from '../hooks/useSearch'
 
 function Search() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const isClient = useSelector((state) => state.auth.userData?.user?.isClient)
     const searchData = useSelector((state) => state.search.freelancerData)
-    const searchClientData = useSelector((state) => state.search.clientPostData)
+    // const searchClientData = useSelector((state) => state.search.clientPostData)
+    // console.log(searchClientData)
+    const { id } = useParams()
+    console.log(id)
+    let searchClientData = useSearch(id)
     console.log(searchClientData)
-
     const postedTime = (timestamp) => {
     const currentDate = new Date();
     const postDate = new Date(timestamp);
@@ -40,7 +45,7 @@ function Search() {
 
   return (
     <section>
-        <Container>
+       <Container>
             <div className={`rounded-md sm:p-6 my-8 ${isClient && " bg-gray-50"} `}>
             {
                 isClient ? (

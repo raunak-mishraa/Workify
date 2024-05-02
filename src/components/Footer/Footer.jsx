@@ -56,9 +56,9 @@ function Footer() {
                   <li className='mb-4 hover:underline'>
                     <Link to='/about' >About us</Link>
                   </li>
-                  <li className='mb-4 hover:underline'>
-                    <Link to='/'>How it Works</Link>
-                  </li>
+                  {/* <li className='mb-4 hover:underline'>
+                    <Link to='/how-it-works'>How it Works</Link>
+                  </li> */}
                   <li className='mb-4 hover:underline'>
                     <Link to='/team'>Team</Link>
                   </li>

@@ -38,7 +38,7 @@ function Gigcards({gig}) {
                         <span className='text-xs opacity-70 font-Roboto'>STARTING AT</span>
                         <h2 className='text-sm font-semibold opacity-85'>
                         $ {gig.price}
-                        <sup>99</sup>
+                        {/* <sup>99</sup> */}
                         </h2>
                     </div>
                     </div>

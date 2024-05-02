@@ -5,6 +5,8 @@ import  Axios  from 'axios'
 import { useDispatch } from 'react-redux'
 import { setApplicationData } from '../../../store/applicationSlice'
 import newRequest from '../../assets/utils/newRequest'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 function Applications() {
     const navigate = useNavigate()
@@ -48,6 +50,24 @@ function Applications() {
         }
         // alert(freelancerId)
     }
+    const handleDeleteApplication = (id) => {
+        // alert(id)
+        axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/v1/applications/deleteapplication/${id}`, {withCredentials: true})
+        .then(res => {
+            toast.success('Application deleted successfully!')
+            setApplications(prevApplications => prevApplications.filter(app => app._id !== id));
+        })
+        .catch(err => console.log(err))
+    }
+    const handleChecked = (id) => {
+        axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/applications/updateapplication/${id}`, {isCompleted: true}, {withCredentials: true})
+        .then(res => {
+            toast.success('Application checked successfully!')
+            setApplications(prevApplications => prevApplications.map(app => app._id === id ? {...app, isCompleted: true} : app));
+        
+        })
+        .catch(err => console.log(err))
+    }
   return (
     <section>
         <Container>
@@ -60,13 +80,13 @@ function Applications() {
                                     <div className='flex items-center justify-between'>
                                         <div onClick={(e) => {
                                             e.stopPropagation()
-                                            navigate('/profile/1')
+                                            navigate(`/profile/${application?.userId?._id}`)
                                         }} className='flex items-center gap-2 font-poppins'>
                                             <div className='sm:w-12 sm:h-12 h-8 w-8'>
                                                 <img src={application?.userId?.avatar} alt="" className='sm:p-1 w-full h-full border-blue-100 border-2  object-cover rounded-full' />
                                             </div>
                                             <div className='sm:leading-1 text-xs sm:text-sm'>
-                                                <h2 className='first-letter:capitalize font-semibold text-black text-opacity-90 '>{application?.userId?.fullName}</h2>
+                                                <h2 className='first-letter:capitalize font-semibold text-black text-opacity-90 '>{application?.userId?.fullName}{application?.userId?.isVerified && ( <i className="ri-verified-badge-fill ml-1 text-sm text-cyan-600"></i>)}</h2>
                                                 <h2 className='font-medium text-black text-opacity-70'>{application?.userId?.profession}</h2>
                                             </div>
                                         </div>
@@ -78,9 +98,17 @@ function Applications() {
                                                 Details
                                             </div>
                                         </div>
+                                        <div className='space-x-3'>
                                         <Button onClick={()=>handleContact(application.userId._id)} className=''>
                                             <i className='sm:w-10 sm:h-10 flex justify-center items-center rounded-full sm:text-base text-sm bg-gray-100 top-2 ri-message-line text-black text-opacity-90'></i>
                                         </Button>
+                                        <Button  onClick={()=>handleChecked(application?._id)}>
+                                            <i className={`${application?.isCompleted === true ? 'bg-blue-200' : 'bg-gray-100'} sm:w-10 sm:h-10 flex justify-center items-center rounded-full sm:text-base text-sm top-2 ri-check-line text-black text-opacity-90`}></i>
+                                        </Button>
+                                        <Button onClick={()=>handleDeleteApplication(application?._id)}>
+                                            <i className='sm:w-10 sm:h-10 flex justify-center items-center rounded-full sm:text-base text-sm bg-gray-100 top-2 ri-delete-bin-4-line text-black text-opacity-90'></i>
+                                        </Button>
+                                        </div>
                                     </div>
                                    
                                    
