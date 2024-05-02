@@ -12,7 +12,7 @@ function Categories() {
                 <h2 className='block text-2xl opacity-90 md:text-3xl font-bold'>Browse Categories</h2>
                 <div className='mt-5 text-base grid sm:grid-cols-2 gap-5 md:grid-cols-3 sm:flex-row md:gap-7'>
                 {categories.map((category, index) => (
-                    <Link to={`/gigs?category=${category.name}`} key={index} className='opacity-90 p-6 py-10 rounded-lg bg-gray-50 shadow-md flex flex-col gap-3 hover:bg-gray-100 duration-200 ease-in'>
+                    <Link to={`/gigs?category=${category.value}`} key={index} className='opacity-90 p-6 py-10 rounded-lg bg-gray-50 shadow-md flex flex-col gap-3 hover:bg-gray-100 duration-200 ease-in'>
                     <h4 className='font-medium tracking-wider'><i className={`mr-2 ${category.icon}`}></i>{category.name}</h4>
                     <div className='flex justify-between'>
                         <div><i className="text-blue-700 ri-star-fill mr-2"></i>{category.rating}</div>

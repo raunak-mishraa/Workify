@@ -90,7 +90,8 @@ function User() {
     const search = () =>{
         // i changed here 
         if(userData?.user.isClient) {
-           navigate(`/gigs?search=${searchValue}`)
+        //    navigate(`/gigs?search=${searchValue}`)
+           navigate(`/gigs?category=${searchValue}`)
         }
         else{
             const query = searchValue;

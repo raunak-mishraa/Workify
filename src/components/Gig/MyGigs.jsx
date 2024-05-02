@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Container from '../container/Container';
 import Button from '../Button';
-function MyGigs() {
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
+
+function MyGigs() {
+    const [gigs, setGigs] = useState([])
+    const handleDelete = (id) => {
+        axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/v1/gigs/${id}`, {
+            withCredentials: true
+        }).then(res => {
+            toast.success("gig deleted successfully")
+            setGigs(gigs.filter(gig => gig._id !== id))
+            console.log(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/gigs`, {
+            withCredentials: true
+        }).then(res => {
+            console.log(res.data)
+            setGigs(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }, [])
   return (
     <section className='py-8'>
         <Container>
@@ -21,36 +46,20 @@ function MyGigs() {
                     <th>Sales</th>
                     <th>Action</th>
                 </tr>
-                <tr className='h-12 font-Roboto'>
+               {
+                gigs?.map(gig => (
+                    <tr className='h-12 font-Roboto'>
                     <td>
-                        <img src="https://th.bing.com/th/id/OIG2.YAHMNo1xhyLrLaLs6qSX?pid=ImgGn" alt="" className='w-12 h-6 object-cover'/>
-                        {/* <img src="" alt=""  /> */}
+                        <img src={gig?.cover} alt="" className='w-12 h-6 object-cover'/>
+
                     </td>
-                    <td>Gig1</td>
-                    <td>88</td>
-                    <td>123</td>
-                    <td><i className="ri-delete-bin-6-line text-red-500"></i></td>
+                    <td>{gig?.title}</td>
+                    <td>{gig?.price}</td>
+                    <td>{gig?.sales}</td>
+                    <td><i onClick={()=>handleDelete(gig?._id)} className="ri-delete-bin-6-line text-red-500"></i></td>
                 </tr>
-                <tr className='h-12 font-Roboto'>
-                    <td>
-                        <img src="https://th.bing.com/th/id/OIG2.YAHMNo1xhyLrLaLs6qSX?pid=ImgGn" alt="" className='w-12 h-6 object-cover'/>
-                        {/* <img src="" alt=""  /> */}
-                    </td>
-                    <td>Gig1</td>
-                    <td>88</td>
-                    <td>123</td>
-                    <td><i className="ri-delete-bin-6-line text-red-500"></i></td>
-                </tr>
-                <tr className='h-12 font-Roboto'>
-                    <td>
-                        <img src="https://th.bing.com/th/id/OIG2.YAHMNo1xhyLrLaLs6qSX?pid=ImgGn" alt="" className='w-12 h-6 object-cover'/>
-                        {/* <img src="" alt=""  /> */}
-                    </td>
-                    <td>Gig1</td>
-                    <td>88</td>
-                    <td>123</td>
-                    <td><i className="ri-delete-bin-6-line text-red-500"></i></td>
-                </tr>
+                ))
+               }
             </table>
         </Container>
     </section>

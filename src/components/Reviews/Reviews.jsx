@@ -4,9 +4,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import  newRequest  from '../../assets/utils/newRequest'
 import Input from '../Input'
 import Button from '../Button'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 function Reviews({gigId}) {
     const queryClient = useQueryClient()
+    const userData = JSON.parse(localStorage.getItem('userData'));
     const { isPending, error, data } = useQuery({
         queryKey: ['reviews'],
         queryFn: () =>
@@ -23,11 +26,20 @@ function Reviews({gigId}) {
         }
       })
 
+      const navigate = useNavigate()
       const handleSubmit = (e) => {
         e.preventDefault();
-        const desc = e.target[0].value;
-        const star = e.target[1].value;
-        mutation.mutate({ gigId, desc, star });
+        if(userData?.user.isClient){
+          const desc = e.target[0].value;
+          const star = e.target[1].value;
+          mutation.mutate({ gigId, desc, star });
+        }
+        else if(!userData?.user.isClient){
+          toast.error('Only clients can add reviews')
+        }
+        else{
+          navigate('/login')
+        }
       };
   return (
    <div>

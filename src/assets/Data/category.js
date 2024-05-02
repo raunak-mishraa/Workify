@@ -59,36 +59,42 @@ export const categories = [{
     icon: 'ri-code-s-slash-line',
     name: 'Development & IT',
     rating: '4.85/5',
-    skills: '130 Skills'
+    skills: '130 Skills',
+    value:'development'
 },
 {
     icon: 'ri-palette-line',
     name: 'Graphics & Design',
     rating: '4.85/5',
-    skills: '130 Skills'
+    skills: '130 Skills',
+    value:'design'
 },
 {
     icon: 'ri-computer-line',
     name: 'Digital Marketing',
     rating: '4.85/5',
-    skills: '130 Skills'
+    skills: '130 Skills',
+    value:'digital-marketing'
 },
 {
     icon: 'ri-edit-2-line',
     name: 'Writing & Translation',
     rating: '4.85/5',
-    skills: '130 Skills'
+    skills: '130 Skills',
+    value:'writing'
 },
 {
     icon: 'ri-movie-line',
     name: 'Video & Animation',
     rating: '4.85/5',
-    skills: '130 Skills'
+    skills: '130 Skills',
+    value:'animation'
 },
 {
     icon: 'ri-music-2-fill',
     name: 'Music & Audio',
     rating: '4.85/5',
-    skills: '130 Skills'
+    skills: '130 Skills',
+    value:'music'
 }
 ]
