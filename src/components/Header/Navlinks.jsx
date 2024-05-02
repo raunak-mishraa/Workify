@@ -12,23 +12,22 @@ function Navlinks({className = 'flex'}) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    let searchData = useSearch(searchValue)
-    console.log("getting",searchData);
-    const search = (searchItem, isFreelancer, searchUser) => {
+    // let searchData = useSearch(searchValue)
+    // console.log("getting",searchData);
+    const search = (isFreelancer, searchUser) => {
    
-        console.log(searchItem)
-        if(isFreelancer === "Find Jobs"){
-           console.log(isFreelancer)
-                setSearchValue(searchItem)
-                console.log(searchValue)
-            if(searchData){
-                dispatch(searchClientPosts(searchData))
-                navigate('/search')
-            }
-            else{
-                dispatch(searchClientPosts([]))
-                navigate('/search')
-            }
+        console.log(searchValue, "e")
+        // setSearchValue(searchItem)
+        if(isFreelancer === "Find Jobs" && searchValue !== ''){
+        //    console.log(isFreelancer)
+                // console.log(searchValue)
+                // if(searchValue !== ''){
+                    navigate(`/search/${searchValue}`)
+                //   }
+            // else{
+            //     dispatch(searchClientPosts([]))
+            //     navigate('/search')
+            // }
        }
        else{
         const query = searchUser;
@@ -77,7 +76,9 @@ function Navlinks({className = 'flex'}) {
                                         <div key={mysublink.head}>
                                             <h2 className='text-lg font-semibold'>{mysublink.head}</h2>
                                             {mysublink.sublink.map(slink=>(
-                                                <li onClick={()=>search(slink.link,link.name,slink.link)} key={slink.name} className='text-gray-600 text-sm my-2.5'>
+                                                <li onClick={()=>{
+                                                    setSearchValue(slink.link)
+                                                    search(link.name,slink.link)}} key={slink.name} className='text-gray-600 text-sm my-2.5'>
                                                     <div className='hover:underline' >{slink.name}</div>    
                                                 </li>
                                             ))}

@@ -67,20 +67,52 @@
             }
         };
 
+
+        //is verified
+        const isVerified = () =>{
+            const verified = userData?.user?.isVerified;
+            console.log(verified, "isVerified")
+            if(verified){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     //Verify user
         const verifyUser = () => {
-            Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/verify`,{
-                isVerified: true
-            },{
-                withCredentials:true
-            })
-            .then((res) => {
-                // console.log(res.data)
-                toast.success(res.data.message)
-            })
-            .catch((e) => {
-                console.log(e)
-            })
+            if(isVerified()){
+                // alert("You are already verified!")
+                return;
+            }
+            else{
+                Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/verify`,{
+                    isVerified: true
+                },{
+                    withCredentials:true
+                })
+                .then((res) => {
+                    const userData = JSON.parse(localStorage.getItem('userData'))
+                    const values = localStorage.setItem('userData', JSON.stringify({...userData, user: {...userData.user, isVerified: true}}));
+                    console.log(values, "values")
+                    toast.success(res.data.message)
+                })
+                .catch((e) => {
+                    console.log(e)
+                })
+            }
+            // Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/verify`,{
+            //     isVerified: true
+            // },{
+            //     withCredentials:true
+            // })
+            // .then((res) => {
+            //     // console.log(res.data)
+            //     toast.success(res.data.message)
+            // })
+            // .catch((e) => {
+            //     console.log(e)
+            // })
         }
         function updateProjectData(){
             console.log('h')
@@ -110,14 +142,15 @@
             })
             .then((res) => {   
                 // console.log("Project Data Length:", projectData.length);
-                // if(projectData.length>=2){
-                //     verifyUser()
-                // }
                 toast.success("Project added successfully");
                 setProject({
                     title: '',
                     projectUrl: ''
                 });
+                if(projectData?.length >= 2){
+                    verifyUser()
+                }
+                
             })
             .catch((e) => {
                 console.log("error", e)
@@ -125,14 +158,46 @@
             })
         }
 
+        const removeVerification = () => {
+            if(!isVerified()){
+                // alert("You are already unverified!")
+                return;
+            }
+            else{
+                // console.log("remove verification")
+            Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/verify`,{
+                isVerified: false
+            },{
+                withCredentials:true
+            })
+            .then((res) => {
+                console.log("remove verification")
+                const userData = JSON.parse(localStorage.getItem('userData'))
+                localStorage.setItem('userData', JSON.stringify({...userData, user: {...userData.user, isVerified: false}}));
+                console.log(res.data)
+                // toast.success(res.data.message)
+            })
+            .catch((e) => {
+                console.log(e)
+            })
+            }
+        }
         const handleDeleteProject = (projectId) => {
             Axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/v1/project/${projectId}`,{
                 withCredentials:true
             })
             .then((res) => {
+                // console.log(projectData.length)
                 toast.success("Project deleted successfully")
                 console.log(res.data)
                 setDeleteMessage(res.data)
+                console.log(projectData.length)
+                if(projectData?.length===3){
+                    // alert("You need to add atleast 3 projects to get verified!")
+                    removeVerification()
+                }
+                // console.log(projectData.length)
+                
             })
         }
 
