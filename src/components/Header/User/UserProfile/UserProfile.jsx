@@ -428,6 +428,7 @@
                                     value={project.title}
                                     className='w-full border p-3 h-full font-normal'/>
                                     <Input placeholder='Enter link of project'
+                                    type='url'
                                     name="projectUrl" 
                                     onChange={handleChange} 
                                     type='url'
