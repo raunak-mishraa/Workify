@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container } from '../../components'
 import { Link, useNavigate } from 'react-router-dom'
+import ApplicationLoader from '../../components/MUC/ApplicationLoader'
 import  Axios  from 'axios'
 import { useDispatch } from 'react-redux'
 import { setApplicationData } from '../../../store/applicationSlice'
@@ -11,6 +12,7 @@ import { toast } from 'react-toastify'
 function Applications() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(true)
     const clientData = JSON.parse(localStorage.getItem('userData'))
     const [applications, setApplications] = useState([])
     useEffect(()=>{
@@ -19,6 +21,7 @@ function Applications() {
         .then(res => {
             console.log(res.data.data)
             setApplications(res.data.data)
+            setLoading(false); 
         })
         .catch(err => console.log(err))
     },[])
@@ -70,13 +73,14 @@ function Applications() {
     }
   return (
     <section>
-        <Container>
-        <div className='rounded-md  sm:p-6 my-8  bg-gray-100 '>
-                <div className='cursor-pointer mx-auto md:w-[70%] space-y-4 w-full'>
-                       {
-                        applications?.length > 0 ? (
-                                applications.map((application, index) => (
-                                    <div key={index} className='w-full font-poppins p-2 sm:p-6 bg-white rounded-md'>
+            <Container>
+                <div className='rounded-md sm:p-6 my-8 bg-gray-100 '>
+                    <div className='cursor-pointer mx-auto md:w-[70%] space-y-4 w-full'>
+                        {loading ? ( // Display loader while data is being fetched
+                            <ApplicationLoader/>
+                        ) : applications.length > 0 ? (
+                            applications.map((application, index) => (
+                                <div key={index} className='w-full font-poppins p-2 sm:p-6 bg-white rounded-md'>
                                     <div className='flex items-center justify-between'>
                                         <div onClick={(e) => {
                                             e.stopPropagation()
@@ -113,16 +117,14 @@ function Applications() {
                                    
                                    
                                 </div>
-                                ))
-                        ) 
-                        : (
+                            ))
+                        ) : (
                             <div className='text-xl font-semibold opacity-80 flex justify-center items-center flex-col gap-3'>You don't have any application yet!</div>
-                        )
-                       }
+                        )}
+                    </div>
                 </div>
-        </div>        
-        </Container>
-    </section>
+            </Container>
+        </section>
   )
 }
 

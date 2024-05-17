@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Container from './container/Container'
 import  axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { logout } from '../../store/authSlice'
+import { useDispatch } from 'react-redux';
 
 function MyApplication() {
     const [loading, setLoading] = useState(true)
     // Axios.defaults.withCredentials = true;
     const [applicationData, setApplicationData] = useState([])
+    const dispatch = useDispatch();
+    const  navigate  = useNavigate();
+
     useEffect(() => {
          axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/applications/myapplications`,{
             headers:{
@@ -19,7 +24,13 @@ function MyApplication() {
               setLoading(false)
               setApplicationData(res.data.data)
          })
-         .catch((err) => console.log(err))
+         .catch((err) => {
+            console.log(err)
+            if(err.response.status === 401){
+                dispatch(logout());
+                navigate('/login');
+            }
+        })
        
     }, [])
      console.log(applicationData)

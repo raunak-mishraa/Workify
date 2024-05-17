@@ -19,8 +19,10 @@ function MyPost() {
               setLoading(false)
          })
          .catch((err) => {
+           if(err.response.status === 401){
             dispatch(logout())
             navigate('/login')
+           }
             console.log(err)
         })
        

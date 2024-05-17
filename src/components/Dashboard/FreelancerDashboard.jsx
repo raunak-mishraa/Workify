@@ -29,6 +29,7 @@ function FreelancerDashboard() {
     queryFn: () =>
       newRequest(`/posts/allposts`)
       .then((res) =>{ 
+        console.log("res",res.data)
         return res.data.data
       })
       .catch((e)=>{

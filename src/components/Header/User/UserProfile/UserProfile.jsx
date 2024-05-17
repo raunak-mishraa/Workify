@@ -132,10 +132,35 @@
                 updateProjectData()
             }, [project, deleteMessage]);
 
-        
+                
+        //Add projects to state
+        const handleChange = (e) =>{
+            let name = e.target.name;
+            let value = e.target.value;
+            setProject({
+            ...project,
+            [name]: value
+            })
+        }
+
+        const isValidUrl = (url) => {
+            try {
+                new URL(url);
+                return true;
+            } catch (error) {
+                return false;
+            }
+        };
+
+
 
         //Add project
         const addProject = () => {
+            if (!isValidUrl(project.projectUrl)) {
+                toast.error('Please enter a valid URL for the project.');
+                return;
+            }
+           else{
             console.log(project)
             Axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/project`,project,{
                 withCredentials:true
@@ -156,6 +181,7 @@
                 console.log("error", e)
                 toast.error("both the fields are required!")
             })
+           }
         }
 
         const removeVerification = () => {
@@ -204,15 +230,7 @@
 
     
 
-        //Add projects to state
-        const handleChange = (e) =>{
-            let name = e.target.name;
-            let value = e.target.value;
-            setProject({
-            ...project,
-            [name]: value
-            })
-        }
+        
 
     
     
@@ -412,6 +430,7 @@
                                     <Input placeholder='Enter link of project'
                                     name="projectUrl" 
                                     onChange={handleChange} 
+                                    type='url'
                                     value={project.projectUrl}
                                     className='w-full focus:bg-blue-100 border p-3 h-full font-normal'/>
                                 </div>

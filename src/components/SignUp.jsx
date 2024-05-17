@@ -60,8 +60,11 @@ function SignUp() {
       navigate('/login'); // Redirect to dashboard or any other page
     } catch (error) {
       setLoading(false);
-      toast.error("Error: Username or Gmail already taken. Please choose another.");
-      console.log("register", error.message);
+      if(error.response.status === 409){
+        toast.error("Error: Username or Gmail already taken. Please choose another.");
+      }
+      console.log("register", error.response.status);
+      console.log("register", error.response);
     }
   }
   

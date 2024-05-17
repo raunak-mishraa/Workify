@@ -8,30 +8,22 @@ import axios from 'axios';
 
 function Navlinks({className = 'flex'}) {
     const isAuth = useSelector(state => state.auth.status);
-    const [searchValue, setSearchValue] = useState('')
+    // const [searchValue, setSearchValue] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     // let searchData = useSearch(searchValue)
     // console.log("getting",searchData);
-    const search = (isFreelancer, searchUser) => {
+    const search = (isFreelancer, searchValue) => {
    
-        console.log(searchValue, "e")
         // setSearchValue(searchItem)
-        if(isFreelancer === "Find Jobs" && searchValue !== ''){
-        //    console.log(isFreelancer)
-                // console.log(searchValue)
-                // if(searchValue !== ''){
-                    navigate(`/search/${searchValue}`)
-                //   }
-            // else{
-            //     dispatch(searchClientPosts([]))
-            //     navigate('/search')
-            // }
+        if (isFreelancer === "Find Jobs"){
+            console.log('its me', searchValue)
+            navigate(`/search/${searchValue}`)
        }
        else{
-        const query = searchUser;
-        // alert(searchUser)
+        const query = searchValue;
+        // alert(searchValue)
         console.log(isFreelancer)
         // console.log(searchValue)
             axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search/freelancers/search?query=${query}`)
@@ -42,7 +34,6 @@ function Navlinks({className = 'flex'}) {
             })
             .catch((error)=>{
                 navigate('/search_user')
-                setSearchValue('')
                 dispatch(searchFreelancer([]))
                 console.log(error)
             })
@@ -77,7 +68,7 @@ function Navlinks({className = 'flex'}) {
                                             <h2 className='text-lg font-semibold'>{mysublink.head}</h2>
                                             {mysublink.sublink.map(slink=>(
                                                 <li onClick={()=>{
-                                                    setSearchValue(slink.link)
+                                                    // setSearchValue(slink.link)
                                                     search(link.name,slink.link)}} key={slink.name} className='text-gray-600 text-sm my-2.5'>
                                                     <div className='hover:underline' >{slink.name}</div>    
                                                 </li>
