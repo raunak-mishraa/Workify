@@ -42,7 +42,7 @@ function MyGigs() {
                 <tr className='h-12 font-Roboto opacity-90'>
                     <th>Image</th>
                     <th>Title</th>
-                    <th>Price</th>
+                    <th>Price $</th>
                     <th>Sales</th>
                     <th>Action</th>
                 </tr>
@@ -56,7 +56,7 @@ function MyGigs() {
                     <td>{gig?.title}</td>
                     <td>{gig?.price}</td>
                     <td>{gig?.sales}</td>
-                    <td><i onClick={()=>handleDelete(gig?._id)} className="ri-delete-bin-6-line text-red-500"></i></td>
+                    <td><i onClick={()=>handleDelete(gig?._id)} className="cursor-pointer ri-delete-bin-6-line text-red-500"></i></td>
                 </tr>
                 ))
                }
