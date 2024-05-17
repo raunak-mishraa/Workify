@@ -431,7 +431,6 @@
                                     type='url'
                                     name="projectUrl" 
                                     onChange={handleChange} 
-                                    type='url'
                                     value={project.projectUrl}
                                     className='w-full focus:bg-blue-100 border p-3 h-full font-normal'/>
                                 </div>
