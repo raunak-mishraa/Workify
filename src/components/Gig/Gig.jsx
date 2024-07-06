@@ -5,7 +5,6 @@ import Slide from '../Slider/Slide'
 import { useQuery } from '@tanstack/react-query'
 import  newRequest  from '../../assets/utils/newRequest'
 import { Link, useParams } from 'react-router-dom';
-import InfiniteCarousel from 'react-snap-infinite-carousel';
 import Reviews from '../Reviews/Reviews'
 function Gig() {
     const {id} = useParams()

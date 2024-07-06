@@ -2,16 +2,12 @@ import React, { useState } from 'react'
 import Container from '../container/Container'
 import  landingImg  from '../../assets/images/landingImg.png'
 import goalImg from '../../assets/images/goal.gif'
-import { Input, whyImg } from '..'
+import {whyImg } from '..'
 import { useId } from 'react'
 import Button from '../Button'
-import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Categories from './Categories'
-// import axios from 'axios'
-import { searchClientPosts } from '../../../store/searchSlice'
-import { useDispatch } from 'react-redux'
-import useSearch from '../../hooks/useSearch'
+
 function Home() {
   const id = useId()
   const navigate = useNavigate()

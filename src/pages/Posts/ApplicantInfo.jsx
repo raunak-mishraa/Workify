@@ -1,11 +1,29 @@
 import React from 'react'
 import { Container } from '../../components'
-import { useSelector } from 'react-redux'
-
+import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import axios from 'axios'
 function ApplicantInfo() {
   const [isActive, setIsActive] = React.useState(false)
-  const applicantsData = useSelector((state) => state.application.applicationData)
-console.log(applicantsData)
+  const [applicantsData, setApplicantsData] = React.useState([])
+  const {id} = useParams()
+  console.log(id)
+
+  useEffect(() => {
+    // Fetch applicant data
+    const fetchApplicantData = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/applications/getapplication/${id}`);
+        setApplicantsData(response.data.data)
+        console.log(response.data.data);
+      } catch (error) {
+        console.error("Error fetching applicant data:", error);
+      }
+    };
+  
+    fetchApplicantData();
+  }, [id]);
+
   const popup = () => {
     setIsActive(!isActive)
   }
@@ -36,8 +54,8 @@ console.log(applicantsData)
                     <div className='flex'>
                         <div className='w-1/3'>Application for</div>
                         <div className='space-y-1 w-2/3'>
-                          <h2 className='first-letter:capitalize opacity-80 font-semibold font-medium'>{applicantsData?.postId.title}</h2>
-                          <h2 className='first-letter:capitalize opacity-70'>{applicantsData?.postId.description}</h2>
+                          <h2 className='first-letter:capitalize opacity-80 font-semibold '>{applicantsData?.postId?.title}</h2>
+                          <h2 className='first-letter:capitalize opacity-70'>{applicantsData?.postId?.description}</h2>
                           </div>
                     </div>
                     <hr className='border-b border-gray-100'/>

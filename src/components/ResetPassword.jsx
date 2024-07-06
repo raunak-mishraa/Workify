@@ -12,7 +12,6 @@ function ResetPassword() {
     const {register, handleSubmit} = useForm();
     const resetPassword = async(password) => {
 
-        // console.log(accesstoken)
         console.log(password)
         try {
             console.log(password)

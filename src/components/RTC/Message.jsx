@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Container from '../container/Container'
 import { Link, useParams } from 'react-router-dom'
 import Button from '../Button'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import newRequest from '../../assets/utils/newRequest';
+import { fetchUser } from '../../assets/utils/getUser';
 
 function Message() {
     const { id } = useParams();
-    const currentUser = JSON.parse(localStorage.getItem("userData"));
-    // console.log(currentUser);
-    // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  
+    const [currentUser, setCurrentUser] = React.useState([]);
+    const [conversation, setConversation] = React.useState([]);
+
+    useEffect(() => {
+      const fetchConversation = async () => {
+        const response = await newRequest.get(`/conversations/single/${id}`);
+        // console.log(response.data);
+        setConversation(response.data);
+      }
+      fetchConversation();
+    }, [id])
+
+
+    //fetching userData
+    useEffect(() => {
+      const fetchUserData = async() => {
+          const response = await fetchUser();
+          console.log(response.data)
+          setCurrentUser(response.data)
+      }
+      fetchUserData()
+  }, [])
+
     const queryClient = useQueryClient();
   
     const { isPending, error, data } = useQuery({
@@ -48,18 +68,18 @@ function Message() {
             <div className='flex justify-center w-full'>
                 <div className='md:m-12  w-full'>
                     <span className='opacity-60 text-sm'>
-                         <Link to="/messages">Message between</Link>  {data && data[0]?.userId?.fullName.toUpperCase() } & {data && data[1]?.userId?.fullName.toUpperCase() }
+                         <Link to="/messages">Message between</Link>  {conversation?.clientId?.fullName?.toUpperCase() } & {conversation?.freelancerId?.fullName?.toUpperCase() }
                     </span>
-                    {isPending ? "LOading" : error ? "error" :
+                    {isPending ? "Loading" : error ? "error" :
                     (<div className='my-7 sm:p-10 flex flex-col gap-5 min-h-[30vh] sm:h-[300px] overflow-y-scroll w-full items-end'>
                        {data.map((m)=>(
-                        <div className={`${m.userId._id === currentUser.user._id ? "flex flex-row-reverse" : "flex"} flex items-end gap-4 w-full text-base`} key={m._id}>
+                        <div className={`${m.userId._id === currentUser._id ? "flex flex-row-reverse" : "flex"} flex items-end gap-4 w-full text-base`} key={m._id}>
                         <img
-                            src={`${m.userId._id === currentUser.user._id ? currentUser.user.avatar  : m.userId.avatar || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'}`}
+                            src={`${m.userId._id === currentUser._id ? currentUser.avatar  : m.userId.avatar || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'}`}
                             alt=""
                             className='rounded-full sm:w-12 w-9 h-9 sm:h-12 object-cover'
                             />
-                            <p className={`${m.userId._id === currentUser.user._id ? "bg-blue-600 text-white rounded-tr-none" : "bg-gray-200 rounded-tl-none"} sm:px-2 p-1 text-xs sm:text-sm rounded-md opacity-85`}>
+                            <p className={`${m.userId._id === currentUser._id ? "bg-blue-600 text-white rounded-tr-none" : "bg-gray-200 rounded-tl-none"} sm:px-2 p-1 text-xs sm:text-sm rounded-md opacity-85`}>
                            {m.message}
                             </p>
                     </div>

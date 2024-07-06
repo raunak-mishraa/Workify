@@ -1,22 +1,20 @@
-    import React, { useRef, useState,useEffect } from 'react'
+    import React, { useRef, useState,useEffect, useCallback } from 'react'
     import { Button, Container, Input} from "../../../index"
     import { Link, useNavigate } from 'react-router-dom'
-    import { useDispatch, useSelector } from 'react-redux'
-    import { updateUserAvatar } from '../../../../../store/authSlice'
+    import { useDispatch } from 'react-redux'
     import  Axios  from 'axios'
     import { countries } from '../../../../assets/Data/country'
     import { toast } from 'react-toastify'
-    import { skills as skillList } from '../../../../assets/Data/skills'
-    import { useQuery } from '@tanstack/react-query'
+
     import newRequest from '../../../../assets/utils/newRequest'
+    import {fetchUser} from '../../../../assets/utils/getUser'
     function UserProfile() {
         const navigate = useNavigate()
         const dispatch = useDispatch()
-        const userData = useSelector(state => state.auth.userData)
+        const [userData, setUserData] = useState()
         const [tabs, setTabs] = React.useState('profile')
         const [openSkillBtn, setOpenSkillBtn] = useState(false)
         const [openAddProjects, setOpenAddProjects] = useState(false)
-        // const [countryName, SetCountryName] = useState('India')
         const [skill, setSkill] = useState('')
         const [skills, setSkills] = useState([]);
         const [deleteMessage, setDeleteMessage] = useState('')
@@ -40,16 +38,7 @@
             Axios.defaults.withCredentials = true;
             Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/update-avatar`, formData)
                 .then(response => {
-                    const newAvatar = response.data.data.avatar;
-                    const updatedUserData = {
-                        ...userData,
-                        user: {
-                            ...userData.user,
-                            avatar: newAvatar
-                        }
-                    };
-                    localStorage.setItem('userData', JSON.stringify(updatedUserData));
-                    dispatch(updateUserAvatar(newAvatar));
+                    fetchUserData()
                     toast.success(response.data.message);
                     console.log('File uploaded successfully:', response.data);
                 })
@@ -70,7 +59,7 @@
 
         //is verified
         const isVerified = () =>{
-            const verified = userData?.user?.isVerified;
+            const verified = userData?.isVerified;
             console.log(verified, "isVerified")
             if(verified){
                 return true;
@@ -81,6 +70,7 @@
         }
     //Verify user
         const verifyUser = () => {
+            console.log("verify user")
             if(isVerified()){
                 // alert("You are already verified!")
                 return;
@@ -92,34 +82,18 @@
                     withCredentials:true
                 })
                 .then((res) => {
-                    const userData = JSON.parse(localStorage.getItem('userData'))
-                    const values = localStorage.setItem('userData', JSON.stringify({...userData, user: {...userData.user, isVerified: true}}));
-                    console.log(values, "values")
                     toast.success(res.data.message)
                 })
                 .catch((e) => {
                     console.log(e)
                 })
             }
-            // Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/verify`,{
-            //     isVerified: true
-            // },{
-            //     withCredentials:true
-            // })
-            // .then((res) => {
-            //     // console.log(res.data)
-            //     toast.success(res.data.message)
-            // })
-            // .catch((e) => {
-            //     console.log(e)
-            // })
         }
         function updateProjectData(){
             console.log('h')
             try {
                 newRequest.get(`/project`)
                 .then((res) => {
-                    // console.log("takatak",res.data.data.length)
                     setProjectData(res.data.data)
                 })
                 // Handle response data
@@ -128,20 +102,20 @@
             }
         }
             //fetching projectdata
-            useEffect(() => { 
-                updateProjectData()
-            }, [project, deleteMessage]);
+        useEffect(() => { 
+            updateProjectData()
+        }, [project, deleteMessage]);
 
                 
         //Add projects to state
-        const handleChange = (e) =>{
-            let name = e.target.name;
-            let value = e.target.value;
-            setProject({
-            ...project,
-            [name]: value
-            })
-        }
+        const handleChange = useCallback((e) => {
+            const name = e.target.name;
+            const value = e.target.value;
+            setProject((prevProject) => ({
+              ...prevProject,
+              [name]: value,
+            }));
+          }, [project]);
 
         const isValidUrl = (url) => {
             try {
@@ -178,61 +152,50 @@
                 
             })
             .catch((e) => {
-                console.log("error", e)
                 toast.error("both the fields are required!")
             })
            }
         }
 
         const removeVerification = () => {
+            console.log("remove verification")
             if(!isVerified()){
                 // alert("You are already unverified!")
                 return;
             }
             else{
-                // console.log("remove verification")
             Axios.put(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/verify`,{
                 isVerified: false
             },{
                 withCredentials:true
             })
             .then((res) => {
-                console.log("remove verification")
-                const userData = JSON.parse(localStorage.getItem('userData'))
-                localStorage.setItem('userData', JSON.stringify({...userData, user: {...userData.user, isVerified: false}}));
                 console.log(res.data)
-                // toast.success(res.data.message)
+                toast.success(res.data.message)
             })
             .catch((e) => {
                 console.log(e)
             })
             }
         }
+
+
+        //Delete project
         const handleDeleteProject = (projectId) => {
             Axios.delete(`${import.meta.env.VITE_SERVER_URL}/api/v1/project/${projectId}`,{
                 withCredentials:true
             })
             .then((res) => {
-                // console.log(projectData.length)
                 toast.success("Project deleted successfully")
                 console.log(res.data)
                 setDeleteMessage(res.data)
-                console.log(projectData.length)
+                setProjectData(projectData.filter(project => project._id !== projectId))
+                console.log(projectData?.length, "projectData")
                 if(projectData?.length===3){
-                    // alert("You need to add atleast 3 projects to get verified!")
                     removeVerification()
                 }
-                // console.log(projectData.length)
-                
             })
         }
-
-
-    
-
-        
-
-    
     
         //Add skill
         const handleAddSkill = () => {
@@ -265,7 +228,6 @@
             }) 
         };
 
-
         // render skills
         useEffect(() => {
             Axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/user-skill`, {
@@ -275,7 +237,6 @@
             setSkillList(res.data)
             })
         },[skills])
-
 
         //delete Skills
         const handleDeleteSkill = (skillValue) => {
@@ -293,7 +254,22 @@
             });
         };
         
-
+        //fetch user data
+        const fetchUserData = async() => {
+            try {
+                const response = await fetchUser();
+                console.log(response.data)
+                setUserData(response.data)
+            } catch (error) {
+                if(error){
+                    navigate('/login')
+                    dispatch(logout());
+                }
+            }
+        }
+        useEffect(() => {
+            fetchUserData()
+        }, [project, projectData])
 
     return (
         <section className='max-w-6xl mx-auto font-poppins h-auto my-6 flex justify-center items-center'>
@@ -306,21 +282,21 @@
                         <div className='flex gap-2 items-center '>
                         <div className='w-16 h-16 relative cursor-pointer' onClick={handleFileInputClick}>
                                             <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileInputChange} />
-                                            <img src={userData?.user.avatar} className='w-full h-full object-cover rounded-full' alt="" />
+                                            <img src={userData?.avatar} className='w-full h-full object-cover rounded-full' alt="" />
                                             <div className='absolute w-6 h-6 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 bottom-0 right-0'>
                                                 <i className='ri-pencil-line text-blue-500'></i>
                                             </div>
                                         </div>
                             <div className=' opacity-85'>
-                                <h2 className='text-lg font-semibold first-letter:uppercase'>{userData?.user.fullName}
-                                {projectData?.length >= 3 && (
+                                <h2 className='text-lg font-semibold first-letter:uppercase'>{userData?.fullName}
+                                {userData?.isVerified && (
                                             <i className="ri-verified-badge-fill ml-1 text-base text-cyan-600"></i>
                                     )}
                                 </h2>
-                        { userData?.user?.isClient ? <h2 className='font-poppins font-medium text-sm'>Client</h2> : <h2 className='font-medium text-sm'>{userData?.user.profession}</h2>}
+                        { userData?.isClient ? <h2 className='font-poppins font-medium text-sm'>Client</h2> : <h2 className='font-medium text-sm'>{userData?.profession}</h2>}
                             </div>
                         </div>
-                    {!userData?.user?.isClient &&  <div className='space-y-1'>
+                    {!userData?.isClient &&  <div className='space-y-1'>
                             <div className={`${tabs === 'profile'  && 'bg-gray-100 text-opacity-90'} text-black cursor-pointer p-2 border-2 rounded-md text-opacity-75`} onClick={()=>setTabs('profile')}>
                                 <h2 className='font-medium'>Profile</h2>
                             </div>
@@ -342,17 +318,17 @@
                 {
                     tabs === 'profile' && (
                         <div className='sm:w-5/6 p-4 w-full'>
-                    <h2 className='text-2xl font-semibold opacity-80'>Profile Info <span className='opacity-80 text-base'>({userData?.user.username})</span></h2>
+                    <h2 className='text-2xl font-semibold opacity-80'>Profile Info <span className='opacity-80 text-base'>({userData?.username})</span></h2>
                     <div className=' mt-4 bg-white font-medium rounded-md p-6 opacity-90  border-2 border-gray-200 relative'>
                         <h2 className='text-lg '>Account</h2>
                     <div className='space-y-3 mt-2 font-assistant text-base'>
                             <div>
                                 <label className='font-semibold'>Name</label>
-                                <h3 className='mt-1 font-semibold '>{userData?.user.fullName}</h3>
+                                <h3 className='mt-1 font-semibold '>{userData?.fullName}</h3>
                             </div>
                             <div>
                                 <label className=' font-semibold'>Email</label>
-                                <h3 className=' mt-1  font-semibold'>{userData?.user.email}</h3>
+                                <h3 className=' mt-1  font-semibold'>{userData?.email}</h3>
                             </div>
                     </div>
                     <div className='absolute right-4 border-2 w-8 h-8 rounded-full flex justify-center items-center  top-3'>

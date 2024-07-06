@@ -11,14 +11,12 @@ import  axios  from 'axios'
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from "react-toastify"
 import AuthLoader from './MUC/AuthLoader'
-// import { jwtDecode } from "jwt-decode";
 function Login() {
   const navigate = useNavigate()
   const {register, handleSubmit} = useForm();
   const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch()
   const [error, setError] = React.useState('')
-  // const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
 
   axios.defaults.withCredentials = true;
   const login = async(userData) => {  
@@ -31,37 +29,19 @@ function Login() {
      );
       
       const responseData = response.data.message;
-      console.log("login",responseData)
+      console.log("login",responseData?.user?.isClient)
       if(responseData){
         navigate('/dashboard');
-        localStorage.setItem('userData', JSON.stringify(responseData));
-      }
-      if (responseData.accessToken) {
-        // const accessToken = responseData.accessToken;
-        // const decodedToken = jwtDecode(accessToken);
-        
-        // Convert token expiry time to Date object
-        // let expiryTime = new Date(decodedToken.exp * 1000);
-        // console.log(expiryTime);
-        
-        // Set cookie with expiration time
-        // setCookie('accessToken', responseData.accessToken, { 
-        //   secure: true, 
-        //   sameSite: 'strict', 
-        //   httpOnly: true, 
-        //   expires: new Date(decodedToken.exp * 1000) // Set cookie expiration time
-        // });
-        
-        // setCookie('refreshToken', responseData.refreshToken, { secure: true, sameSite: 'strict' });
         setLoading(false);
         toast.success("User Logged In!", {
           autoClose: 1000,
         });
-        dispatch(loginUser(responseData));
-      } 
+        dispatch(loginUser(responseData?.user?.isClient));
+        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('isClient', responseData?.user?.isClient);
+      }
 
     } catch (error) {
-     
       setLoading(false);
         toast.error("Invalid user credentials",{
           autoClose: 2000,

@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Button, Container } from '../../components'
 import Axios from 'axios'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 function Apply() {
-  const selectedPost = useSelector((state) => state.post.selectedPost);
-  console.log(selectedPost)
   const navigate = useNavigate()
   const {id}= useParams()
   const [file, setFile] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [post, setPost] = useState()
   const [applicationData, setApplicationData] = useState({
     coverLetter: "",
     attachment: '',
@@ -59,6 +58,19 @@ function Apply() {
       [name]: value
     })
   }
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/posts/get-single-post/${id}`, {withCredentials:true});
+        console.log(response.data)
+        setPost(response.data.data)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchPost();
+  }, [])
   return (
     <section>
       <Container>
@@ -71,19 +83,19 @@ function Apply() {
               <h2 className='text-lg opacity-75 font-bold'>Job details</h2>
             </div>
             <div className='mt-4 space-y-2'>
-              <h2 className='text-base font-semibold text-opacity-80 text-black'>{selectedPost?.title}</h2>
+              <h2 className='text-base font-semibold text-opacity-80 text-black'>{post?.title}</h2>
               <div className=''>
-                <span className='p-2 px-3 text-xs  rounded-md border-1 bg-gray-100 inline-block opacity-90'>{selectedPost?.category}</span>
+                <span className='p-2 px-3 text-xs  rounded-md border-1 bg-gray-100 inline-block opacity-90'>{post?.category}</span>
                 <span className='p-2 px-3 text-xs inline-block opacity-90'>Posted Feb 29, 2024</span>
               </div>
-              <p className='text-sm opacity-85'>{selectedPost?.description}</p>
+              <p className='text-sm opacity-85'>{post?.description}</p>
             </div>
             <hr className=' my-4 h-0.5 bg-gray-300 opacity-70'/>
             <div>
               <h2 className='text-base font-medium opacity-95 text-black'>Skills Required</h2>
               <div className='flex flex-wrap gap-2 mt-4'>
-                {selectedPost?.tags.map((tag)=>(
-                  <span className='p-2 px-3 text-xs  rounded-md border-1 bg-gray-100 inline-block opacity-90'>{tag}</span>
+                {post?.tags.map((tag,i)=>(
+                  <span key={i} className='p-2 px-3 text-xs  rounded-md border-1 bg-gray-100 inline-block opacity-90'>{tag}</span>
                 ))}
               </div>
             </div>

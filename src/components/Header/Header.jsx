@@ -8,9 +8,8 @@ import UserSD from './User/UserProfile/UserSD';
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
-  const userData = useSelector((state) => state.auth.userData);
-  const isClient = userData?.user?.isClient;
-
+  const isClient = useSelector((state) => state.auth.isClient);
+// console.log(isClient, authStatus)
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import Container from '../container/Container'
 
 function GigsLoader() {
   return (

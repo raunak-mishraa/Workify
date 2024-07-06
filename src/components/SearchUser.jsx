@@ -2,8 +2,6 @@ import React from 'react'
 import Container from './container/Container'
 import { useSelector } from 'react-redux'
 
-
-
 function SearchUser() {
     const searchData = useSelector((state) => state.search.freelancerData)
   return (

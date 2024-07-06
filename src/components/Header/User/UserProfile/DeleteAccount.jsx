@@ -24,7 +24,6 @@ function DeleteAccount() {
             .then((res)=>{
                 toast.success(res.data.message)
                 navigate("/")
-                localStorage.removeItem('userData');
                 dispatch(logout());  
             })
             .catch((err)=>{

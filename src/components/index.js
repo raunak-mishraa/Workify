@@ -17,7 +17,7 @@ import UpdateProfile from "./Header/User/UserProfile/UpdateProfile";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import ClientDashboard from "../components/Dashboard/ClientDashboard";
-import CreatePost from "./CreatePost";
+import CreatePost from "../pages/Posts/CreatePost";
 import Gigs from "./Gig/Gigs";
 import Gig from "./Gig/Gig";
 import MyGigs from "./Gig/MyGigs";

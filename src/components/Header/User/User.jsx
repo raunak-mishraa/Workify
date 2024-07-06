@@ -3,20 +3,22 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../../../../store/authSlice'
-import {searchFreelancer, searchClientPosts} from '../../../../store/searchSlice'
+// import {searchFreelancer, searchClientPosts} from '../../../../store/searchSlice'
 import axios from 'axios'
 import { toast } from 'react-toastify';
+import { fetchUser } from '../../../assets/utils/getUser'
 
 function User() {
     const navigate = useNavigate()
     const ref = useRef(null);
     const nref = useRef(null);
-    // const [cookies] = useCookies(['accessToken']);
     const [notificationOn, setNotificationOn] = useState(false)
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
-    const userData = useSelector((state) => state.auth.userData)
+    // const userData = useSelector((state) => state.auth.userData)
+    const isClient = useSelector((state) => state.auth.isClient)
     const [searchValue, setSearchValue] = useState('')
+    const [userAvatar, setUserAvatar] = useState('')
     useEffect(() => {
         const handleClickOutside = (event) => {
           if (ref.current && !ref.current.contains(event.target)) {
@@ -45,23 +47,15 @@ function User() {
         };
       }, [nref]);
 
-    const logOut = async() => {
+//always use {} when you are not sending any data in the body
+      const logOut = async() => {
         try {
-            const logoutRes = await axios.post(
-                `${import.meta.env.VITE_SERVER_URL}/api/v1/users/logout`,
-                { _id: userData.user._id },
-                {
-                    headers: {
-                        // Authorization: `Bearer ${cookies.accessToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    withCredentials: true // Send cookies with the request
-                }
-            );
-
-            localStorage.removeItem('userData');
-            localStorage.removeItem('applicationData');
-            localStorage.removeItem('selectedPostData');
+            await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/v1/users/logout`,{},{
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              withCredentials: true // Send cookies with the request
+          });
             dispatch(logout());
             navigate("/")
             toast.success("User logged Out!",{
@@ -73,14 +67,12 @@ function User() {
                 progress: undefined,
                
             })
+            
         } catch (error) {
-            toast.error("Internet Connection Error!", {
-                autoClose: 1000,
-                hideProgressBar: false,
-            })
             console.error("Error logging out:", error);
         }
-    };
+      }
+
     
     //For notifications
     // const showNotifications = () => {
@@ -88,36 +80,42 @@ function User() {
     //     setNotificationOn((prev) => !prev)
     // }
     const search = () =>{
-        // i changed here 
-        if(userData?.user.isClient) {
-        //    navigate(`/gigs?search=${searchValue}`)
+        if(isClient) {
+            console.log(searchValue)
            navigate(`/gigs?category=${searchValue}`)
+           setSearchValue('')
         }
         else{
             const query = searchValue;
-            axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/search/client_posts/search?query=${query}`)
-            .then((res)=>{
-                if(searchValue !== ''){
-                    navigate(`/search/${searchValue}`)
-                  }
-            })
-            .catch((error)=>{
-                navigate('/search')
+            if(searchValue !== ''){
+                navigate(`/search/${searchValue}`)
                 setSearchValue('')
-                dispatch(searchClientPosts([]))
-                console.log(error)
-            })
+              }
         }
     }
 
+    useEffect(() => {
+        const fetchUserAvatar = async() => {
+            try {
+                const response = await fetchUser();
+                console.log(response.data)
+                setUserAvatar(response.data?.avatar)
+            } catch (error) {
+                dispatch(logout());
+            }
+        }
+        fetchUserAvatar()
+    }, [])
+
   return (
+   
     <div className='md:flex gap-6 hidden'> 
         <div className='flex py-2 px-3 border border-gray-200 rounded outline-none max-w-xl'>
             <input onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                     search();
                 }
-            }} type="search" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} name="searchValue" id=""  placeholder={userData?.user?.isClient ? 'Search For Gigs' : 'Search Jobs'} className='text-gray-800 outline-none appearance-none' />
+            }} type="search" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} name="searchValue" id=""  placeholder={isClient ? 'Search For Gigs' : 'Search Jobs'} className='text-gray-800 outline-none appearance-none' />
             <i onClick={search} className="ri-search-line"></i>
         </div>
         <div className='md:flex items-center gap-2 hidden'>
@@ -137,7 +135,7 @@ function User() {
         <div className='relative'>
         <div ref={ref} onClick={() =>setOpen((prev)=>!prev)} className='rounded-full flex items-center justify-center w-8 h-8  overflow-hidden'>
             {/* <i className=" ri-user-line"></i> */}
-            <img className='w-full h-full object-cover' src={userData?.user?.avatar} alt="profile" />
+            <img className='w-full h-full object-cover' src={userAvatar} alt="profile" />
         </div>
         <div className={`absolute right-0 top-13 z-10  py-2 ${open ? 'block' : 'hidden'} `}>
         <div className='w-4 h-4 left-3 absolute mt-1 bg-white rotate-45'></div>
@@ -149,7 +147,7 @@ function User() {
                     <i className="ri-message-line"></i> Messages
                 </div>
                 <div className='hover:bg-blue-200 py-1 pl-3 pr-10 opacity-85 flex gap-1 items-center'>
-                    {userData?.user?.isClient ? <Link to='orders'><i className="ri-folder-5-line"></i> Orders</Link> : <Link to='/mygigs'><i className="ri-folder-5-line"></i> MyGigs</Link>}
+                    {isClient ? <Link to='orders'><i className="ri-folder-5-line"></i> Orders</Link> : <Link to='/mygigs'><i className="ri-folder-5-line"></i> MyGigs</Link>}
                 </div>
                 
                 <hr />

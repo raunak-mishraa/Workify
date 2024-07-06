@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import Container from '../../container/Container'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
@@ -20,15 +19,6 @@ function Profile() {
             console.log(err)
         })
     }, [])
-    // console.log("this is profile page", userData)
-    
-    // console.log("this is the data",userData)
-    // const userData = {user:{ fullName: 'John Doe',
-    // email: 'xyz@gmail.com',
-    // avatar: 'https://img.freepik.com/free-photo/close-up-portrait-young-bearded-man-white-shirt-jacket-posing-camera-with-broad-smile-isolated-gray_171337-629.jpg?size=626&ext=jpg&uid=R117610733&ga=GA1.1.1393354656.1695382104&semt=sph',
-    // profession: 'Web Developer'}
-       
-    // }
   return (
     <section className='max-w-6xl mx-auto font-poppins h-[60vh] flex justify-center items-center'>
         <Container>
@@ -123,7 +113,6 @@ function Profile() {
                                         <div key={project?._id} className='w-full flex items-center p-2 px-4 rounded-lg justify-between font-poppins  bg-gray-100'>
                                             <div className='first-letter:capitalize font-bold text-black text-opacity-85 sm:text-base text-sm'>{project?.title}</div>
                                             <div className='hidden sm:flex items-center gap-3 '>
-                                                <div className='cursor-pointer text-white p-2 bg-black font-poppins w-20 text-center rounded-md font-medium'>Delete</div>
                                                 <Link to={project?.projectUrl}  className='cursor-pointer text-black p-2 bg-gray-50 border-2 font-poppins w-20 text-center rounded-md font-medium'>Show</Link>
                                             </div>
                                             <div className='sm:hidden space-x-1'>

@@ -1,3 +1,5 @@
+
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
@@ -5,6 +7,7 @@ import './index.css'
 import Home from './pages/Home.jsx'
 import 'remixicon/fonts/remixicon.css'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
 import SignUp from './pages/Signup.jsx'
 import Login from './pages/Login.jsx'
 import Contact from './pages/Contact.jsx'
@@ -26,8 +29,7 @@ import { Provider } from 'react-redux'
 import store from '../store/store.js'
 import Dashboard from './pages/Dashboard.jsx'
 import { ToastContainer } from 'react-toastify';
-import CreatePost from './components/CreatePost.jsx'
-// import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
+import CreatePost from './pages/Posts/CreatePost.jsx'
 import MyPost from './pages/Posts/MyPost.jsx'
 import {Post} from './pages/Posts/Post.jsx'
 import About from './pages/About.jsx'
@@ -47,52 +49,20 @@ import Policy from './pages/Policy.jsx'
 import TermAndCondition from './pages/TermAndCondition.jsx'
 import Copyright from './pages/Copyright.jsx'
 import HIW from './pages/HIW.jsx'
+import PublicRoute from './components/ProtectedRoute/PublicRoute.jsx'
+
 
 const router = createBrowserRouter(
   
   createRoutesFromElements(
 
       <Route path='/' element={<App/>}>
-        <Route path='' element={<Home/>}/>
-        <Route path='signup' element={<SignUp/>}/>
-        <Route path='login' element={<Login/>}/>
-        <Route path='applicantinfo' element={<ApplicantInfo/>}/>
         <Route path='about' element={<About/>}/>
         <Route path='team' element={<Team/>}/>
-        <Route path='mypost' element={<MyPost/>}/>
-        <Route path='post' element={<Post/>}/>
-        <Route path='gigs' element={<Gigs/>}/>
-        <Route path='mygigs' element={<MyGigs/>}/>
-        <Route path='orders' element={<Orders/>}/>
-        <Route path='gig/:id' element={<Gig/>}/>
-        <Route path='message/:id' element={<Message/>}/>
-        <Route path='messages' element={<Messages/>}/>
-        <Route path='add' element={<Add/>}/>
-        <Route path='search/:id' element={<Search/>}/>
-        <Route path='search_user' element={<SearchUser/>}/>
-        <Route path='applications' element={<Applications/>}/>
-        <Route path='apply/:id' element={<Apply/>}/>
+
         <Route path='contact' element={<Contact/>}/>
         <Route path='how-it-works' element={<HIW/>}/>
         <Route path='*' element={<PNF/>}/>
-        <Route path='deleteaccount' element={<DeleteAccount/>}/>
-        <Route path='myapplication' element={<MyApplication/>}/>
-        <Route path='profile/:id' element={<Profile/>}/>
-        <Route path='dashboard' element={
-
-            <Dashboard/>
-
-        }/>
-        <Route path='createpost' element={
-
-            <CreatePost/>
-
-        }
-        />
-        <Route path='login/forgot-password' element={<ForgotPassword/>}/>
-        <Route path='resetpassword/:token' element={<ResetPassword/>}/>
-        <Route path='pay/:id' element={<Pay/>}/>
-        <Route path='success' element={<Success/>}/>
         <Route path='success' element={<Success/>}/>
         <Route path='privacy-policy' element={
             <Policy/>
@@ -103,16 +73,42 @@ const router = createBrowserRouter(
         <Route path='copyright' element={
             <Copyright/>
         }/>
-        <Route path='updateprofile' element={
 
-            <UpdateProfile/>
+        {/* //Public Routes */}
+        <Route element={<PublicRoute/>}>
+          <Route path='' element={<Home/>}/>
+          <Route path='signup' element={<SignUp/>}/>
+          <Route path='login' element={<Login/>}/>
+          <Route path='login/forgot-password' element={<ForgotPassword/>}/>
+          <Route path='resetpassword/:token' element={<ResetPassword/>}/>
+        </Route>
 
-        }/>
-        <Route path='userprofile' element={
-
-            <UserProfile/>
-
-        }/>
+        {/* //Protected Routes */}
+        <Route element={<ProtectedRoute/>}>
+          <Route path='updateprofile' element={<UpdateProfile/>}/>
+          <Route path='userprofile' element={<UserProfile/>}/>
+          <Route path='createpost' element={<CreatePost/>}/>
+          <Route path='deleteaccount' element={<DeleteAccount/>}/>
+          <Route path='myapplication' element={<MyApplication/>}/>
+          <Route path='profile/:id' element={<Profile/>}/>
+          <Route path='dashboard' element={<Dashboard/>}/>
+          <Route path='mypost' element={<MyPost/>}/>
+          <Route path='post/:postId' element={<Post/>}/>
+          <Route path='gigs' element={<Gigs/>}/>
+          <Route path='mygigs' element={<MyGigs/>}/>
+          <Route path='orders' element={<Orders/>}/>
+          <Route path='gig/:id' element={<Gig/>}/>
+          <Route path='message/:id' element={<Message/>}/>
+          <Route path='messages' element={<Messages/>}/>
+          <Route path='add' element={<Add/>}/>
+          <Route path='search/:id' element={<Search/>}/>
+          <Route path='search_user' element={<SearchUser/>}/>
+          <Route path='applications' element={<Applications/>}/>
+          <Route path='apply/:id' element={<Apply/>}/>
+          <Route path='applicantinfo/:id' element={<ApplicantInfo/>}/>
+          <Route path='pay/:id' element={<Pay/>}/>
+        </Route>
+      
       </Route>
   )
 )
@@ -127,3 +123,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>,
 )
+

@@ -2,18 +2,13 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { links } from './NavItems'
 import { useDispatch, useSelector } from 'react-redux';
-import useSearch from '../../hooks/useSearch';
-import { searchClientPosts, searchFreelancer } from '../../../store/searchSlice';
+import { searchFreelancer } from '../../../store/searchSlice';
 import axios from 'axios';
 
 function Navlinks({className = 'flex'}) {
     const isAuth = useSelector(state => state.auth.status);
-    // const [searchValue, setSearchValue] = useState('')
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-    // let searchData = useSearch(searchValue)
-    // console.log("getting",searchData);
     const search = (isFreelancer, searchValue) => {
    
         // setSearchValue(searchItem)
@@ -40,7 +35,6 @@ function Navlinks({className = 'flex'}) {
        }
     }
 
-    // const userData = useSelector(state => state.auth.userData);
    
 
    const [heading, setHeading] = React.useState('')

@@ -4,17 +4,29 @@ import { Link, useNavigate } from 'react-router-dom'
 import ApplicationLoader from '../../components/MUC/ApplicationLoader'
 import  Axios  from 'axios'
 import { useDispatch } from 'react-redux'
-import { setApplicationData } from '../../../store/applicationSlice'
 import newRequest from '../../assets/utils/newRequest'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { fetchUser } from '../../assets/utils/getUser'
 
 function Applications() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
-    const clientData = JSON.parse(localStorage.getItem('userData'))
+    // const clientData = JSON.parse(localStorage.getItem('userData'))
+    const [clientData, setClientData] = useState()
     const [applications, setApplications] = useState([])
+
+    //fetching userData
+    useEffect(() => {
+        const fetchUserData = async() => {
+            const response = await fetchUser();
+            setClientData(response.data)
+        }
+        fetchUserData()
+    }, [])
+
+
     useEffect(()=>{
         Axios.defaults.withCredentials = true;
         Axios.get(`${import.meta.env.VITE_SERVER_URL}/api/v1/applications/getapplications`)
@@ -26,27 +38,22 @@ function Applications() {
         .catch(err => console.log(err))
     },[])
 
-    const handleApp = (application) => {
-        localStorage.setItem('applicationData', JSON.stringify(application));
-        dispatch(setApplicationData(application))
-    }
 
     const handleContact = async(application) => {
         // console.log(clientData.user._id)
         const freelancerId = application;
-        const clientId = clientData.user._id;
+        const clientId = clientData._id;
         const id = freelancerId + clientId;
         console.log(freelancerId, clientId, id)
         try{
             const res = await newRequest.get(`/conversations/single/${id}`);
             navigate(`/message/${res.data.id}`);
-            // console.log(res.data, freelancerId, clientId, id)
         }
         catch(err){
             console.log(err.response.status)
             if (err.response.status === 404) {
                 const res = await newRequest.post(`/conversations/`, {
-                  to: clientData.user.isClient ? freelancerId : clientId,
+                  to: clientData?.isClient ? freelancerId : clientId,
                 });
                 navigate(`/message/${res.data.id}`);
               }
@@ -96,8 +103,7 @@ function Applications() {
                                         </div>
                                         <div>
                                             <div onClick={() => {
-                                                handleApp(application)
-                                                navigate('/applicantinfo')
+                                                navigate(`/applicantinfo/${application?._id}`)
                                             }} className='border border-blue-100 sm:px-8 sm:p-2 p-1 sm:text-base text-xs text-black text-opacity-85'>
                                                 Details
                                             </div>
