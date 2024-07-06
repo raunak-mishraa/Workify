@@ -8,7 +8,6 @@
 
     import newRequest from '../../../../assets/utils/newRequest'
     import {fetchUser} from '../../../../assets/utils/getUser'
-    import AvatarLoader from './AvatarLoader'
     function UserProfile() {
         const navigate = useNavigate()
         const dispatch = useDispatch()
@@ -285,13 +284,13 @@
                     <div className='flex flex-col gap-6 justify-center'>
                         {/* profile_url */}
                         <div className='flex gap-2 items-center '>
-                        {loader ? <AvatarLoader/> : <div className='w-16 h-16 relative cursor-pointer' onClick={handleFileInputClick}>
+                        <div className='w-16 h-16 relative cursor-pointer' onClick={handleFileInputClick}>
                                             <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileInputChange} />
                                             <img src={userData?.avatar} className='w-full h-full object-cover rounded-full' alt="" />
                                             <div className='absolute w-6 h-6 flex items-center justify-center rounded-full bg-white border-2 border-gray-300 bottom-0 right-0'>
                                                 <i className='ri-pencil-line text-blue-500'></i>
                                             </div>
-                             </div>}
+                             </div>
                             <div className=' opacity-85'>
                                 <h2 className='text-lg font-semibold first-letter:uppercase'>{userData?.fullName}
                                 {userData?.isVerified && (
