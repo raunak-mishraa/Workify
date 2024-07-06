@@ -8,7 +8,7 @@
 
     import newRequest from '../../../../assets/utils/newRequest'
     import {fetchUser} from '../../../../assets/utils/getUser'
-    import AvatarLoader from '../../../MUC/AvatarLoader'
+    import AvatarLoader from './AvatarLoader'
     function UserProfile() {
         const navigate = useNavigate()
         const dispatch = useDispatch()
