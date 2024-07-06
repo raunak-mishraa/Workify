@@ -73,6 +73,10 @@ const router = createBrowserRouter(
         <Route path='copyright' element={
             <Copyright/>
         }/>
+        <Route path='search/:id' element={<Search/>}/>
+        <Route path='search_user' element={<SearchUser/>}/>
+        <Route path='gigs' element={<Gigs/>}/>
+        <Route path='gig/:id' element={<Gig/>}/>
 
         {/* //Public Routes */}
         <Route element={<PublicRoute/>}>
@@ -94,21 +98,16 @@ const router = createBrowserRouter(
           <Route path='dashboard' element={<Dashboard/>}/>
           <Route path='mypost' element={<MyPost/>}/>
           <Route path='post/:postId' element={<Post/>}/>
-          <Route path='gigs' element={<Gigs/>}/>
           <Route path='mygigs' element={<MyGigs/>}/>
           <Route path='orders' element={<Orders/>}/>
-          <Route path='gig/:id' element={<Gig/>}/>
           <Route path='message/:id' element={<Message/>}/>
           <Route path='messages' element={<Messages/>}/>
           <Route path='add' element={<Add/>}/>
-          <Route path='search/:id' element={<Search/>}/>
-          <Route path='search_user' element={<SearchUser/>}/>
           <Route path='applications' element={<Applications/>}/>
           <Route path='apply/:id' element={<Apply/>}/>
           <Route path='applicantinfo/:id' element={<ApplicantInfo/>}/>
           <Route path='pay/:id' element={<Pay/>}/>
         </Route>
-      
       </Route>
   )
 )
