@@ -8,8 +8,7 @@
 
     import newRequest from '../../../../assets/utils/newRequest'
     import {fetchUser} from '../../../../assets/utils/getUser'
-import { set } from 'react-hook-form'
-import AvatarLoader from '../../../MUC/AvatarLoader'
+    import AvatarLoader from '../../../MUC/AvatarLoader'
     function UserProfile() {
         const navigate = useNavigate()
         const dispatch = useDispatch()
@@ -173,7 +172,7 @@ import AvatarLoader from '../../../MUC/AvatarLoader'
                 withCredentials:true
             })
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 toast.success(res.data.message)
             })
             .catch((e) => {
