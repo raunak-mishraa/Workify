@@ -13,7 +13,7 @@ function UserSD() {
     const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const [userAvatar, setUserAvatar] = useState('')
-    const isClient = localStorage.getItem('isClient');
+    const isClient = useSelector((state) => state.auth.isClient)
     console.log('user small device',isClient)
     // const isClient = useSelector((state) => state.auth.isClient)
     
