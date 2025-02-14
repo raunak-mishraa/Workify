@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from '../container/Container'
 import Button from '../Button'
-import Slide from '../Slider/Slide'
+// import Slide from '../Slider/Slide'
 import { useQuery } from '@tanstack/react-query'
 import  newRequest  from '../../assets/utils/newRequest'
 import { Link, useParams } from 'react-router-dom';
@@ -53,7 +53,7 @@ function Gig() {
                     )}
                 </div>}
                 
-               <Slide images={data?.images}/>
+               {/* <Slide images={data?.images}/> */}
                 <h2 className='font-Roboto font-bold opacity-90 text-xl my-4'>About This Gig</h2>
                 <p className='opacity-60 leading-6'>
                   {data?.desc}
