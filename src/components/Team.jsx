@@ -2,7 +2,7 @@ import React from 'react'
 import Container from './container/Container'
 import RaunakImage from '../assets/images/author.jpg'
 // import KetanImage from '../assets/images/ketan.jpg'
-import zaidImage from '../assets/images/aakash.jpg'
+import zaidImage from '../assets/images/zaid.jpeg'
 import AkashImage from '../assets/images/aakash.jpg'
 function Team() {
   return (
