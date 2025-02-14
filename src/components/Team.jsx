@@ -1,7 +1,8 @@
 import React from 'react'
 import Container from './container/Container'
 import RaunakImage from '../assets/images/author.jpg'
-import KetanImage from '../assets/images/ketan.jpg'
+// import KetanImage from '../assets/images/ketan.jpg'
+import zaidImage from '../../assets/images/zaid.jpeg'
 import AkashImage from '../assets/images/aakash.jpg'
 function Team() {
   return (
@@ -39,13 +40,13 @@ function Team() {
                 <div className=' flex justify-center items-center h-auto p-4 rounded-full'>
                 <div className='absolute right-0 top-0 w-10 h-10 bg-blue-700 rounded-bl-sm'></div>
                   <div>
-                    <img src={KetanImage} className='w-28 h-28 object-cover rounded-full border-2 p-1 overflow-hidden'/>
+                    <img src={zaidImage} className='w-28 h-28 object-cover rounded-full border-2 p-1 overflow-hidden'/>
                   </div>
                 </div>
                 <div className=' border flex justify-center items-center h-auto p-4 '>
                   <div className='text-center'>
-                    <h3 className='font-semibold text-black text-opacity-85'>Ketan Yadav</h3>
-                    <p className='font-medium text-sm text-black text-opacity-60'>SEO, UI/UX Designer</p>
+                    <h3 className='font-semibold text-black text-opacity-85'>Zaid Rahman</h3>
+                    <p className='font-medium text-sm text-black text-opacity-60'>Full Stack Developer</p>
                   </div>
                 </div>
                 <div className=' border flex justify-center items-center h-auto p-4 '>
